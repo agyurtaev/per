@@ -1,0 +1,77 @@
+%% Таблица со значениями напряжений
+\newcommand{\ltheadtestV}{}
+\renewcommand{\ltheadtestV}{
+\hline
+\multicolumn{1}{m{3.0cm}|}{\centering Имя\-/описание цепи}&
+\multicolumn{1}{m{2.5cm}|}{\centering Кон\-троль\-ная точка №1 (вывод компонента)}&
+\multicolumn{1}{m{2.5cm}|}{\centering Кон\-троль\-ная точка №2 (вывод компонента)}&    
+\multicolumn{1}{m{2.3cm}|}{\centering Ми\-ни\-маль\-ное напряжение, В}&
+\multicolumn{1}{m{2.3cm}|}{\centering Мак\-си\-мальн\-ое напряжение, В}&
+\multicolumn{1}{m{2.3cm}}{\centering Диапазон значений напряжения в \%}\\
+\hline}
+
+\begin{longtable}{m{3.0cm}|m{2.5cm}|m{2.5cm}|m{2.3cm}|m{2.3cm}|m{2.3cm}}
+\caption{Допустимые значения выходного напряжения вторичных источников питания}
+\label{tab:test_v}\\
+% первая шапка     
+\ltheadtestV
+\endfirsthead   
+% последующие шапки 
+\caption*{\it{Продолжение таблицы} \thetable}\\
+\ltheadtestV
+\endhead
+% концевики
+%\multicolumn{3}{c}{\hidehline}
+\endfoot
+\endlastfoot
+%============ содержимое таблицы==============================
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering VCC3.3}&
+\multicolumn{1}{m{2.5cm}|}{\centering K109}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 3,201}&
+\multicolumn{1}{m{2.3cm}|}{\centering 3,399}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering VCC2.5}&
+\multicolumn{1}{m{2.5cm}|}{\centering K123}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 2,425}&
+\multicolumn{1}{m{2.3cm}|}{\centering 2,575}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering VCC1.0}&
+\multicolumn{1}{m{2.5cm}|}{\centering K128}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 0,97}&
+\multicolumn{1}{m{2.3cm}|}{\centering 1,03}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering DDR3\_VDD}&
+\multicolumn{1}{m{2.5cm}|}{\centering K116}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 1,455}&
+\multicolumn{1}{m{2.3cm}|}{\centering 1,545}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering DDR3\_VTT}&
+\multicolumn{1}{m{2.5cm}|}{\centering K114}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 0,728}&
+\multicolumn{1}{m{2.3cm}|}{\centering 0,773}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering DDR3\_VREF}&
+\multicolumn{1}{m{2.5cm}|}{\centering K112}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 0,728}&
+\multicolumn{1}{m{2.3cm}|}{\centering 0,773}&
+\multicolumn{1}{m{2.3cm}}{\centering $\pm$~3}\\\hline
+%%Строка
+\multicolumn{1}{m{3.0cm}|}{\centering +1.8V\_CPLD}&
+\multicolumn{1}{m{2.5cm}|}{\centering K83}&
+\multicolumn{1}{m{2.5cm}|}{\centering вывод №1 колодки XP1}&    
+\multicolumn{1}{m{2.3cm}|}{\centering 1,725}&
+\multicolumn{1}{m{2.3cm}|}{\centering 1,860}&
+\multicolumn{1}{m{2.3cm}}{\centering \(+3,3\) \\ \(-4,2\)}\\\hline
+\end{longtable}  

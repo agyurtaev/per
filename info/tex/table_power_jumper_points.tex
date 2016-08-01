@@ -1,0 +1,49 @@
+%% Таблица с контрольными точками для установки перемычек
+\newcommand{\ltheadPowerJumpers}{}
+\renewcommand{\ltheadPowerJumpers}{
+\hline
+\multicolumn{1}{m{4.5cm}|}{\centering Имя\-/описание цепи}&
+\multicolumn{1}{m{5.5cm}|}{\centering Кон\-троль\-ная точка №1 (вывод компонента)}&
+\multicolumn{1}{m{5.5cm}}{\centering Кон\-троль\-ная точка №2 (вывод компонента)}\\
+\hline}
+
+\begin{longtable}{m{4.5cm}|m{5.5cm}|m{5.5cm}}
+\caption{Точки для установки перемычек по цепям питания}
+\label{tab:power_jumper_points}\\
+% первая шапка     
+\ltheadPowerJumpers
+\endfirsthead   
+% последующие шапки 
+\caption*{\it{Продолжение таблицы} \thetable}\\
+\ltheadPowerJumpers
+\endhead
+% концевики
+%\multicolumn{3}{c}{\hidehline}
+\endfoot
+\endlastfoot
+%============ содержимое таблицы==============================
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering VCC3.3}&
+\multicolumn{1}{m{5.5cm}|}{\centering K78}&
+\multicolumn{1}{m{5.5cm}}{\centering K109}\\\hline
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering VCC2.5}&
+\multicolumn{1}{m{5.5cm}|}{\centering K122}&
+\multicolumn{1}{m{5.5cm}}{\centering K123}\\\hline
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering VCC1.0}&
+\multicolumn{1}{m{5.5cm}|}{\centering K127}&
+\multicolumn{1}{m{5.5cm}}{\centering K128}\\\hline
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering DDR3\_VDD}&
+\multicolumn{1}{m{5.5cm}|}{\centering K117}&
+\multicolumn{1}{m{5.5cm}}{\centering K116}\\\hline
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering DDR3\_VTT}&
+\multicolumn{1}{m{5.5cm}|}{\centering K115}&
+\multicolumn{1}{m{5.5cm}}{\centering K114}\\\hline
+%%Строка
+\multicolumn{1}{m{4.5cm}|}{\centering DDR3\_VREF}&
+\multicolumn{1}{m{5.5cm}|}{\centering K113}&
+\multicolumn{1}{m{5.5cm}}{\centering K112}\\\hline
+\end{longtable}
