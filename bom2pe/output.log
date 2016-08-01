@@ -1,0 +1,106 @@
+[INFO] Config file is loaded. UnplacedStr={*) не уст.}, TestPointStr={Контрольная точка}
+[INFO] CSV file header is loaded succesfully. header={['RefDes', 'Name', 'PartNumber', 'PartNumberRU', 'Value', 'TU GOST', 'PartDocument', 'Manufacturer', 'Unplaced', 'Case', 'TCx', 'PowerRating', 'Voltage', 'ReplacementPN', 'SpecSection', 'BomNote']}
+C1 is unplaced {*}, changing RefDes and note
+C2 is unplaced {*}, changing RefDes and note
+C3 is unplaced {*}, changing RefDes and note
+C4 is unplaced {*}, changing RefDes and note
+R1 is unplaced {*}, changing RefDes and note
+R2 is unplaced {*}, changing RefDes and note
+R3 is unplaced {*}, changing RefDes and note
+R4 is unplaced {*}, changing RefDes and note
+R6 is unplaced {*}, changing RefDes and note
+R7 is unplaced {*}, changing RefDes and note
+R8 is unplaced {*}, changing RefDes and note
+R12 is unplaced {*}, changing RefDes and note
+R22 is unplaced {*}, changing RefDes and note
+R31 is unplaced {*}, changing RefDes and note
+R38 is unplaced {*}, changing RefDes and note
+R39 is unplaced {*}, changing RefDes and note
+R40 is unplaced {*}, changing RefDes and note
+R41 is unplaced {*}, changing RefDes and note
+R42 is unplaced {*}, changing RefDes and note
+R43 is unplaced {*}, changing RefDes and note
+R51 is unplaced {*}, changing RefDes and note
+R65 is unplaced {*}, changing RefDes and note
+R78 is unplaced {*}, changing RefDes and note
+R79 is unplaced {*}, changing RefDes and note
+R80 is unplaced {*}, changing RefDes and note
+R81 is unplaced {*}, changing RefDes and note
+R82 is unplaced {*}, changing RefDes and note
+R83 is unplaced {*}, changing RefDes and note
+R84 is unplaced {*}, changing RefDes and note
+R85 is unplaced {*}, changing RefDes and note
+R86 is unplaced {*}, changing RefDes and note
+R87 is unplaced {*}, changing RefDes and note
+R88 is unplaced {*}, changing RefDes and note
+R89 is unplaced {*}, changing RefDes and note
+R90 is unplaced {*}, changing RefDes and note
+R91 is unplaced {*}, changing RefDes and note
+R101 is unplaced {*}, changing RefDes and note
+R103 is unplaced {*}, changing RefDes and note
+R105 is unplaced {*}, changing RefDes and note
+R106 is unplaced {*}, changing RefDes and note
+R109 is unplaced {*}, changing RefDes and note
+R110 is unplaced {*}, changing RefDes and note
+R112 is unplaced {*}, changing RefDes and note
+R114 is unplaced {*}, changing RefDes and note
+R120 is unplaced {*}, changing RefDes and note
+R125 is unplaced {*}, changing RefDes and note
+R127 is unplaced {*}, changing RefDes and note
+R129 is unplaced {*}, changing RefDes and note
+R130 is unplaced {*}, changing RefDes and note
+R131 is unplaced {*}, changing RefDes and note
+R132 is unplaced {*}, changing RefDes and note
+R133 is unplaced {*}, changing RefDes and note
+R134 is unplaced {*}, changing RefDes and note
+R135 is unplaced {*}, changing RefDes and note
+R136 is unplaced {*}, changing RefDes and note
+R137 is unplaced {*}, changing RefDes and note
+R138 is unplaced {*}, changing RefDes and note
+R139 is unplaced {*}, changing RefDes and note
+R140 is unplaced {*}, changing RefDes and note
+R141 is unplaced {*}, changing RefDes and note
+R142 is unplaced {*}, changing RefDes and note
+R143 is unplaced {*}, changing RefDes and note
+R144 is unplaced {*}, changing RefDes and note
+XN1 is Test Point, removing item
+XN2 is Test Point, removing item
+XN3 is Test Point, removing item
+XN4 is Test Point, removing item
+XN5 is Test Point, removing item
+XN6 is Test Point, removing item
+XN7 is Test Point, removing item
+XN8 is Test Point, removing item
+XN9 is Test Point, removing item
+XN10 is Test Point, removing item
+XN11 is Test Point, removing item
+XN12 is Test Point, removing item
+XN13 is Test Point, removing item
+XN14 is Test Point, removing item
+XN15 is Test Point, removing item
+XN16 is Test Point, removing item
+XN17 is Test Point, removing item
+XN18 is Test Point, removing item
+XN19 is Test Point, removing item
+XN20 is Test Point, removing item
+XN21 is Test Point, removing item
+XN22 is Test Point, removing item
+XN23 is Test Point, removing item
+XN24 is Test Point, removing item
+XN25 is Test Point, removing item
+XN26 is Test Point, removing item
+XN27 is Test Point, removing item
+XN28 is Test Point, removing item
+XN29 is Test Point, removing item
+XN30 is Test Point, removing item
+XN31 is Test Point, removing item
+XT1 has Russian Part Number = {2-1,6-6,0-14-00}, removing common part number
+XT2 has Russian Part Number = {2-1,6-6,0-14-00}, removing common part number
+XT3 has Part Document = {СТИК.741532.035}, removing common part number
+XT4 has Part Document = {СТИК.741532.035}, removing common part number
+Duplicated RefDes XS1
+Duplicated RefDes XS2
+Duplicated RefDes XS3
+Duplicated RefDes XS4
+Duplicated RefDes XS8
+Last writeble RefDes X1

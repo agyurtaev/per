@@ -1,0 +1,23 @@
+\documentclass[russian,utf8]{eskdtab}
+\usepackage{eskdspec}
+\usepackage[T2A]{fontenc}
+%\usepackage{pscyr}
+\usepackage{cmap}
+\usepackage{ifthen}
+\ESKDtitle{AA eskdx. A A}
+\ESKDdocName{1111111  ФФФ}
+
+\usepackage[unicode]{hyperref}
+\usepackage{eskdchngsheet}
+
+\begin{document}
+\begin{ESKDspecification}
+\input{reportss}
+
+\end{ESKDspecification}
+
+\ifthenelse{\value{page}>2}
+{
+\input{changeSheet}
+}
+\end{document}

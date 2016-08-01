@@ -1,0 +1,40 @@
+\documentclass[russian,utf8]{eskdtab}
+%\documentclass[russian,utf8]{eskdtext}
+\usepackage{eskdper}
+\usepackage[T2A]{fontenc}
+
+%\usepackage{pscyr}
+\usepackage{cmap}
+\usepackage{ifthen}
+
+\ESKDtitle{1 eskdx. 1}
+\ESKDdocName{1111111  ФФФ}
+
+\usepackage{eskdchngsheet}
+\usepackage[unicode]{hyperref}
+
+
+%\usepackage[unicode,breaklinks=true,pdfborder={0 0 0}]{hyperref}
+
+
+\begin{document}
+\begin{ESKDper}
+
+%\setcounter{page}{\value{page}+1}
+
+
+
+\input{reports}
+\end{ESKDper}
+
+\ifthenelse{\value{page}>2}
+{
+\input{changeSheet}
+}
+
+
+%\newpage % начать с новой страницы
+%\input{changeSheet} % лист регистрации изменений
+
+\end{document}
+
