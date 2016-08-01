@@ -1,11 +1,6 @@
-﻿#-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
-#
-# Author:      ilya.dementev
-#
-# Created:     29.06.2016
-#-------------------------------------------------------------------------------
+
+# coding: utf8
+
 
 def main():
     import csv
@@ -208,7 +203,7 @@ def main():
             row1 = row
         else:
             row2 = row
-            if (row1['Name']==row1['Name'] and row1['PartNumber']==row2['PartNumber'] and row1['PartNumberRU']==row2['PartNumberRU'] and row1['PartDocument']==row2['PartDocument'] and row1['Unplaced']==row2['Unplaced']):
+            if (row1['Name']==row2['Name'] and row1['PartNumber']==row2['PartNumber'] and row1['PartNumberRU']==row2['PartNumberRU'] and row1['PartDocument']==row2['PartDocument'] and row1['Unplaced']==row2['Unplaced']):
                 row1['kol'] =int(row1['kol']) + 1               
                 if row1['kol'] == 2:
                     refbuf = row1['RefDes']
@@ -227,13 +222,139 @@ def main():
 ## Седьмой проход: Латех
     
     ifile  = open('projectname_tdd_pe3_7.csv', "rb")
+    #with open('projectname_tdd_pe3_7.csv', 'rb', encoding='utf-8') as ifile
+
     readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
-    ofile =open('output.tex', 'w')
+    ofile =open('reports.tex', 'w')
 
+    vid = ''
+    vidpred = ''
     for row in readerd:
-        ofile.write(row['RefDes']+'&'+row['Name']+row['PartNumber']+row['PartNumberRU']+row['Value']+row['TU GOST']+row['PartDocument']+'&'+row['kol']+'&'+row['Manufacturer']+row['Case']+row['Unplaced']+'\\'+'\\''\n')
 
+        vid = row['RefDes'][0]
+
+        if vid != vidpred:
+            
+            ofile.write('&&&'+'\\'+'\\''\n')
+
+            if vid == 'C':
+                ofile.write('&Конденсаторы&&'+'\\'+'\\''\n')
+            if vid == 'R':
+                ofile.write('&Резисторы&&'+'\\'+'\\''\n')
+            if vid == 'D':
+                ofile.write('&Микросхемы&&'+'\\'+'\\''\n')
+            if vid == 'X':
+                ofile.write('&Соединители&&'+'\\'+'\\''\n')
+            if vid == 'B':
+                ofile.write('&Кварцевые резонаторы&&'+'\\'+'\\''\n')
+            if vid == 'F':
+                ofile.write('&Предохранители&&'+'\\'+'\\''\n')
+            if vid == 'G':
+                ofile.write('&Генераторы&&'+'\\'+'\\''\n')
+            if vid == 'H':
+                ofile.write('&Светодиоды&&'+'\\'+'\\''\n')
+            if vid == 'K':
+                ofile.write('&Реле&&'+'\\'+'\\''\n')
+            if vid == 'L':
+                ofile.write('&Катушки индуктивности / Дроссели&&'+'\\'+'\\''\n')
+            if vid == 'S':
+                ofile.write('&Механичесие устройства коммутации&&'+'\\'+'\\''\n')
+            if vid == 'T':
+                ofile.write('&Трансформаторы&&'+'\\'+'\\''\n')
+            if vid == 'V':
+                if row['RefDes'][1] == 'T':
+                    ofile.write('&Транзисторы&&'+'\\'+'\\''\n')
+                if row['RefDes'][1] == 'D':
+                    ofile.write('&Диоды&&'+'\\'+'\\''\n')
+            if vid == 'Z':
+                ofile.write('&Фильтры&&'+'\\'+'\\''\n')
+               
+
+            
+            ofile.write('&&&'+'\\'+'\\''\n')
+        #l0 = len(row['RefDes'])
+        #l1 = len(row['Name']+' '+row['PartNumber']+' '+row['PartNumberRU']+' '+row['Value']+' '+row['TU GOST']+' '+row['PartDocument'])
+        #l2 = len(row['Manufacturer']+' '+row['Case']+' '+row['Unplaced'])
+
+        #print l0, l1, l2
+
+                
+        #ofile.write('&&&'+'\\'+'\\''\n')
+
+        col2 = row['Name']+' '+row['PartNumber']+' '+row['PartNumberRU']+' '+row['Value']+' '+row['TU GOST']+' '+row['PartDocument']
+
+        #col4 = row['Manufacturer']+' '+row['Case']+' '+row['Unplaced']
+
+
+        col4 = ''
+        p = 0
+        p1 = 0
+        
+        if row['Manufacturer'] !=' ':
+            col4 = row['Manufacturer']
+        else:
+            if row['Case'] !=' ':
+                col4 = row['Case']
+                p = 1
+            else:
+                if row['Unplaced'] !=' ':
+                    col4 = row['Unplaced']
+                    p = 2
+
+        if len(col2)<50:
+            ofile.write(row['RefDes']
+                        +'&'
+                        +col2.decode('cp1251').encode("utf-8")
+                        +'&'
+                        +row['kol']
+                        +'&'
+                        +col4.decode('cp1251').encode("utf-8")
+                        +'\\'+'\\''\n')
+            p1 = 1
+        else:
+            ofile.write(row['RefDes']
+                        +'&'
+                        +row['Name'].decode('cp1251').encode("utf-8")+' '+row['PartNumber'].decode('cp1251').encode("utf-8")+' '+row['PartNumberRU'].decode('cp1251').encode("utf-8")
+                        +'&'
+                        +row['kol']
+                        +'&'
+                        +col4.decode('cp1251').encode("utf-8")
+                        +'\\'+'\\''\n')
+
+        col4 = ''
+        if row['Case'] !=' 'and p!=1:
+            col4 = row['Case']
+            p = 1
+        else:
+            if row['Unplaced'] !=' ':
+                col4 = row['Unplaced']
+                p = 2
+           
+        if ((row['Value']!=' '  or row['TU GOST']!=' ' or row['PartDocument']!=' ') and p1 ==0) or p == 1 or p == 2:
+            
+            if len(col2)<50:
+                ofile.write('&'
+                            +'&'
+                            +'&'
+                            +col4.decode('cp1251').encode("utf-8")
+                            +'\\'+'\\''\n')
+            else:
+                ofile.write('&'
+                            +row['Value'].decode('cp1251').encode("utf-8")+' '+row['TU GOST'].decode('cp1251').encode("utf-8")+' '+row['PartDocument'].decode('cp1251').encode("utf-8")
+                            +'&'
+                            +'&'
+                            +col4.decode('cp1251').encode("utf-8")
+                            +'\\'+'\\''\n')
+            
+
+        if row['Unplaced'] !=' ' and p != 2:
+            ofile.write('&'
+                        +'&'
+                        +'&'
+                        +row['Unplaced'].decode('cp1251').encode("utf-8")
+                        +'\\'+'\\''\n')
         #strbuff = row['RefDes']+'&'+row['Name']+row['PartNumber']+row['PartNumberRU']+row['Value']+row['TU GOST']+row['PartDocument']+'&'+row['kol']+'&'+row['Manufacturer']+row['Case']+row['Unplaced']+strbuf
+        vidpred = vid
 
     ifile.close()
     ofile.close()
