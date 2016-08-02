@@ -229,49 +229,79 @@ def main():
 
     vid = ''
     vidpred = ''
+
+    st = 0
+
+    def per(a):
+        if a == 28:
+            ofile.write('&&&'+'\\'+'\\''\n')
+            ofile.write('&&&'+'\\'+'\\''\n')
+            a = 1
+        if a == 29:
+            ofile.write('&&&'+'\\'+'\\''\n')
+            a = 1
+        if a == 30:
+            a = 1 
+        return a
+        
     for row in readerd:
 
         vid = row['RefDes'][0]
 
         if vid != vidpred:
-            
+            st += 1
+            st = per(st)
             ofile.write('&&&'+'\\'+'\\''\n')
-
+            
             if vid == 'C':
-                ofile.write('&Конденсаторы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Конденсаторы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'R':
-                ofile.write('&Резисторы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Резисторы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'D':
-                ofile.write('&Микросхемы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Микросхемы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'X':
-                ofile.write('&Соединители&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Соединители}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'B':
-                ofile.write('&Кварцевые резонаторы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{2 cm}\underline{Кварцевые резонаторы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'F':
-                ofile.write('&Предохранители&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Предохранители}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'G':
-                ofile.write('&Генераторы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Генераторы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'H':
-                ofile.write('&Светодиоды&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Светодиоды}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'K':
-                ofile.write('&Реле&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Реле}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'L':
-                ofile.write('&Катушки индуктивности / Дроссели&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'S':
-                ofile.write('&Механичесие устройства коммутации&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'T':
-                ofile.write('&Трансформаторы&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Трансформаторы}&&'+'\\'+'\\''\n')
+                st += 1
             if vid == 'V':
                 if row['RefDes'][1] == 'T':
-                    ofile.write('&Транзисторы&&'+'\\'+'\\''\n')
+                    ofile.write('&\hspace{3 cm}\underline{Транзисторы}&&'+'\\'+'\\''\n')
+                    st += 1
                 if row['RefDes'][1] == 'D':
-                    ofile.write('&Диоды&&'+'\\'+'\\''\n')
+                    ofile.write('&\hspace{3 cm}\underline{Диоды}&&'+'\\'+'\\''\n')
+                    st += 1
             if vid == 'Z':
-                ofile.write('&Фильтры&&'+'\\'+'\\''\n')
-               
-
-            
+                ofile.write('&\hspace{3 cm}\underline{Фильтры}&&'+'\\'+'\\''\n')
+                st += 1
+            st += 1   
             ofile.write('&&&'+'\\'+'\\''\n')
+            
         #l0 = len(row['RefDes'])
         #l1 = len(row['Name']+' '+row['PartNumber']+' '+row['PartNumberRU']+' '+row['Value']+' '+row['TU GOST']+' '+row['PartDocument'])
         #l2 = len(row['Manufacturer']+' '+row['Case']+' '+row['Unplaced'])
@@ -302,6 +332,8 @@ def main():
                     p = 2
 
         if len(col2)<50:
+            st += 1
+            st = per(st)
             ofile.write(row['RefDes']
                         +'&'
                         +col2.decode('cp1251').encode("utf-8")
@@ -312,6 +344,8 @@ def main():
                         +'\\'+'\\''\n')
             p1 = 1
         else:
+            st += 1
+            st = per(st)
             ofile.write(row['RefDes']
                         +'&'
                         +row['Name'].decode('cp1251').encode("utf-8")+' '+row['PartNumber'].decode('cp1251').encode("utf-8")+' '+row['PartNumberRU'].decode('cp1251').encode("utf-8")
@@ -333,12 +367,14 @@ def main():
         if ((row['Value']!=' '  or row['TU GOST']!=' ' or row['PartDocument']!=' ') and p1 ==0) or p == 1 or p == 2:
             
             if len(col2)<50:
+                st += 1
                 ofile.write('&'
                             +'&'
                             +'&'
                             +col4.decode('cp1251').encode("utf-8")
                             +'\\'+'\\''\n')
             else:
+                st += 1
                 ofile.write('&'
                             +row['Value'].decode('cp1251').encode("utf-8")+' '+row['TU GOST'].decode('cp1251').encode("utf-8")+' '+row['PartDocument'].decode('cp1251').encode("utf-8")
                             +'&'
@@ -348,6 +384,7 @@ def main():
             
 
         if row['Unplaced'] !=' ' and p != 2:
+            st += 1
             ofile.write('&'
                         +'&'
                         +'&'

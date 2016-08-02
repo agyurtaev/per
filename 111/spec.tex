@@ -4,20 +4,24 @@
 %\usepackage{pscyr}
 \usepackage{cmap}
 \usepackage{ifthen}
+
 \ESKDtitle{AA eskdx. A A}
 \ESKDdocName{1111111  ФФФ}
 
-\usepackage[unicode]{hyperref}
 \usepackage{eskdchngsheet}
+\usepackage[unicode]{hyperref}
+
 
 \begin{document}
+
 \begin{ESKDspecification}
 \input{reportss}
 
 \end{ESKDspecification}
 
-\ifthenelse{\value{page}>2}
+\ifthenelse{\value{page}>2} 
 {
 \input{changeSheet}
 }
+
 \end{document}
