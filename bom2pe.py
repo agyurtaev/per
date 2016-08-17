@@ -178,7 +178,8 @@ def main():
             else:
                 writerd.writerow(row1)
                 row1 = row
-        row_num+=1     
+        row_num+=1
+    writerd.writerow(row1)
     ifile.close()
     ofile.close()
 

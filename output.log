@@ -109,8 +109,8 @@ Duplicated RefDes XS2
 Duplicated RefDes XS3
 Duplicated RefDes XS4
 Duplicated RefDes XS8
-Last writeble RefDes X1
-Add kol. Last writeble RefDes X1
+Last writeble RefDes X2
+Add kol. Last writeble RefDes X2
 United C1*,C2* and C2*
 United C1*-C3* and C3*
 United C1*-C4* and C4*
@@ -220,6 +220,7 @@ United XS1-XS3 and XS3
 United XS1-XS4 and XS4
 United XT1,XT2 and XT2
 United XT3,XT4 and XT4
+United X1,X2 and X2
 Add category C 
 Add category D 
 Add category R 
