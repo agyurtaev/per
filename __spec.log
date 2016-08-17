@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.1.27)  16 AUG 2016 16:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.1.27)  17 AUG 2016 16:34
 entering extended mode
-**D:/_data/per/__spec.tex
-(D:/_data/per/__spec.tex
+**./__spec.tex
+(__spec.tex
 LaTeX2e <2015/10/01> patch level 2
 Babel <3.9n> and hyphenation patterns for 69 languages loaded.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eskdx\eskdtab.cls"
@@ -647,10 +647,9 @@ Package: eskdafterpkg 2010/01/14 v0.98 Apply Commands After Package
 )
 After Package Info: Collect commands for hyperref on input line 99
 )))
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\eskdx\eskdspec.sty"
+(eskdspec.sty
 Package: eskdspec 2010/01/14 v0.98 Specification GOST 2.106.95
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\array.sty"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\array.sty"
 Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
 \col@sep=\dimen116
 \extrarowheight=\dimen117
@@ -939,35 +938,79 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 (reports.tex
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 120.
+(babel)             in language  on input line 238.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 120.
+(babel)             in language  on input line 238.
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 120.
+(babel)             in language  on input line 238.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 120.
+(babel)             in language  on input line 238.
  [1{C:/Users/yurtaev/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
 
 ]
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 318.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 318.
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 160.
+(babel)             in language  on input line 318.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 160.
- [2])
+(babel)             in language  on input line 318.
+ [2]
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 15.
+(babel)             in language  on input line 478.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 15.
+(babel)             in language  on input line 478.
 Package babel Info: Redefining russian shorthand "|
-(babel)             in language  on input line 15.
+(babel)             in language  on input line 478.
 Package babel Info: Redefining russian shorthand "~
-(babel)             in language  on input line 15.
+(babel)             in language  on input line 478.
  [3]
 Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 558.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 558.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 558.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 558.
+ [4]
+Overfull \hbox (0.51198pt too wide) in alignment at lines 638--718
+[] [] [] [] [] [] [] 
+ []
+
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 718.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 718.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 718.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 718.
+[5]
+Overfull \hbox (0.51198pt too wide) in alignment at lines 718--798
+[] [] [] [] [] [] [] 
+ []
+
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 798.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 798.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 798.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 798.
+[6]
+Overfull \hbox (0.51198pt too wide) in alignment at lines 798--878
+[] [] [] [] [] [] [] 
+ []
+
+)
+Overfull \hbox (0.51198pt too wide) in alignment at lines 878--15
+[] [] [] [] [] [] [] 
+ []
+
+Package babel Info: Redefining russian shorthand "|
 (babel)             in language  on input line 15.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language  on input line 15.
@@ -975,7 +1018,20 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language  on input line 15.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language  on input line 15.
- [4] (changeSheet.tex) 
+[7]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 1 on input line 15.
+
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 15.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 15.
+Package babel Info: Redefining russian shorthand "|
+(babel)             in language  on input line 15.
+Package babel Info: Redefining russian shorthand "~
+(babel)             in language  on input line 15.
+[8] (changeSheet.tex) 
 AED: lastpage setting LastPage
 Package babel Info: Redefining russian shorthand "|
 (babel)             in language  on input line 23.
@@ -985,7 +1041,7 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language  on input line 23.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language  on input line 23.
-[5
+[9
 
 
 ]
@@ -993,9 +1049,13 @@ Package babel Info: Redefining russian shorthand "|
 (babel)             in language  on input line 23.
 Package babel Info: Redefining russian shorthand "~
 (babel)             in language  on input line 23.
+
+
+Package longtable Warning: Table widths have changed. Rerun LaTeX.
+
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 23.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 23.
- (__spec.aux)
+(__spec.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 23.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 23.
 Package rerunfilecheck Info: File `__spec.out' has not changed.
@@ -1005,22 +1065,26 @@ Package rerunfilecheck Info: File `__spec.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.28pt have occurred.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 23.
  ) 
 Here is how much of TeX's memory you used:
- 10819 strings out of 493634
- 151742 string characters out of 3141308
- 263771 words of memory out of 3000000
+ 10822 strings out of 493634
+ 151627 string characters out of 3141308
+ 264771 words of memory out of 3000000
  14049 multiletter control sequences out of 15000+200000
  8635 words of font info for 20 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 48i,10n,28p,315b,526s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,10n,28p,304b,526s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\yurtaev\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t2a\dpi600\
-lasl1000.pk> <C:\Users\yurtaev\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t
-2a\dpi600\lasl1728.pk>
-Output written on __spec.pdf (5 pages, 40970 bytes).
+larm1000.pk> <C:\Users\yurtaev\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\lh\lh-t
+2a\dpi600\lasl1000.pk> <C:\Users\yurtaev\AppData\Local\MiKTeX\2.9\fonts\pk\ljfo
+ur\lh\lh-t2a\dpi600\lasl1728.pk>
+Output written on __spec.pdf (9 pages, 72497 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 8 named destinations out of 1000 (max. 500000)
+ 202 PDF objects out of 1000 (max. 8388607)
+ 12 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

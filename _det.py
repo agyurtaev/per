@@ -1,6 +1,6 @@
 # coding: utf8
 
-def detgen(num):
+def detgen(num,perecod):
     
     import csv
     import sys
@@ -22,16 +22,16 @@ def detgen(num):
     row_num = 0
     for row in readerd:
         if row_num > 0:
-            ofile.write(row['Form'].decode('cp1251').encode("utf-8")
+            ofile.write(perecod(row['Form'])
                             +'&&'
                             +str(num)
                             #+row['Poz'].decode('cp1251').encode("utf-8")
                             +'&'
-                            +row['Oboz'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Oboz'])
                             +'&'
-                            +row['Name'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Name'])
                             +'&'
-                            +row['Kol'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Kol'])
                             +'&'
                             +'\\'+'\\''\n')
             num += 1

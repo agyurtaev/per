@@ -1,6 +1,6 @@
 # coding: utf8
 
-def docgen():
+def docgen(perecod):
     
     import csv
     import sys
@@ -22,13 +22,13 @@ def docgen():
     for row in readerd:
         if row_num > 0:
             if len(row['Name']) < 30:
-                ofile.write(row['Form'].decode('cp1251').encode("utf-8")
+                ofile.write(perecod(row['Form'])
                                 +'&'
                                 +'&'
                                 +'&'
-                                +row['Oboz'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Oboz'])
                                 +'&'
-                                +row['Name'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Name'])
                                 +'&'
                                 +'&'
                                 +'\\'+'\\''\n')
@@ -41,26 +41,26 @@ def docgen():
                         pr = st.rfind(' ')
                         st = st[0:pr]
                     if n == 1:
-                        ofile.write(row['Form'].decode('cp1251').encode("utf-8")
+                        ofile.write(perecod(row['Form'])
                                         +'&'
                                         +'&'
                                         +'&'
-                                        +row['Oboz'].decode('cp1251').encode("utf-8")
+                                        + perecod(row['Oboz'])
                                         +'&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
                                         +'&'
                                         +'\\'+'\\''\n')
                     else:
                         ofile.write('&&&&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
                                         +'&'
                                         +'\\'+'\\''\n')                   
                     stp = stp [pr:]
                     n += 1
                 ofile.write('&&&&'
-                                +stp.decode('cp1251').encode("utf-8")
+                                +perecod(stp)
                                 +'&&'
                                 +'\\'+'\\''\n')
         row_num += 1

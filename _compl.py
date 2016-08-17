@@ -1,6 +1,6 @@
 # coding: utf8
 
-def complgen():
+def complgen(perecod):
     
     import csv
     import sys
@@ -23,11 +23,11 @@ def complgen():
     for row in readerd:
         if row_num > 0:
             ofile.write('&&&'
-                            +row['Oboz'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Oboz'])
                             +'&'
-                            +row['Name'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Name'])
                             +'&'
-                            +row['Kol'].decode('cp1251').encode("utf-8")
+                            +perecod(row['Kol'])
                             +'&'
                             +'\\'+'\\''\n')
         row_num+=1

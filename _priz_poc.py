@@ -1,6 +1,6 @@
 # coding: utf8
 
-def prizgen(num):
+def prizgen(num,perecod):
     
     import csv
     import sys
@@ -23,9 +23,9 @@ def prizgen(num):
                                 +str(num)
                                 #+row['Poz'].decode('cp1251').encode("utf-8")
                                 +'&&'
-                                +row['Name'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Name'])
                                 +'&'
-                                +row['Kol'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Kol'])
                                 +'&'
                                 +'\\'+'\\''\n')
             else:
@@ -41,21 +41,21 @@ def prizgen(num):
                                         +str(num)
                                         #+row['Poz'].decode('cp1251').encode("utf-8")
                                         +'&&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
-                                        +row['Kol'].decode('cp1251').encode("utf-8")
+                                        +perecod(row['Kol'])
                                         +'&'
                                         +'\\'+'\\''\n')
                     else:
                         ofile.write('&&&&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
                                         +'&'
                                         +'\\'+'\\''\n')                   
                     stp = stp [pr:]
                     n += 1
                 ofile.write('&&&&'
-                                +stp.decode('cp1251').encode("utf-8")
+                                +perecod(stp)
                                 +'&&'
                                 +'\\'+'\\''\n')
             num += 1

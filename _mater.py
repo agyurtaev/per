@@ -1,6 +1,6 @@
 # coding: utf8
 
-def matergen():
+def matergen(perecod):
     
     import csv
     import sys
@@ -23,11 +23,11 @@ def matergen():
         if row_num > 0:
             if len(row['Name']) < 30:
                 ofile.write('&&&&'
-                                +row['Name'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Name'])
                                 +'&'
-                                +row['Kol'].decode('cp1251').encode("utf-8")
+                                +perecod(row['Kol'])
                                 +'&'
-                                +row['Prim'].decode('cp1251').encode("utf-8")                            
+                                +perecod(row['Prim'])                            
                                 +'\\'+'\\''\n')
             else:
                 stp = row['Name']
@@ -39,22 +39,22 @@ def matergen():
                         st = st[0:pr]
                     if n == 1:
                         ofile.write('&&&&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
-                                        +row['Kol'].decode('cp1251').encode("utf-8")
+                                        +perecod(row['Kol'])
                                         +'&'
-                                        +row['Prim'].decode('cp1251').encode("utf-8")
+                                        +perecod(row['Prim'])
                                         +'\\'+'\\''\n')
                     else:
                         ofile.write('&&&&'
-                                        +st.decode('cp1251').encode("utf-8")
+                                        +perecod(st)
                                         +'&'
                                         +'&'
                                         +'\\'+'\\''\n')                   
                     stp = stp [pr:]
                     n += 1
                 ofile.write('&&&&'
-                                +stp.decode('cp1251').encode("utf-8")
+                                +perecod(stp)
                                 +'&&'
                                 +'\\'+'\\''\n')
         row_num += 1
