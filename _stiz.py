@@ -1,0 +1,72 @@
+# coding: utf8
+
+def stizgen(num):
+    
+    import csv
+    import sys
+    import os
+    
+    ifile  = open('csv_stiz.csv', "rb")
+    readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
+    ofile =open('reports_stiz.tex', 'w')
+    row_num = 0
+    for row in readerd:
+        row_num += 1
+    if row_num > 0:   
+        ofile.write('&&&&&&'+'\\'+'\\''\n')
+        doc_title = '&&&&\hspace{1 cm}\underline{Стандартные изделия}&&'+'\\'+'\\''\n'
+        ofile.write(doc_title)
+        ofile.write('&&&&&&'+'\\'+'\\''\n')
+    ifile.seek(0)
+    row_num = 0
+    for row in readerd:
+        if row_num > 0:
+            if len(row['Name']) < 30:
+                ofile.write('&&'
+                                +str(num)
+                                #+row['Poz'].decode('cp1251').encode("utf-8")
+                                +'&&'
+                                +row['Name'].decode('cp1251').encode("utf-8")
+                                +'&'
+                                +row['Kol'].decode('cp1251').encode("utf-8")
+                                +'&'
+                                +'\\'+'\\''\n')
+            else:
+                stp = row['Name']
+                n = 1
+                while len(stp) > 30:
+                    st = stp
+                    while len(st) >30: 
+                        pr = st.rfind(' ')
+                        st = st[0:pr]
+                    if n == 1:
+                        ofile.write('&&'
+                                        +str(num)
+                                        #+row['Poz'].decode('cp1251').encode("utf-8")
+                                        +'&&'
+                                        +st.decode('cp1251').encode("utf-8")
+                                        +'&'
+                                        +row['Kol'].decode('cp1251').encode("utf-8")
+                                        +'&'
+                                        +'\\'+'\\''\n')
+                    else:
+                        ofile.write('&&&&'
+                                        +st.decode('cp1251').encode("utf-8")
+                                        +'&'
+                                        +'&'
+                                        +'\\'+'\\''\n')                   
+                    stp = stp [pr:]
+                    n += 1
+                ofile.write('&&&&'
+                                +stp.decode('cp1251').encode("utf-8")
+                                +'&&'
+                                +'\\'+'\\''\n')
+            num += 1
+        row_num += 1
+    num += 5
+    ifile.close()
+    ofile.close()
+    return num
+    
+
+
