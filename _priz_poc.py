@@ -10,10 +10,12 @@ def prizgen(num,perecod):
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_priz_poc.tex', 'w')
     row_num = 0
+    raz = 0
     for row in readerd:
         row_num += 1
     if row_num > 0:   
         ofile.write('&&&&&&'+'\\'+'\\''\n')
+        raz = 1
     ifile.seek(0)
     row_num = 0
     for row in readerd:
@@ -60,7 +62,8 @@ def prizgen(num,perecod):
                                 +'\\'+'\\''\n')
             num += 1
         row_num += 1
-    num += 5
+    if raz > 0:
+        num += 5
     ifile.close()
     ofile.close()
     return num

@@ -10,6 +10,7 @@ def stizgen(num,perecod):
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_stiz.tex', 'w')
     row_num = 0
+    raz = 0
     for row in readerd:
         row_num += 1
     if row_num > 0:   
@@ -17,6 +18,7 @@ def stizgen(num,perecod):
         doc_title = '&&&&\hspace{1 cm}\underline{Стандартные изделия}&&'+'\\'+'\\''\n'
         ofile.write(doc_title)
         ofile.write('&&&&&&'+'\\'+'\\''\n')
+        raz = 1
     ifile.seek(0)
     row_num = 0
     for row in readerd:
@@ -63,7 +65,8 @@ def stizgen(num,perecod):
                                 +'\\'+'\\''\n')
             num += 1
         row_num += 1
-    num += 5
+    if raz > 0:
+        num += 5
     ifile.close()
     ofile.close()
     return num

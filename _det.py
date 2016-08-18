@@ -10,6 +10,7 @@ def detgen(num,perecod):
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_det.tex', 'w')
     row_num = 0
+    raz = 0
     for row in readerd:
         row_num += 1
     if row_num > 0:
@@ -18,6 +19,7 @@ def detgen(num,perecod):
         doc_title = '&&&&\hspace{2 cm}\underline{Детали}&&'+'\\'+'\\''\n'
         ofile.write(doc_title)
         ofile.write('&&&&&&'+'\\'+'\\''\n')
+        raz = 1
     ifile.seek(0)
     row_num = 0
     for row in readerd:
@@ -36,7 +38,8 @@ def detgen(num,perecod):
                             +'\\'+'\\''\n')
             num += 1
         row_num += 1
-    num += 5
+    if raz > 0:
+        num += 5
     ifile.close()
     ofile.close()
     return num
