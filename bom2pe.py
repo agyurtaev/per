@@ -257,6 +257,7 @@ def main():
             st += 1   
             ofile.write('&&&'+'\\'+'\\''\n')
         col2 = row['Name']+' '+row['PartNumber']+' '+row['PartNumberRU']+' '+row['Value']+' '+row['TU GOST']+' '+row['PartDocument']
+        #################TCx;PowerRating;Voltage;ReplacementPN
         col4 = ''
         p = 0
         p1 = 0      
