@@ -1,0 +1,230 @@
+[INFO] Config file is loaded. UnplacedStr={*) не уст.}, TestPointStr={Контрольная точка}
+[INFO] CSV file header is loaded succesfully. header={['RefDes', 'Name', 'PartNumber', 'PartNumberRU', 'Value', 'TU GOST', 'PartDocument', 'Manufacturer', 'Unplaced', 'Case', 'TCx', 'PowerRating', 'Voltage', 'ReplacementPN', 'SpecSection', 'BomNote']}
+C1 is unplaced {*}, changing RefDes and note
+C2 is unplaced {*}, changing RefDes and note
+C3 is unplaced {*}, changing RefDes and note
+C4 is unplaced {*}, changing RefDes and note
+C16 is unplaced {*}, changing RefDes and note
+C17 is unplaced {*}, changing RefDes and note
+C18 is unplaced {*}, changing RefDes and note
+C19 is unplaced {*}, changing RefDes and note
+C20 is unplaced {*}, changing RefDes and note
+C21 is unplaced {*}, changing RefDes and note
+R1 is unplaced {*}, changing RefDes and note
+R2 is unplaced {*}, changing RefDes and note
+R3 is unplaced {*}, changing RefDes and note
+R4 is unplaced {*}, changing RefDes and note
+R6 is unplaced {*}, changing RefDes and note
+R7 is unplaced {*}, changing RefDes and note
+R8 is unplaced {*}, changing RefDes and note
+R12 is unplaced {*}, changing RefDes and note
+R22 is unplaced {*}, changing RefDes and note
+R31 is unplaced {*}, changing RefDes and note
+R38 is unplaced {*}, changing RefDes and note
+R39 is unplaced {*}, changing RefDes and note
+R40 is unplaced {*}, changing RefDes and note
+R41 is unplaced {*}, changing RefDes and note
+R42 is unplaced {*}, changing RefDes and note
+R43 is unplaced {*}, changing RefDes and note
+R51 is unplaced {*}, changing RefDes and note
+R65 is unplaced {*}, changing RefDes and note
+R78 is unplaced {*}, changing RefDes and note
+R79 is unplaced {*}, changing RefDes and note
+R80 is unplaced {*}, changing RefDes and note
+R81 is unplaced {*}, changing RefDes and note
+R82 is unplaced {*}, changing RefDes and note
+R83 is unplaced {*}, changing RefDes and note
+R84 is unplaced {*}, changing RefDes and note
+R85 is unplaced {*}, changing RefDes and note
+R86 is unplaced {*}, changing RefDes and note
+R87 is unplaced {*}, changing RefDes and note
+R88 is unplaced {*}, changing RefDes and note
+R89 is unplaced {*}, changing RefDes and note
+R90 is unplaced {*}, changing RefDes and note
+R91 is unplaced {*}, changing RefDes and note
+R101 is unplaced {*}, changing RefDes and note
+R103 is unplaced {*}, changing RefDes and note
+R105 is unplaced {*}, changing RefDes and note
+R106 is unplaced {*}, changing RefDes and note
+R109 is unplaced {*}, changing RefDes and note
+R110 is unplaced {*}, changing RefDes and note
+R112 is unplaced {*}, changing RefDes and note
+R114 is unplaced {*}, changing RefDes and note
+R120 is unplaced {*}, changing RefDes and note
+R125 is unplaced {*}, changing RefDes and note
+R127 is unplaced {*}, changing RefDes and note
+R129 is unplaced {*}, changing RefDes and note
+R130 is unplaced {*}, changing RefDes and note
+R131 is unplaced {*}, changing RefDes and note
+R132 is unplaced {*}, changing RefDes and note
+R133 is unplaced {*}, changing RefDes and note
+R134 is unplaced {*}, changing RefDes and note
+R135 is unplaced {*}, changing RefDes and note
+R136 is unplaced {*}, changing RefDes and note
+R137 is unplaced {*}, changing RefDes and note
+R138 is unplaced {*}, changing RefDes and note
+R139 is unplaced {*}, changing RefDes and note
+R140 is unplaced {*}, changing RefDes and note
+R141 is unplaced {*}, changing RefDes and note
+R142 is unplaced {*}, changing RefDes and note
+R143 is unplaced {*}, changing RefDes and note
+R144 is unplaced {*}, changing RefDes and note
+XN1 is Test Point, removing item
+XN2 is Test Point, removing item
+XN3 is Test Point, removing item
+XN4 is Test Point, removing item
+XN5 is Test Point, removing item
+XN6 is Test Point, removing item
+XN7 is Test Point, removing item
+XN8 is Test Point, removing item
+XN9 is Test Point, removing item
+XN10 is Test Point, removing item
+XN11 is Test Point, removing item
+XN12 is Test Point, removing item
+XN13 is Test Point, removing item
+XN14 is Test Point, removing item
+XN15 is Test Point, removing item
+XN16 is Test Point, removing item
+XN17 is Test Point, removing item
+XN18 is Test Point, removing item
+XN19 is Test Point, removing item
+XN20 is Test Point, removing item
+XN21 is Test Point, removing item
+XN22 is Test Point, removing item
+XN23 is Test Point, removing item
+XN24 is Test Point, removing item
+XN25 is Test Point, removing item
+XN26 is Test Point, removing item
+XN27 is Test Point, removing item
+XN28 is Test Point, removing item
+XN29 is Test Point, removing item
+XN30 is Test Point, removing item
+XN31 is Test Point, removing item
+XT1 has Russian Part Number = {2-1,6-6,0-14-00}, removing common part number
+XT2 has Russian Part Number = {2-1,6-6,0-14-00}, removing common part number
+XT3 has Part Document = {СТИК.741532.035}, removing common part number
+XT4 has Part Document = {СТИК.741532.035}, removing common part number
+Duplicated RefDes XS1
+Duplicated RefDes XS2
+Duplicated RefDes XS3
+Duplicated RefDes XS4
+Duplicated RefDes XS8
+Last writeble RefDes X2
+Add kol. Last writeble RefDes X2
+United C1* and C2*
+United C1*,C2* and C3*
+United C1*-C3* and C4*
+United C5 and C6
+United C7 and C8
+United C9 and C10
+United C9,C10 and C11
+United C9-C11 and C12
+United C9-C12 and C13
+United C9-C13 and C14
+United C9-C14 and C15
+United DD1 and DD2
+United R1* and R2*
+United R1*,R2* and R3*
+United R1*-R3* and R4*
+United R6* and R7*
+United R6*,R7* and R8*
+United R9 and R10
+United R14 and R15
+United R14,R15 and R16
+United R23 and R24
+United R23,R24 and R25
+United R23-R25 and R26
+United R23-R26 and R27
+United R23-R27 and R28
+United R23-R28 and R29
+United R23-R29 and R30
+United R32 and R33
+United R32,R33 and R34
+United R32-R34 and R35
+United R32-R35 and R36
+United R32-R36 and R37
+United R38* and R39*
+United R41* and R42*
+United R44 and R45
+United R47 and R48
+United R52 and R53
+United R52,R53 and R54
+United R52-R54 and R55
+United R52-R55 and R56
+United R52-R56 and R57
+United R52-R57 and R58
+United R52-R58 and R59
+United R52-R59 and R60
+United R52-R60 and R61
+United R52-R61 and R62
+United R52-R62 and R63
+United R66 and R67
+United R66,R67 and R68
+United R66-R68 and R69
+United R66-R69 and R70
+United R66-R70 and R71
+United R66-R71 and R72
+United R66-R72 and R73
+United R66-R73 and R74
+United R66-R74 and R75
+United R66-R75 and R76
+United R66-R76 and R77
+United R78* and R79*
+United R78*,R79* and R80*
+United R78*-R80* and R81*
+United R78*-R81* and R82*
+United R78*-R82* and R83*
+United R78*-R83* and R84*
+United R78*-R84* and R85*
+United R78*-R85* and R86*
+United R78*-R86* and R87*
+United R78*-R87* and R88*
+United R78*-R88* and R89*
+United R78*-R89* and R90*
+United R78*-R90* and R91*
+United R92 and R93
+United R92,R93 and R94
+United R92-R94 and R95
+United R92-R95 and R96
+United R92-R96 and R97
+United R98 and R99
+United R105* and R106*
+United R116 and R117
+United R116,R117 and R118
+United R116-R118 and R119
+United R121 and R122
+United R121,R122 and R123
+United R121-R123 and R124
+United R129* and R130*
+United R129*,R130* and R131*
+United R129*-R131* and R132*
+United R129*-R132* and R133*
+United R129*-R133* and R134*
+United R129*-R134* and R135*
+United R129*-R135* and R136*
+United R129*-R136* and R137*
+United R129*-R137* and R138*
+United R129*-R138* and R139*
+United R129*-R139* and R140*
+United R129*-R140* and R141*
+United R129*-R141* and R142*
+United R129*-R142* and R143*
+United R129*-R143* and R144*
+United XP1 and XP2
+United XP1,XP2 and XP3
+United XP1-XP3 and XP4
+United XP1-XP4 and XP5
+United XP1-XP5 and XP6
+United XS1 and XS2
+United XS1,XS2 and XS3
+United XS1-XS3 and XS4
+United XT1 and XT2
+United XT3 and XT4
+United X1 and X2
+Add category C 
+Add category D 
+Add category R 
+Add category V 
+Add category X 
+Add category C 
+Add category R 
