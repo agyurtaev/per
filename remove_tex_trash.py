@@ -8,7 +8,7 @@ def main():
     
     if os.path.exists(os.path.abspath('_per.aux')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.aux')
-        os.remove(path)
+        #os.remove(path)
     if os.path.exists(os.path.abspath('_per.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.log')
         os.remove(path)
