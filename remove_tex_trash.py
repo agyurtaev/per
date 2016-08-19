@@ -8,7 +8,7 @@ def main():
     
     if os.path.exists(os.path.abspath('__spec.aux')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.aux')
-        os.remove(path)
+        #os.remove(path)
     if os.path.exists(os.path.abspath('__spec.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.log')
         os.remove(path)
