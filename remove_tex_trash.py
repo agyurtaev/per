@@ -6,17 +6,17 @@ def main():
     import sys
     import os
     
-    if os.path.exists(os.path.abspath('__spec.aux')):
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.aux')
+    if os.path.exists(os.path.abspath('__ved_poc.aux')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.aux')
         os.remove(path)
-    if os.path.exists(os.path.abspath('__spec.log')):
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.log')
+    if os.path.exists(os.path.abspath('__ved_poc.log')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.log')
         os.remove(path)
-    if os.path.exists(os.path.abspath('__spec.out')):
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.out')
+    if os.path.exists(os.path.abspath('__ved_poc.out')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.out')
         os.remove(path)
-    if os.path.exists(os.path.abspath('__spec.synctex.gz')):
-        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.synctex.gz')
+    if os.path.exists(os.path.abspath('__ved_poc.synctex.gz')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.synctex.gz')
         os.remove(path)    
     path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'output.log')
     os.remove(path)

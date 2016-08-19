@@ -1,6 +1,6 @@
-bom2sp.py
+bom2vp.py
 TIMEOUT /T 1 /NOBREAK
-pdflatex __spec.tex
+pdflatex __ved_poc.tex
 TIMEOUT /T 1 /NOBREAK
 ::__spec.pdf
 ::pause
