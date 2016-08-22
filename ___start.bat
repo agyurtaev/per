@@ -1,4 +1,5 @@
-bom2pe.py
+_bom2pe_sort.py
+::bom2pe.py
 TIMEOUT /T 1 /NOBREAK
 pdflatex _per.tex
 TIMEOUT /T 1 /NOBREAK
