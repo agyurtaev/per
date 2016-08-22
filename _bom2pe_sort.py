@@ -30,7 +30,7 @@ def main():
     cfg_file.close()
     
 ## Первый проход: проверка атрибутов
-    ifile  = open('projectname_tdd.csv', 'rb')
+    ifile  = open('csv_priz_bom.csv', 'rb')
     reader  = csv.reader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
     row_num = 0
     for row in reader:
@@ -51,7 +51,7 @@ def main():
     ifile.close()
 
 ## Второй проход: Работа с неустановленными
-    ifile  = open('projectname_tdd.csv', 'rb')
+    ifile  = open('csv_priz_bom.csv', 'rb')
     readerd.__init__(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
     ofile  = open('projectname_tdd_1.csv', "wb")
     writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
