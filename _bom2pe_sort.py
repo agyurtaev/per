@@ -13,6 +13,52 @@ def main():
         line = line.decode('cp1251').encode("utf-8")
         return line
     
+## Проверка наличия файлов
+    if not os.path.exists(os.path.abspath('csv_priz_bom.csv')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'
+        +'file csv_priz_bom ERROR!!!' 
+        +'&&'
+        +'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()        
+    if not os.path.exists(os.path.abspath('bom2pe.cfg')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'
+        +'file bom2pe ERROR!!!' 
+        +'&&'
+        +'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+    if not os.path.exists(os.path.abspath('changeSheet.tex')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'
+        +'file changeSheet ERROR!!!' 
+        +'&&'
+        +'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+    if not os.path.exists(os.path.abspath('eskdper.sty')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'
+        +'file eskdper ERROR!!!' 
+        +'&&'
+        +'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+    if not os.path.exists(os.path.abspath('remove_tex_trash.py')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'
+        +'file remove_tex_trash ERROR!!!' 
+        +'&&'
+        +'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
 ## Текст для настройки программы
     output_log_file =open('output.log', 'w')
     cfg_file  = open('bom2pe.cfg', 'rb')
@@ -22,10 +68,19 @@ def main():
         if row_num==0:
             cfg_headerd=row
             if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd)):
+                print 'FATAL ERROR!!! \n' 
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'Conf file ERROR!!!' 
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ofile.close()
                 sys.exit("[ERROR] Bad config file. No {UnplacedStr} or {TestPointStr} fields. Exit")
             else:
                 dni_str = row['UnplacedStr']
                 tp_str = row['TestPointStr']
+                dop = row['Dop']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
     
@@ -43,7 +98,20 @@ def main():
     for row in readerd:
         if row_num==0:
             headerd=row
-            if not (('RefDes' in headerd) and ('Unplaced' in headerd)and ('Name' in headerd)):
+            if not (('RefDes' in headerd) and ('Unplaced' in headerd) and ('Name' in headerd)
+                    and ('PartNumber' in headerd) and ('PartNumberRU' in headerd) and ('Value' in headerd) and ('TU GOST' in headerd)
+                    and ('PartDocument' in headerd) and ('Manufacturer' in headerd) and ('Case' in headerd) and ('TCx' in headerd)
+                    and ('PowerRating' in headerd) and ('Voltage' in headerd) and ('ReplacementPN' in headerd) and ('SpecSection' in headerd)
+                    and ('BomNote' in headerd)):
+                print 'FATAL ERROR!!! \n' 
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'Bom file ERROR!!!'
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
                 sys.exit("[ERROR] No {RefDes} or {Unplaced} or {Name} fields. Exit")
             else:
                 output_log_file.write("[INFO] CSV file header is loaded succesfully. header={%s}\n" %(header))
@@ -306,12 +374,13 @@ def main():
             col2_list.append(' ')
             col2_list.append(row['PartDocument'])            
             val = 1
+        lens2 = 50            
 ################################################ 1-я строка        
         count  = len(col2_list)
         while count > 0:
             col2 = col2_list[count-1] + col2
             count -=1
-        if len(col2)<50: #Если количество символов записи меньше 50, то пишем всё в одну строку
+        if len(col2)<lens2: 
             col2 = ''
             count  = len(col2_list)
             while count > 0:
@@ -330,7 +399,7 @@ def main():
             while count > 0:
                 col2 = col2_list[count-1] + col2
                 count -=1                            
-            if len(col2)<50:
+            if len(col2)<lens2:
                 if col2 != '':
                     s1.append(col2)
                 count  = len(col2_list)
@@ -345,7 +414,7 @@ def main():
                 while count > 0:
                     col2 = col2_list[count-1] + col2
                     count -=1                            
-                if len(col2)<50:
+                if len(col2)<lens2:
                     if col2 != '':
                         s1.append(col2)
                     count  = len(col2_list)
@@ -361,7 +430,7 @@ def main():
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
-                        if len(col2)<50:
+                        if len(col2)<lens2:
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
@@ -376,7 +445,7 @@ def main():
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
-                        if len(col2)<50:
+                        if len(col2)<lens2:
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
@@ -384,7 +453,7 @@ def main():
                             while count > 0:                   
                                 count -=1
                                 col2_list.pop(count) 
-                    if len(col2) >= 50:##PartNum
+                    if len(col2) >= lens2:##PartNum
                         if val == 0:
                             col2 = ''
                             count  = len(col2_list) 
@@ -392,7 +461,7 @@ def main():
                             while count > 0:
                                 col2 = col2_list[count-1] + col2
                                 count -=1                            
-                            if len(col2)<50:
+                            if len(col2)<lens2:
                                 if col2 != '':
                                     s1.append(col2)
                                 count  = len(col2_list)
@@ -400,12 +469,12 @@ def main():
                                 while count > 0:
                                     count -=1
                                     col2_list.pop(count) 
-                    if len(col2) >= 50:
+                    if len(col2) >= lens2:
                         print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                         ofile.close()
                         ofile =open('reports.tex', 'w')
                         ofile.write('&'
-                        +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                        +'LEN ERROR!!! %s' % (row['RefDes'])
                         +'&&'
                         +'\\'+'\\''\n')
                         output_log_file.close()
@@ -417,7 +486,7 @@ def main():
         while count > 0:
             col2 = col2_list[count-1] + col2
             count -=1
-        if len(col2)<50: #Если количество символов записи меньше 50, то пишем всё в одну строку
+        if len(col2)<lens2: 
             col2 = ''
             count  = len(col2_list)
             while count > 0:
@@ -436,7 +505,7 @@ def main():
             while count > 0:
                 col2 = col2_list[count-1] + col2
                 count -=1                            
-            if len(col2)<50:
+            if len(col2)<lens2:
                 if col2 != '':
                     s1.append(col2)
                 count  = len(col2_list)
@@ -451,7 +520,7 @@ def main():
                 while count > 0:
                     col2 = col2_list[count-1] + col2
                     count -=1                            
-                if len(col2)<50:
+                if len(col2)<lens2:
                     if col2 != '':
                         s1.append(col2)
                     s1.append(col2)
@@ -468,7 +537,7 @@ def main():
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
-                        if len(col2)<50:
+                        if len(col2)<lens2:
                             if col2 != '':
                                 s1.append(col2)
                             s1.append(col2)
@@ -477,12 +546,12 @@ def main():
                             while count > 0:
                                 count -=1
                                 col2_list.pop(count)  
-                    if len(col2) >= 50:
+                    if len(col2) >= lens2:
                         print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                         ofile.close()
                         ofile =open('reports.tex', 'w')
                         ofile.write('&'
-                        +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                        +'LEN ERROR!!! %s' % (row['RefDes'])
                         +'&&'
                         +'\\'+'\\''\n')
                         output_log_file.close()
@@ -495,7 +564,7 @@ def main():
         while count > 0:
             col2 = col2_list[count-1] + col2
             count -=1
-        if len(col2)<50: #Если количество символов записи меньше 50, то пишем всё в одну строку
+        if len(col2)<lens2: 
             col2 = ''
             count  = len(col2_list)
             while count > 0:
@@ -514,7 +583,7 @@ def main():
             while count > 0:
                 col2 = col2_list[count-1] + col2
                 count -=1                            
-            if len(col2)<50:
+            if len(col2)<lens2:
                 if col2 != '':
                     s1.append(col2)
                 count  = len(col2_list)
@@ -530,7 +599,7 @@ def main():
                     while count > 0:
                         col2 = col2_list[count-1] + col2
                         count -=1                            
-                    if len(col2)<50:
+                    if len(col2)<lens2:
                         if col2 != '':
                             s1.append(col2)
                         count  = len(col2_list)
@@ -538,12 +607,12 @@ def main():
                         while count > 0:
                             count -=1
                             col2_list.pop(count)  
-                if len(col2) >= 50:
+                if len(col2) >= lens2:
                     print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                     ofile.close()
                     ofile =open('reports.tex', 'w')
                     ofile.write('&'
-                    +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                    +'LEN ERROR!!! %s' % (row['RefDes'])
                     +'&&'
                     +'\\'+'\\''\n')
                     output_log_file.close()
@@ -556,7 +625,7 @@ def main():
         while count > 0:
             col2 = col2_list[count-1] + col2
             count -=1
-        if len(col2)<50: #Если количество символов записи меньше 50, то пишем всё в одну строку
+        if len(col2)<lens2: 
             col2 = ''
             count  = len(col2_list)
             while count > 0:
@@ -576,7 +645,7 @@ def main():
                 while count > 0:
                     col2 = col2_list[count-1] + col2
                     count -=1                            
-                if len(col2)<50:
+                if len(col2)<lens2:
                     if col2 != '':
                         s1.append(col2)
                     count  = len(col2_list)
@@ -584,12 +653,12 @@ def main():
                     while count > 0:
                         count -=1
                         col2_list.pop(count)  
-            if len(col2) >= 50:
+            if len(col2) >= lens2:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                 ofile.close()
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
-                +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                +'LEN ERROR!!! %s' % (row['RefDes'])
                 +'&&'
                 +'\\'+'\\''\n')
                 output_log_file.close()
@@ -597,6 +666,25 @@ def main():
                 ofile.close()
                 sys.exit()
 
+################################################ Допустимые замены
+        col2 = ''
+        if row['ReplacementPN']!=' ':
+            col2 = dop + ' (' + row['ReplacementPN']+')'
+            if len(col2)<50:
+                s1.append(col2)
+            else:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s ' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()                
+                
         count = len(s1)
         while count > 0:
             count -=1
@@ -608,7 +696,7 @@ def main():
             count -=1
             if s1[count]== ' ':
                 s1.pop(count)
-
+                
 ######################################################################################################## 4-й столбец
         s2 = []
         col4 = ''
@@ -624,7 +712,7 @@ def main():
         while count > 0:
             col4 = col4_list[count-1] + col4
             count -=1
-        if len(col4)<lens4: #Если количество символов записи меньше 25, то пишем всё в одну строку
+        if len(col4)<lens4: 
             col4 = ''
             count  = len(col4_list)
             while count > 0:
@@ -671,7 +759,7 @@ def main():
                     ofile.close()
                     ofile =open('reports.tex', 'w')
                     ofile.write('&'
-                    +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                    +'LEN ERROR!!! %s' % (row['RefDes'])
                     +'&&'
                     +'\\'+'\\''\n')
                     output_log_file.close()
@@ -684,7 +772,7 @@ def main():
         while count > 0:
             col4 = col4_list[count-1] + col4
             count -=1
-        if len(col4)<lens4: #Если количество символов записи меньше 25, то пишем всё в одну строку
+        if len(col4)<lens4: 
             col4 = ''
             count  = len(col4_list)
             while count > 0:
@@ -716,7 +804,7 @@ def main():
                 ofile.close()
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
-                +'LEN ERROR!!! %s \n' % (row['RefDes'])
+                +'LEN ERROR!!! %s' % (row['RefDes'])
                 +'&&'
                 +'\\'+'\\''\n')
                 output_log_file.close()
@@ -729,7 +817,7 @@ def main():
         while count > 0:
             col4 = col4_list[count-1] + col4
             count -=1
-        if len(col4)<lens4: #Если количество символов записи меньше 25, то пишем всё в одну строку
+        if len(col4)<lens4: 
             col4 = ''
             count  = len(col4_list)
             while count > 0:
@@ -746,7 +834,7 @@ def main():
             ofile.close()
             ofile =open('reports.tex', 'w')
             ofile.write('&'
-            +'LEN ERROR!!! %s \n' % (row['RefDes'])
+            +'LEN ERROR!!! %s' % (row['RefDes'])
             +'&&'
             +'\\'+'\\''\n')
             output_log_file.close()
@@ -806,10 +894,7 @@ def main():
     output_log_file.close()
     ifile.close()
     ofile.close()
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1.csv')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
-    os.remove(path)
+
 if __name__ == '__main__':
     main()
 

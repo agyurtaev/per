@@ -22,6 +22,10 @@ def main():
     os.remove(path)
     path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports.tex')
     os.remove(path)
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1.csv')
+    os.remove(path)
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
+    os.remove(path)
 
 if __name__ == '__main__':
     main()
