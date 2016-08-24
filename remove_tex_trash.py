@@ -17,15 +17,19 @@ def main():
         os.remove(path)
     if os.path.exists(os.path.abspath('_per.synctex.gz')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.synctex.gz')
-        os.remove(path)    
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'output.log')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1.csv')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
-    os.remove(path)
+        os.remove(path)
+    if os.path.exists(os.path.abspath('output.log')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'output.log')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('reports.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports.tex')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('projectname_tdd_1.csv')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1.csv')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('projectname_tdd_2.csv')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
+        os.remove(path)
 
 if __name__ == '__main__':
     main()
