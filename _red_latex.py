@@ -5,7 +5,21 @@ def visstr():
     import csv
     import sys
     import os
-    
+
+    if not os.path.exists(os.path.abspath('eskdspec.sty')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&&&'+'file eskdspec ERROR!!!'+'&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+        
+    if not os.path.exists(os.path.abspath('changeSheet.tex')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&&&'+'file changeSheet ERROR!!!'+'&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+        
     ofile = open('reports1.tex', 'w') 
     ifile  = open('reports.tex', "rb")
     row_num = 0
@@ -39,5 +53,3 @@ def visstr():
     ifile.close()
     ofile.close()
 
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports1.tex')
-    os.remove(path)

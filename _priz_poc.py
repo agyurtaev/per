@@ -5,6 +5,13 @@ def prizgen(num,perecod):
     import csv
     import sys
     import os
+
+    if not os.path.exists(os.path.abspath('csv_priz_poc.csv')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&&&'+'file csv priz poc ERROR!!!'+'&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
     
     ifile  = open('csv_priz_poc.csv', "rb")
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
@@ -12,6 +19,16 @@ def prizgen(num,perecod):
     row_num = 0
     raz = 0
     for row in readerd:
+        if row_num==0:
+            headerd=row
+            if not (('Poz' in headerd) and ('Kol' in headerd) and ('Name' in headerd)):
+                print 'FATAL ERROR!!! \n'
+                ofile.close()                        
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'file csv priz poc ERROR!!!'+'&&&'+'\\'+'\\''\n')
+                ifile.close()
+                ofile.close()
+                sys.exit()
         row_num += 1
     if row_num > 0:   
         ofile.write('&&&&&&'+'\\'+'\\''\n')

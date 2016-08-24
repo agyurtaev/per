@@ -26,7 +26,7 @@ def prizgen(num,perecod):
     
 ## Текст для настройки программы
     output_log_file =open('output.log', 'w')
-    cfg_file  = open('bom2pe.cfg', 'rb')
+    cfg_file  = open('bom2sp.cfg', 'rb')
     cfg_readerd = csv.DictReader(cfg_file, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
     row_num = 0
     for row in cfg_readerd:

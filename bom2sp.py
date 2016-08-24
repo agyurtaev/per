@@ -23,7 +23,7 @@ def main():
     import _sbed
     import _det
     import _stiz
-    import _priz_bom
+    import _priz_bom_sort
     import _priz_poc
     import _mater
     import _complect
@@ -33,7 +33,14 @@ def main():
     import _red_latex
     
     NUM = 1
-    
+
+    if not os.path.exists(os.path.abspath('remove_tex_trash.py')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&&&'+'file remove tex trash ERROR!!!'+'&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+        
 #################################- перекодировка;
     def perecod(line):
         line = line.decode('cp1251').encode("utf-8")
@@ -50,7 +57,7 @@ def main():
 #################################- стандартные изделия; Poz;Name;Kol
     NUM = _stiz.stizgen(NUM,perecod)
 #################################- прочие изделия; /Poz;Name;Kol
-    NUM = _priz_bom.prizgen(NUM,perecod)
+    NUM = _priz_bom_sort.prizgen(NUM,perecod)
     NUM = _priz_poc.prizgen(NUM,perecod)
 #################################- материалы; Name;Kol;Prim
     _mater.matergen(perecod)

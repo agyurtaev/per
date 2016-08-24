@@ -58,24 +58,7 @@ def unite():
 
     ofile.close()
 
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_doc.tex')
-    os.remove(path)   
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_compl.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_sbed.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_det.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_stiz.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_priz_bom.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_priz_poc.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_mater.tex')
-    os.remove(path)
-    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_complect.tex')
-    os.remove(path)
+
 
 
 

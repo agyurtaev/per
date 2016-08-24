@@ -5,12 +5,29 @@ def docgen(perecod):
     import csv
     import sys
     import os
-    
+
+    if not os.path.exists(os.path.abspath('csv_doc.csv')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&&&'+'file csv doc ERROR!!!'+'&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()
+
     ifile  = open('csv_doc.csv', "rb")
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_doc.tex', 'w')
     row_num = 0
     for row in readerd:
+        if row_num==0:
+            headerd=row
+            if not (('Form' in headerd) and ('Oboz' in headerd) and ('Name' in headerd)):
+                print 'FATAL ERROR!!! \n'
+                ofile.close()                        
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'file csv doc ERROR!!!'+'&&&'+'\\'+'\\''\n')
+                ifile.close()
+                ofile.close()
+                sys.exit()
         row_num += 1
     if row_num > 0:   
         ofile.write('&&&&&&'+'\\'+'\\''\n')
