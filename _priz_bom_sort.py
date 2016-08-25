@@ -32,7 +32,7 @@ def prizgen(num,perecod):
     for row in cfg_readerd:
         if row_num==0:
             cfg_headerd=row
-            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd)):
+            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd) and ('Dop' in cfg_headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&&&'+'file bom2sp ERROR!!!'+'&&&'+'\\'+'\\''\n')

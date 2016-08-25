@@ -54,7 +54,7 @@ def sbedgen(num,perecod):
                             +perecod(row['Kol'])
                             +'&'
                             +'\\'+'\\''\n')
-            #num += 1
+            num += 1
         row_num += 1
     if raz > 0:
         num += 5
