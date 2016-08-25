@@ -13,10 +13,10 @@ def unite():
         ofile.write(row)
     ifile.close() 
     
-    #ifile  = open('reports_priz_bom.tex', "rb")
-    #for row in ifile:
-    #    ofile.write(row)
-    #ifile.close()
+    ifile  = open('reports_priz_bom.tex', "rb")
+    for row in ifile:
+        ofile.write(row)
+    ifile.close()
     
     ifile  = open('reports_priz_poc.tex', "rb")
     for row in ifile:

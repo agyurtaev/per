@@ -36,7 +36,7 @@ def main():
 #################################- стандартные изделия; Poz;Name;Kol
     _stiz_vp.stizgen(perecod)
 #################################- прочие изделия; /Poz;Name;Kol
-    #_priz_bom_vp.prizgen(perecod)
+    _priz_bom_vp.prizgen(perecod)
     _priz_poc_vp.prizgen(perecod)
 #################################- материалы; Name;Kol;Prim
     _mater_vp.matergen(perecod)
