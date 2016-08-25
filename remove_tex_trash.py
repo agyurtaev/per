@@ -63,6 +63,24 @@ def main():
     if os.path.exists(os.path.abspath('reports1.tex')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports1.tex')
         os.remove(path)
+    if os.path.exists(os.path.abspath('_per.aux')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.aux')
+        #os.remove(path)
+    if os.path.exists(os.path.abspath('_per.log')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.log')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('_per.out')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.out')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('_per.synctex.gz')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.synctex.gz')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('projectname_tdd_1.csv')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1.csv')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('projectname_tdd_2.csv')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
+        os.remove(path)
 if __name__ == '__main__':
     main()
 
