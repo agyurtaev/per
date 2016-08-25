@@ -366,7 +366,7 @@ def prizgen(num,perecod):
                 num += 5
             output_log_file.write('Add category %s \n' % vid)
             ofile.write('&&&&&&'+'\\'+'\\''\n')
-
+######################################################################################################## 7-й столбец
             man = ''
             if len(row['Manufacturer']) < 13: 
                 man = row['Manufacturer']
@@ -396,505 +396,433 @@ def prizgen(num,perecod):
                     else:
                         man = row['Manufacturer'][0:9]+'.'
 
-               
-        if len(row['RefDes'])<10: #Если количество символов записи меньше 10, то пишем всё в одну строку
-            ofile.write('&&'
-                        +str(num)
-                        +'&&'
-                        +perecod(row['Name'])
-                        +'&'
-                        +perecod(row['kol'])
-                        +'&'
-                        +perecod(row['RefDes'])
-                        +'\\'+'\\''\n')
-            ofile.write('&&&&'
-                        +perecod(row['PartNumber']+' '+row['PartNumberRU'])
-                        +'&&'
-                        #+perecod(row['Manufacturer'])
-                        +man
-                        +'\\'+'\\''\n')                        
-            if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ' or row['Case']!=' ':
-                ofile.write('&&&&'
-                            +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                            +'&&'
-                            +perecod(row['Case'])
-                            +'\\'+'\\''\n')                
-            if row['TU GOST'] !=' ': 
-                ofile.write('&&&&'
-                            +perecod(row['TU GOST'])
-                            +'&&'
-                            +'\\'+'\\''\n')                
-            if row['PartDocument'] !=' ': 
-                ofile.write('&&&&'
-                            +perecod(row['PartDocument'])
-                            +'&&'
-                            +'\\'+'\\''\n')                
-            if row['ReplacementPN'] !=' ': 
-                ofile.write('&&&&'
-                            +'( Допуск '
-                            + perecod(row['ReplacementPN'])
-                            +')'
-                            +'&&'
-                            +'\\'+'\\''\n')
-            num += 1
-        
+        lens7 = 10
+        s7 = []
+        col7 = ''
+        if len(row['RefDes'])<lens7:
+            if row['RefDes'] != '':
+                s7.append(row['RefDes'])            
         else:
             stp = row['RefDes']
-            n = 1
-            while len(stp) > 10:                      
+            while len(stp) > lens7:                      
                 st = stp
-                while len(st) > 10:
+                while len(st) > lens7:
                     pr = st.rfind (',')
                     st = st[0:pr]
-                if n==1:
-                    ofile.write('&&'
-                                +str(num)
-                                +'&&'
-                                +perecod(row['Name'])
-                                +'&'
-                                +perecod(row['kol'])
-                                +'&'
-                                +perecod(st+',')
-                                +'\\'+'\\''\n')
-                if n==2:
-                    ofile.write('&&'
-                                +'&&'
-                                +perecod(row['PartNumber']+' '+row['PartNumberRU'])
-                                +'&'
-                                +'&'
-                                +perecod(st+',')
-                                +'\\'+'\\''\n')
-                if n==3:
-                    if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ':
-                        ofile.write('&&&&'
-                                    +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                    +'&&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                    else:
-                        if row['TU GOST'] !=' ': 
-                            ofile.write('&&&&'
-                                        +perecod(row['TU GOST'])
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            if row['PartDocument'] !=' ': 
-                                ofile.write('&&&&'
-                                            +perecod(row['PartDocument'])
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                            else:
-                                if row['ReplacementPN'] !=' ': 
-                                    ofile.write('&&&&'
-                                                +'( Допуск '
-                                                + perecod(row['ReplacementPN'])
-                                                +')'
-                                                +'&&'
-                                                +perecod(st+',')
-                                                +'\\'+'\\''\n')
-                                else:
-                                    ofile.write('&&&&'
-                                                +'&&'
-                                                +perecod(st+',')
-                                                +'\\'+'\\''\n')
-                                        
-                if n==4:               
-                    if row['TU GOST'] !=' ': 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                    else:
-                        if row['PartDocument'] !=' ': 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            if row['ReplacementPN'] !=' ': 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                if n==5:                            
-                    if row['PartDocument'] !=' ': 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                    else:
-                        if row['ReplacementPN'] !=' ': 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                if n==6:                            
-                    if row['ReplacementPN'] !=' ': 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +perecod(st+',')
-                                     +'\\'+'\\''\n')
-                    else:
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                if n > 6:                            
-                    ofile.write('&&&&'
-                                +'&&'
-                                +perecod(st+',')
-                                +'\\'+'\\''\n')
-                            
+                col7 = st + ','
+                s7.append(col7)                                             
                 stp = stp [pr+1:]
-                n += 1
-########################################
+            if stp != '':
+                s7.append(stp)
+        if man != '':
+            s7.append(man)
+            
+        count = len(s7)
+        while count > 0:
+            count -=1
+            if s7[count]== '  ':
+                s7.pop(count)
+                count = len(s7)
+        count = len(s7)        
+        while count > 0:
+            count -=1
+            if s7[count]== ' ':
+                s7.pop(count)
+       
+######################################################################################################## 5-й столбец
+        val = 0
+        s5 = []
+        col5 = ''
+        col5_list = []       
+        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' ': 
+            col5_list.append(row['Name'])
+            col5_list.append(' ')
+            col5_list.append(row['PartNumber'])
+            col5_list.append(' ')
+            col5_list.append(row['PartNumberRU'])
+            col5_list.append(' (')
+            col5_list.append(row['Value'])
+            if row['TCx'] != ' ' and row['Value'] != ' ':
+                col5_list.append('-')
+            else:
+                col5_list.append(' ')
+            col5_list.append(row['TCx'])
+            if row['PowerRating'] != ' 'and (row['TCx'] != ' ' or row['Value'] != ' '):
+                col5_list.append('-')
+            else:
+                col5_list.append(' ')
+            col5_list.append(row['PowerRating'])
+            if row['Voltage'] != ' ' and (row['PowerRating'] != ' 'or row['TCx'] != ' ' or row['Value'] != ' '):
+                col5_list.append('-')
+            else:
+                col5_list.append(' ')            
+            col5_list.append(row['Voltage'])
+            col5_list.append(') ')
+            col5_list.append(row['TU GOST'])
+            col5_list.append(' ')
+            col5_list.append(row['PartDocument'])
             val = 0
-            tu = 0
-            partdoc = 0
-            repl = 0
-            if n==2:
+        else:
+            col5_list.append(row['Name'])
+            col5_list.append(' ')
+            col5_list.append(row['PartNumber'])
+            col5_list.append(' ')
+            col5_list.append(row['PartNumberRU'])
+            col5_list.append(' ')
+            col5_list.append(row['TU GOST'])
+            col5_list.append(' ')
+            col5_list.append(row['PartDocument'])            
+            val = 1
+            
+        lens5 = 30      
+################################################ 1-я строка
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count)             
+        else:##del PartDocument
+            col5 = ''
+            count  = len(col5_list)            
+            count -=2              
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1                            
+            if len(col5)<lens5:
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                count -=2
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count)                                                   
+            else:##del TU GOST
+                col5 = ''
+                count  = len(col5_list) 
+                count -=3              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1                            
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=3 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count) 
+                else:##del Value/PartNum
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=12              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=12 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if val == 1:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=8              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=8 
+                            while count > 0:                   
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##PartNum
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=16              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=16 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count) 
+                    if len(col5) >= lens5:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
+
+################################################ 2-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count)
+        else:##del PartDocument
+            col5 = ''
+            count  = len(col5_list)            
+            count -=2              
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if len(col5)<lens5:
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                count -=2
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count)
+            else:##del TU GOST
+                col5 = ''
+                count  = len(col5_list) 
+                count -=3              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=3 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)
+                else:##del Value
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=12              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1 
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=12 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)  
+                    if len(col5) >= lens5:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
+################################################ 3-я строка
+        col5 = ''
+        count  = len(col5_list)       
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1            
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del PartDocument
+            col5 = ''
+            count  = len(col5_list)            
+            count -=2              
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1                            
+            if len(col5)<lens5:
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                count -=2
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count)                                                   
+            else:##del TU GOST
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=3              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1                            
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=3 
+                        while count > 0:
+                            count -=1
+                            col5_list.pop(count)  
+                if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
+
+################################################ 4-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col5 = ''
+                count  = len(col5_list) 
+                count -=2              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1                            
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col5_list.pop(count)  
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+                
+################################################ Допустимые замены
+
+        col5 = ''
+        if row['ReplacementPN']!=' ':
+            col5 = dop + ' (' + row['ReplacementPN']+')'
+            if len(col5)<lens5:
+                s5.append(col5)
+            else:
+                s5.append(dop)
+                col5 = '(' + row['ReplacementPN']+')'
+                if len(col5)<lens5:
+                    s5.append(col5)
+                else:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()               
+                
+        count = len(s5)
+        while count > 0:
+            count -=1
+            if s5[count]== '  ':
+                s5.pop(count)
+                count = len(s5)
+        count = len(s5)        
+        while count > 0:
+            count -=1
+            if s5[count]== ' ':
+                s5.pop(count)
+
+########################################################################################################
+        count1 = len(s5)
+        count2 = len(s7)      
+        if count1 > count2:
+            count = count1
+        else:
+            count = count2
+        count_u = count
+        number = 0      
+        while count > 0:
+            if number > count1 - 1:
+                s5.append('')                                
+            if number > count2 - 1:
+                s7.append('')
+                
+            if count == count_u:                
                 ofile.write('&&'
+                            +str(num)
                             +'&&'
-                            +perecod(row['PartNumber']+' '+row['PartNumberRU'])
+                            +perecod(s5[number])
                             +'&'
+                            +perecod(row['kol'])
                             +'&'
-                            +perecod(stp)
-                            +'\\'+'\\''\n')                   
-            if n==3:
-                if (row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ') and val == 0:
-                    ofile.write('&&&&'
-                                +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                +'&&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')
-                    val = 1
-                else:
-                    if row['TU GOST'] !=' ' and tu == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        tu = 1
-                    else:
-                        if row['PartDocument'] !=' ' and partdoc == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-                            partdoc = 1
-                        else:
-                            if row['ReplacementPN'] !=' ' and repl == 0: 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +perecod(stp)
-                                            +'\\'+'\\''\n')
-                                repl = 1
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +perecod(stp)
-                                            +'\\'+'\\''\n')                         
-            if n==4:               
-                if row['TU GOST'] !=' ' and tu == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['TU GOST'])
-                                +'&&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')
-                    tu = 1
-                else:
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-            if n==5:                            
-                if row['PartDocument'] !=' ' and partdoc == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['PartDocument'])
-                                +'&&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')
-                    partdoc = 1
-                else:
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-
-            if n==6:                            
-                if row['ReplacementPN'] !=' ' and repl == 0: 
-                    ofile.write('&&&&'
-                                +'( Допуск '
-                                + perecod(row['ReplacementPN'])
-                                +')'
-                                +'&&'
-                                +perecod(stp)
-                                 +'\\'+'\\''\n')
-                    repl = 1
-                else:
-                    ofile.write('&&&&'
-                                +'&&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')
-            if n > 6:                            
-                ofile.write('&&&&'
-                            +'&&'
-                            +perecod(stp)
+                            +perecod(s7[number])
                             +'\\'+'\\''\n')
-########################################
-            if n==2:
-                if (row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ') and val == 0:
-                    ofile.write('&&&&'
-                                +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-                    val = 1
-                else:
-                    if row['TU GOST'] !=' ' and tu == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        tu = 1
-                    else:
-                        if row['PartDocument'] !=' ' and partdoc == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-                            partdoc = 1
-                        else:
-                            if row['ReplacementPN'] !=' ' and repl == 0: 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +man
-                                            +'\\'+'\\''\n')
-                                repl = 1
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +man
-                                            +'\\'+'\\''\n')
-                                        
-            if n==3:               
-                if row['TU GOST'] !=' ' and tu == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['TU GOST'])
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-                    tu = 1
-                else:
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-            if n==4:                            
-                if row['PartDocument'] !=' ' and partdoc == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['PartDocument'])
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-                    partdoc = 1
-                else:
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-
-            if n==5:                            
-                if row['ReplacementPN'] !=' ' and repl == 0: 
-                    ofile.write('&&&&'
-                                +'( Допуск '
-                                + perecod(row['ReplacementPN'])
-                                +')'
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-                    repl = 1
-                else:
-                    ofile.write('&&&&'
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-            if n > 5 and man != ' ':                            
+                num += 1
+            else:
                 ofile.write('&&&&'
+                            +perecod(s5[number])
                             +'&&'
-                            +man
+                            +perecod(s7[number])
                             +'\\'+'\\''\n')
-########################################
-            if n==2:               
-                if row['TU GOST'] !=' ' and tu == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['TU GOST'])
-                                +'&&'
-                                +row['Case']
-                                +'\\'+'\\''\n')
-                    tu = 1
-                else:
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +row['Case']
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            if row['Case'] != ' ':
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +row['Case']
-                                            +'\\'+'\\''\n')
-            if n==3:                            
-                if row['PartDocument'] !=' ' and partdoc == 0: 
-                    ofile.write('&&&&'
-                                +perecod(row['PartDocument'])
-                                +'&&'
-                                +row['Case']
-                                +'\\'+'\\''\n')
-                    partdoc = 1
-                else:
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        if row['Case'] != ' ':
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +row['Case']
-                                        +'\\'+'\\''\n')
-
-            if n==4:                            
-                if row['ReplacementPN'] !=' ' and repl == 0: 
-                    ofile.write('&&&&'
-                                +'( Допуск '
-                                + perecod(row['ReplacementPN'])
-                                +')'
-                                +'&&'
-                                +row['Case']
-                                +'\\'+'\\''\n')
-                    repl = 1
-                else:
-                    if row['Case'] != ' ':
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-            if n > 4 and row['Case'] != ' ':                            
-                ofile.write('&&&&'
-                            +'&&'
-                            +row['Case']
-                            +'\\'+'\\''\n')
-########################################
-            num += 1                 
+            number += 1
+            count -= 1      
         vidpred = vid       
     ifile.close()
 
@@ -995,508 +923,7 @@ def prizgen(num,perecod):
                         
                         else:
                             man = row['Manufacturer'][0:9]+'.'
-
-                   
-            if len(row['RefDes'])<10: #Если количество символов записи меньше 10, то пишем всё в одну строку
-                ofile.write('&&'
-                            +str(num)
-                            +'&&'
-                            +perecod(row['Name'])
-                            +'&'
-                            +perecod(row['kol'])
-                            +'&'
-                            +perecod(row['RefDes'])
-                            +'\\'+'\\''\n')
-                ofile.write('&&&&'
-                            +perecod(row['PartNumber']+' '+row['PartNumberRU'])
-                            +'&&'
-                            #+perecod(row['Manufacturer'])
-                            +man
-                            +'\\'+'\\''\n')                        
-                if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ' or row['Case']!=' ':
-                    ofile.write('&&&&'
-                                +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                +'&&'
-                                +perecod(row['Case'])
-                                +'\\'+'\\''\n')                
-                if row['TU GOST'] !=' ': 
-                    ofile.write('&&&&'
-                                +perecod(row['TU GOST'])
-                                +'&&'
-                                +'\\'+'\\''\n')                
-                if row['PartDocument'] !=' ': 
-                    ofile.write('&&&&'
-                                +perecod(row['PartDocument'])
-                                +'&&'
-                                +'\\'+'\\''\n')                
-                if row['ReplacementPN'] !=' ': 
-                    ofile.write('&&&&'
-                                +'( Допуск '
-                                + perecod(row['ReplacementPN'])
-                                +')'
-                                +'&&'
-                                +'\\'+'\\''\n')        
-                num += 1
-
-            else:
-                stp = row['RefDes']
-                n = 1
-                while len(stp) > 12:                      
-                    st = stp
-                    while len(st) > 12:
-                        pr = st.rfind (',')
-                        st = st[0:pr]
-                    if n==1:
-                        ofile.write('&&'
-                                    +str(num)
-                                    +'&&'
-                                    +perecod(row['Name'])
-                                    +'&'
-                                    +perecod(row['kol'])
-                                    +'&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                    if n==2:
-                        ofile.write('&&'
-                                    +'&&'
-                                    +perecod(row['PartNumber']+' '+row['PartNumberRU'])
-                                    +'&'
-                                    +'&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                    if n==3:
-                        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ':
-                            ofile.write('&&&&'
-                                        +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            if row['TU GOST'] !=' ': 
-                                ofile.write('&&&&'
-                                            +perecod(row['TU GOST'])
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                            else:
-                                if row['PartDocument'] !=' ': 
-                                    ofile.write('&&&&'
-                                                +perecod(row['PartDocument'])
-                                                +'&&'
-                                                +perecod(st+',')
-                                                +'\\'+'\\''\n')
-                                else:
-                                    if row['ReplacementPN'] !=' ': 
-                                        ofile.write('&&&&'
-                                                    +'( Допуск '
-                                                    + perecod(row['ReplacementPN'])
-                                                    +')'
-                                                    +'&&'
-                                                    +perecod(st+',')
-                                                    +'\\'+'\\''\n')
-                                    else:
-                                        ofile.write('&&&&'
-                                                    +'&&'
-                                                    +perecod(st+',')
-                                                    +'\\'+'\\''\n')
-                                            
-                    if n==4:               
-                        if row['TU GOST'] !=' ': 
-                            ofile.write('&&&&'
-                                        +perecod(row['TU GOST'])
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            if row['PartDocument'] !=' ': 
-                                ofile.write('&&&&'
-                                            +perecod(row['PartDocument'])
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                            else:
-                                if row['ReplacementPN'] !=' ': 
-                                    ofile.write('&&&&'
-                                                +'( Допуск '
-                                                + perecod(row['ReplacementPN'])
-                                                +')'
-                                                +'&&'
-                                                +perecod(st+',')
-                                                +'\\'+'\\''\n')
-                                else:
-                                    ofile.write('&&&&'
-                                                +'&&'
-                                                +perecod(st+',')
-                                                +'\\'+'\\''\n')
-                    if n==5:                            
-                        if row['PartDocument'] !=' ': 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                        else:
-                            if row['ReplacementPN'] !=' ': 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +perecod(st+',')
-                                            +'\\'+'\\''\n')
-                    if n==6:                            
-                        if row['ReplacementPN'] !=' ': 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +perecod(st+',')
-                                         +'\\'+'\\''\n')
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +perecod(st+',')
-                                        +'\\'+'\\''\n')
-                    if n > 6:                            
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +perecod(st+',')
-                                    +'\\'+'\\''\n')
-                                
-                    stp = stp [pr+1:]
-                    n += 1
-    ########################################
-                val = 0
-                tu = 0
-                partdoc = 0
-                repl = 0
-                if n==2:
-                    ofile.write('&&'
-                                +'&&'
-                                +perecod(row['PartNumber']+' '+row['PartNumberRU'])
-                                +'&'
-                                +'&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')                   
-                if n==3:
-                    if (row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ') and val == 0:
-                        ofile.write('&&&&'
-                                    +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        val = 1
-                    else:
-                        if row['TU GOST'] !=' ' and tu == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['TU GOST'])
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-                            tu = 1
-                        else:
-                            if row['PartDocument'] !=' ' and partdoc == 0: 
-                                ofile.write('&&&&'
-                                            +perecod(row['PartDocument'])
-                                            +'&&'
-                                            +perecod(stp)
-                                            +'\\'+'\\''\n')
-                                partdoc = 1
-                            else:
-                                if row['ReplacementPN'] !=' ' and repl == 0: 
-                                    ofile.write('&&&&'
-                                                +'( Допуск '
-                                                + perecod(row['ReplacementPN'])
-                                                +')'
-                                                +'&&'
-                                                +perecod(stp)
-                                                +'\\'+'\\''\n')
-                                    repl = 1
-                                else:
-                                    ofile.write('&&&&'
-                                                +'&&'
-                                                +perecod(stp)
-                                                +'\\'+'\\''\n')                         
-                if n==4:               
-                    if row['TU GOST'] !=' ' and tu == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        tu = 1
-                    else:
-                        if row['PartDocument'] !=' ' and partdoc == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-                            partdoc = 1
-                        else:
-                            if row['ReplacementPN'] !=' ' and repl == 0: 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +perecod(stp)
-                                            +'\\'+'\\''\n')
-                                repl = 1
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +perecod(stp)
-                                            +'\\'+'\\''\n')
-                if n==5:                            
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +perecod(stp)
-                                        +'\\'+'\\''\n')
-
-                if n==6:                            
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +perecod(stp)
-                                     +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +perecod(stp)
-                                    +'\\'+'\\''\n')
-                if n > 6:                            
-                    ofile.write('&&&&'
-                                +'&&'
-                                +perecod(stp)
-                                +'\\'+'\\''\n')
-    ########################################
-                if n==2:
-                    if (row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!=' ') and val == 0:
-                        ofile.write('&&&&'
-                                    +perecod('('+row['Value']+row['TCx']+row['PowerRating']+row['Voltage']+')')
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        val = 1
-                    else:
-                        if row['TU GOST'] !=' ' and tu == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['TU GOST'])
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-                            tu = 1
-                        else:
-                            if row['PartDocument'] !=' ' and partdoc == 0: 
-                                ofile.write('&&&&'
-                                            +perecod(row['PartDocument'])
-                                            +'&&'
-                                            +man
-                                            +'\\'+'\\''\n')
-                                partdoc = 1
-                            else:
-                                if row['ReplacementPN'] !=' ' and repl == 0: 
-                                    ofile.write('&&&&'
-                                                +'( Допуск '
-                                                + perecod(row['ReplacementPN'])
-                                                +')'
-                                                +'&&'
-                                                +man
-                                                +'\\'+'\\''\n')
-                                    repl = 1
-                                else:
-                                    ofile.write('&&&&'
-                                                +'&&'
-                                                +man
-                                                +'\\'+'\\''\n')
-                                            
-                if n==3:               
-                    if row['TU GOST'] !=' ' and tu == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        tu = 1
-                    else:
-                        if row['PartDocument'] !=' ' and partdoc == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-                            partdoc = 1
-                        else:
-                            if row['ReplacementPN'] !=' ' and repl == 0: 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +man
-                                            +'\\'+'\\''\n')
-                                repl = 1
-                            else:
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +man
-                                            +'\\'+'\\''\n')
-                if n==4:                            
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +man
-                                        +'\\'+'\\''\n')
-
-                if n==5:                            
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        ofile.write('&&&&'
-                                    +'&&'
-                                    +man
-                                    +'\\'+'\\''\n')
-                if n > 5 and man != ' ':                            
-                    ofile.write('&&&&'
-                                +'&&'
-                                +man
-                                +'\\'+'\\''\n')
-    ########################################
-                if n==2:               
-                    if row['TU GOST'] !=' ' and tu == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['TU GOST'])
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-                        tu = 1
-                    else:
-                        if row['PartDocument'] !=' ' and partdoc == 0: 
-                            ofile.write('&&&&'
-                                        +perecod(row['PartDocument'])
-                                        +'&&'
-                                        +row['Case']
-                                        +'\\'+'\\''\n')
-                            partdoc = 1
-                        else:
-                            if row['ReplacementPN'] !=' ' and repl == 0: 
-                                ofile.write('&&&&'
-                                            +'( Допуск '
-                                            + perecod(row['ReplacementPN'])
-                                            +')'
-                                            +'&&'
-                                            +row['Case']
-                                            +'\\'+'\\''\n')
-                                repl = 1
-                            else:
-                                if row['Case'] != ' ':
-                                    ofile.write('&&&&'
-                                                +'&&'
-                                                +row['Case']
-                                                +'\\'+'\\''\n')
-                if n==3:                            
-                    if row['PartDocument'] !=' ' and partdoc == 0: 
-                        ofile.write('&&&&'
-                                    +perecod(row['PartDocument'])
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-                        partdoc = 1
-                    else:
-                        if row['ReplacementPN'] !=' ' and repl == 0: 
-                            ofile.write('&&&&'
-                                        +'( Допуск '
-                                        + perecod(row['ReplacementPN'])
-                                        +')'
-                                        +'&&'
-                                        +row['Case']
-                                        +'\\'+'\\''\n')
-                            repl = 1
-                        else:
-                            if row['Case'] != ' ':
-                                ofile.write('&&&&'
-                                            +'&&'
-                                            +row['Case']
-                                            +'\\'+'\\''\n')
-
-                if n==4:                            
-                    if row['ReplacementPN'] !=' ' and repl == 0: 
-                        ofile.write('&&&&'
-                                    +'( Допуск '
-                                    + perecod(row['ReplacementPN'])
-                                    +')'
-                                    +'&&'
-                                    +row['Case']
-                                    +'\\'+'\\''\n')
-                        repl = 1
-                    else:
-                        if row['Case'] != ' ':
-                            ofile.write('&&&&'
-                                        +'&&'
-                                        +row['Case']
-                                        +'\\'+'\\''\n')
-                if n > 4 and row['Case'] != ' ':                            
-                    ofile.write('&&&&'
-                                +'&&'
-                                +row['Case']
-                                +'\\'+'\\''\n')
-    ########################################
-
-                
-                num += 1    
+  
             vidpred = vid
         row_num += 1            
     ifile.close()
