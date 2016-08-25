@@ -1,31 +1,32 @@
 
 # coding: utf8
 
-#- документация;
-#- комплексы; #заготовка
-#- сборочные единицы; 
-#- детали;
 #- стандартные изделия;
 #- прочие изделия; - из 2-х частей: бом + покупные
 #- материалы;
-#- комплекты; #заготовка
 
 ######- данные для испонения
-######- блоки -?
+
 
 def main():
     import csv
     import sys
     import os
     
-    import _stiz
-    import _priz_bom
-    import _priz_poc
-    import _mater
+    import _stiz_vp
+    import _priz_bom_vp
+    import _priz_poc_vp
+    import _mater_vp
  
-    import _united_latex
-    import _red_latex
+    import _united_latex_vp
+    import _red_latex_vp
     
+    if not os.path.exists(os.path.abspath('remove_tex_trash.py')):
+        print 'FATAL ERROR!!! \n' 
+        ofile =open('reports.tex', 'w')
+        ofile.write('&'+'file remove tex trash ERROR!!!'+'&&&&&&&&&'+'\\'+'\\''\n')
+        ofile.close()
+        sys.exit()    
     
 #################################- перекодировка;
     def perecod(line):
@@ -33,16 +34,16 @@ def main():
         return line
   
 #################################- стандартные изделия; Poz;Name;Kol
-    _stiz.stizgen(perecod)
+    _stiz_vp.stizgen(perecod)
 #################################- прочие изделия; /Poz;Name;Kol
-    _priz_bom.prizgen(perecod)
-    _priz_poc.prizgen(perecod)
+    #_priz_bom_vp.prizgen(perecod)
+    _priz_poc_vp.prizgen(perecod)
 #################################- материалы; Name;Kol;Prim
-    _mater.matergen(perecod)
+    _mater_vp.matergen(perecod)
 #################################- объединение разделов;
-    _united_latex.unite()
+    _united_latex_vp.unite()
 #################################- редактирование latex;
-    _red_latex.visstr()
+    _red_latex_vp.visstr()
     
 
 if __name__ == '__main__':
