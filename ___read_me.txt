@@ -55,4 +55,5 @@ Kol - количество
 
 3. получение файла
 	3.1. Для получения pdf в ОС Win запустить ___start.bat. В момент запуска __spec.pdf должна быть закрыта.
-	3.2. Для получения pdf в ОС Linux исполнить bom2sp.py, затем pdflatex __spec.tex.
+	3.2. Для получения pdf в ОС Linux исполнить bom2sp.py, bom2vp.py и _bom2pe_sort.py , затем pdflatex __spec.tex, pdflatex __ved_poc.tex и pdflatex _per.tex.
+	3.3. Для ведомости покупных изделий в случае, если количество листов превышает 3, взять файл регистрации изменений __reg_izm.pdf.

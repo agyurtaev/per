@@ -1,0 +1,61 @@
+\documentclass[a3paper,russian,utf8]{eskdgraph}
+\usepackage{eskdvp}
+\usepackage[T2A]{fontenc}
+\usepackage{cmap}
+\usepackage{ifthen}
+\usepackage{pdfpages}
+\ESKDtitle{AA eskdx. A A}
+\ESKDdocName{1111111  ФФФ}
+\usepackage{eskdchngsheet}
+\usepackage[unicode]{hyperref}
+\usepackage[labelsep=none,labelformat=empty]{caption}
+
+\begin{document}
+\renewcommand{\tablename}{}
+\setlength{\extrarowheight}{0,24cm} 
+
+  \newcommand{\ltheadEquipment}{}
+  \renewcommand{\ltheadEquipment}
+    {
+    \hline    
+     &&&&&& \multicolumn{4}{c|}{\centering \textbf{Количество}}&\\
+    \cline{7-10}
+    \multicolumn{1}{|m{1cm}|}{\centering  \textbf{№ стр.}}&
+    \multicolumn{1}{m{6cm}|}{\centering   \textbf{Наименование}}&
+    \multicolumn{1}{m{3cm}|}{\centering  \textbf{Код продукции}}&
+    \multicolumn{1}{m{5cm}|}{\centering   \textbf{Обозначение документа на поставки}}&
+    \multicolumn{1}{m{4cm}|}{\centering   \textbf{Поставщик}}& 
+    \multicolumn{1}{m{6cm}|}{\centering   \textbf{Куда входит (обозначение)}}& 
+    \multicolumn{1}{m{1,6cm}|}{\centering   \textbf{На изделие}}& 
+    \multicolumn{1}{m{1,6cm}|}{\centering   \textbf{В комплекты}}&
+    \multicolumn{1}{m{1,6cm}|}{\centering   \textbf{На регулир.}}&
+    \multicolumn{1}{m{1,6cm}|}{\centering   \textbf{Всего}}&
+    \multicolumn{1}{m{2,4cm}|}{\centering   \textbf{Примечание}}\\
+    \hline
+    }    
+\begin{longtable} {|m{1cm}|m{6cm}|m{3cm}|m{5cm}|m{4cm}|m{6cm}|m{1,6cm}|m{1,6cm}|m{1,6cm}|m{1,6cm}|m{2,4cm}|}
+\caption{}
+\label{tab:psitible}
+\\
+    \ltheadEquipment
+    \endfirsthead 
+    %\caption*{\it{Продолжение таблицы} \thetable}\\
+    \ltheadEquipment
+    \endhead
+    \endfoot
+    \endlastfoot
+\input{reports}
+\end{longtable}
+
+\ifthenelse{\value{page} > 3} 
+{
+\newpage
+
+
+reg izm
+}
+
+
+
+
+\end{document}

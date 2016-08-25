@@ -81,6 +81,18 @@ def main():
     if os.path.exists(os.path.abspath('projectname_tdd_2.csv')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2.csv')
         os.remove(path)
+    if os.path.exists(os.path.abspath('__ved_poc.aux')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.aux')
+        #os.remove(path)
+    if os.path.exists(os.path.abspath('__ved_poc.log')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.log')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('__ved_poc.out')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.out')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('__ved_poc.synctex.gz')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.synctex.gz')
+        os.remove(path)
 if __name__ == '__main__':
     main()
 
