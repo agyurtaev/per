@@ -21,7 +21,7 @@ def main():
     for row in cfg_readerd:
         if row_num==0:
             cfg_headerd=row
-            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd)):
+            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd) and ('Dop' in cfg_headerd)):
                 sys.exit("[ERROR] Bad config file. No {UnplacedStr} or {TestPointStr} fields. Exit")
             else:
                 dni_str = row['UnplacedStr']
