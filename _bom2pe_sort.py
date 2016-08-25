@@ -523,7 +523,6 @@ def main():
                 if len(col2)<lens2:
                     if col2 != '':
                         s1.append(col2)
-                    s1.append(col2)
                     count  = len(col2_list)
                     count -=3 
                     while count > 0:                   
@@ -540,7 +539,6 @@ def main():
                         if len(col2)<lens2:
                             if col2 != '':
                                 s1.append(col2)
-                            s1.append(col2)
                             count  = len(col2_list)
                             count -=12 
                             while count > 0:
