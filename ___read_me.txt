@@ -1,7 +1,23 @@
-1. установка ПО. 
-	1.1. Установить ПО для компиляции tex файлов. Для ОС Win MicTex.
-	1.2. Установить пакет eskdX.
-	1.3. Установить Python27.
+1. установка ПО.
+	1.1.OS WIN: 
+	1.1.1. Установить ПО для компиляции tex файлов MikTex.
+	1.2.2. Установить пакет eskdX.
+	1.2.3. Установить Python27.
+	1.1.OS LIN: 
+	1.1.1. Установить ПО для компиляции tex файлов texlive +texmaker.
+	sudo apt-get install texlive-full
+	sudo apt-get install texmaker
+	texmaker 
+	1.2.2. Установить пакет eskdX.
+	sudo apt-get install subversion
+	svn co http://svn.eskdx.org.ua/trunk eskdx
+	unzip eskdx-0.98.zip
+	mkdir -p ~/texmf/tex/latex
+	cp -a eskdx-0.98/unpacked ~/texmf/tex/latex/eskdx
+	texhash
+	1.2.3. Установить Python27.
+	sudo apt-get install python2.7
+	sudo apt-get install idle
 2. Занесение данных (кодировка файлов cp1251).
 	2.1.Документы, файл csv_doc
 заполняются поля 
@@ -54,6 +70,5 @@ Name - наименование документа
 Kol - количество
 
 3. получение файла
-	3.1. Для получения pdf в ОС Win запустить ___start.bat. В момент запуска __spec.pdf должна быть закрыта.
-	3.2. Для получения pdf в ОС Linux исполнить bom2sp.py, bom2vp.py и _bom2pe_sort.py , затем pdflatex __spec.tex, pdflatex __ved_poc.tex и pdflatex _per.tex.
-	3.3. Для ведомости покупных изделий в случае, если количество листов превышает 3, взять файл регистрации изменений __reg_izm.pdf.
+	3.1. Для получения pdf запустить ___start_bat_sh.py два раза подряд. В момент запуска pdf-файлы должны быть закрыты.
+	3.2. Для ведомости покупных изделий в случае, если количество листов превышает 3, взять файл регистрации изменений __reg_izm.pdf.

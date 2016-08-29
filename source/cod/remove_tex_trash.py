@@ -9,6 +9,9 @@ def main():
     if os.path.exists(os.path.abspath('__spec.aux')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.aux')
         #os.remove(path)
+    if os.path.exists(os.path.abspath('__spec.dvi')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.dvi')
+        #os.remove(path)
     if os.path.exists(os.path.abspath('__spec.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__spec.log')
         os.remove(path)
@@ -66,6 +69,9 @@ def main():
     if os.path.exists(os.path.abspath('_per.aux')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.aux')
         #os.remove(path)
+    if os.path.exists(os.path.abspath('_per.dvi')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.dvi')
+        os.remove(path)
     if os.path.exists(os.path.abspath('_per.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '_per.log')
         os.remove(path)
@@ -84,6 +90,9 @@ def main():
     if os.path.exists(os.path.abspath('__ved_poc.aux')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.aux')
         #os.remove(path)
+    if os.path.exists(os.path.abspath('__ved_poc.dvi')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.dvi')
+        os.remove(path)
     if os.path.exists(os.path.abspath('__ved_poc.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__ved_poc.log')
         os.remove(path)
@@ -95,6 +104,9 @@ def main():
         os.remove(path)
     if os.path.exists(os.path.abspath('__reg_izm.log')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__reg_izm.log')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('__reg_izm.dvi')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__reg_izm.dvi')
         os.remove(path)
     if os.path.exists(os.path.abspath('__reg_izm.out')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '__reg_izm.out')
