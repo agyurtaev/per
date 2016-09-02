@@ -11,11 +11,8 @@ def main():
 
     o = os.name
     put = os.getcwd()
-    put1 = put + '/source/cod/'
+    put1 = put + '/src/'
     if o=='nt':
-        #proc = '___start.bat'
-        #p = subprocess.Popen(proc, shell = True)
-        #p.wait() 
         os.system(put1+'___start.bat')
     if o=='posix':
         os.system('chmod +x '+put1+'___start.sh')

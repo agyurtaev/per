@@ -1,0 +1,40 @@
+\documentclass[a4paper,russian,utf8]{eskdgraph}
+\usepackage{eskdvp}
+\usepackage[T2A]{fontenc}
+\usepackage{cmap}
+\usepackage{ifthen}
+\usepackage{pdfpages}
+\usepackage{eskdchngsheet}
+\usepackage[labelsep=none,labelformat=empty]{caption}
+
+\begin{document}
+\renewcommand{\tablename}{}
+\setlength{\extrarowheight}{0,24cm} 
+  \newcommand{\ltheadEquipment}{}
+  \renewcommand{\ltheadEquipment}
+    {
+    \hline    
+    \multicolumn{1}{m{10cm}|}{\centering   \textit{Позиционное обозначение}}&
+    \multicolumn{1}{m{3mm}}{\centering   \textit{Корпус}}\\
+    \hline
+    }    
+
+\begin{longtable} {m{10cm}|m{3cm}}
+
+\caption{}
+\label{tab:psitible}
+
+\\
+    \ltheadEquipment
+    \endfirsthead 
+    %\caption*{\it{Продолжение таблицы} \thetable}\\
+    \ltheadEquipment
+    \endhead
+    \endfoot
+    \endlastfoot
+
+\input{reports_info_case}
+
+\end{longtable}
+
+\end{document}

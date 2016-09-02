@@ -1,0 +1,22 @@
+\documentclass[russian,utf8]{eskdtab}
+\usepackage{eskdspec}
+\usepackage[T2A]{fontenc}
+\usepackage{cmap}
+\usepackage{ifthen}
+\input{__data_sp}
+\usepackage{eskdchngsheet}
+%\usepackage[unicode]{hyperref}
+\begin{document}
+\begin{ESKDspecification}
+
+\input{reports}
+
+\end{ESKDspecification}
+
+
+\ifthenelse{\value{page} > 4} 
+{
+ \input{changeSheet}
+}
+
+\end{document}
