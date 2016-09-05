@@ -39,7 +39,13 @@ def presort():
         if row_num==0:
             cfg_headerd=row
             if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd) and ('Dop' in cfg_headerd)
-                    and ('Sbed' in cfg_headerd) and ('Det' in cfg_headerd) and ('Stizd' in cfg_headerd)):
+                    and ('Sbed' in cfg_headerd) and ('Det' in cfg_headerd) and ('Stizd' in cfg_headerd)
+                    and ('Korp' in cfg_headerd)
+                    and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
+                    and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('Mk' in cfg_headerd)
+                    ):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&&&'+'file bom2sp ERROR!!!'+'&&&'+'\\'+'\\''\n')
@@ -53,6 +59,14 @@ def presort():
                 sbed = row['Sbed']
                 det = row['Det']
                 stizd = row['Stizd']
+                korp = row['Korp']
+                volt = row['Volt']
+                om = row['Om']
+                pf = row['pF']
+                f = row['F']
+                k = row['K']
+                m = row['M']
+                mk = row['Mk']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
     
@@ -74,7 +88,7 @@ def presort():
                     and ('PartNumber' in headerd) and ('PartNumberRU' in headerd) and ('Value' in headerd) and ('TU GOST' in headerd)
                     and ('PartDocument' in headerd) and ('Manufacturer' in headerd) and ('Case' in headerd) and ('TCx' in headerd)
                     and ('PowerRating' in headerd) and ('Voltage' in headerd) and ('ReplacementPN' in headerd) and ('SpecSection' in headerd)
-                    and ('BomNote' in headerd)):
+                    and ('BomNote' in headerd)and ('Tolerance' in headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&&&'+'prochie izdelija bom ERROR!!!'+'&&&'+'\\'+'\\''\n')

@@ -16,7 +16,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
         if row_num==0:
             cfg_headerd=row
             if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd) and ('Dop' in cfg_headerd)
-                    and ('Sbed' in cfg_headerd) and ('Det' in cfg_headerd) and ('Stizd' in cfg_headerd)):
+                    and ('Sbed' in cfg_headerd) and ('Det' in cfg_headerd) and ('Stizd' in cfg_headerd)
+                    and ('Korp' in cfg_headerd)
+                    and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
+                    and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('Mk' in cfg_headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&&&'+'file bom2sp ERROR!!!'+'&&&'+'\\'+'\\''\n')
@@ -29,7 +34,15 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 dop = row['Dop']
                 sbed = row['Sbed']
                 det = row['Det']
-                stizd = row['Stizd']                
+                stizd = row['Stizd']
+                korp = row['Korp']
+                volt = row['Volt']
+                om = row['Om']
+                pf = row['pF']
+                f = row['F']
+                k = row['K']
+                m = row['M']
+                mk = row['Mk']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
      
@@ -158,6 +171,18 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 s7.append(stp)
         if man != '':
             s7.append(man)
+        if row['BomNote']!= ' ' and row['BomNote']!= '':
+            if len(row['BomNote']) < lens7:
+                s7.append(row['BomNote'])
+            else:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
             
         count = len(s7)
         while count > 0:
@@ -176,29 +201,74 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
         s5 = []
         col5 = ''
         col5_list = []       
-        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' ': 
+        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' 'or row['Case']!= ' 'or row['Tolerance']!= ' ': 
             col5_list.append(row['Name'])
             col5_list.append(' ')
             col5_list.append(row['PartNumber'])
             col5_list.append(' ')
             col5_list.append(row['PartNumberRU'])
             col5_list.append(' (')
-            col5_list.append(row['Value'])
-            if row['TCx'] != ' ' and row['Value'] != ' ':
-                col5_list.append('-')
+
+            if row['Case'] != ' ':
+                col5_list.append(korp +' '+ row['Case'])
             else:
-                col5_list.append(' ')
-            col5_list.append(row['TCx'])
-            if row['PowerRating'] != ' 'and (row['TCx'] != ' ' or row['Value'] != ' '):
-                col5_list.append('-')
+                col5_list.append('')
+                
+            if row['PowerRating'] != ' ' and row['Case'] != ' ':
+                col5_list.append(', ')
             else:
-                col5_list.append(' ')
-            col5_list.append(row['PowerRating'])
-            if row['Voltage'] != ' ' and (row['PowerRating'] != ' 'or row['TCx'] != ' ' or row['Value'] != ' '):
-                col5_list.append('-')
+                col5_list.append('')
+            if row['PowerRating'] != ' ':   
+                col5_list.append(row['PowerRating'])
             else:
-                col5_list.append(' ')            
-            col5_list.append(row['Voltage'])
+                col5_list.append('')
+                
+            if row['TCx'] != ' ' and (row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col5_list.append(', ')
+            else:
+                col5_list.append('')
+            if row['TCx'] != ' ':
+                col5_list.append(row['TCx'])
+            else:
+                col5_list.append('')
+                
+            if row['Value'] != ' ' and (row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col5_list.append(', ')
+            else:
+                col5_list.append('')
+            if row['Value'] != ' ':
+                if vid == 'C':
+                    if mk in row['Value']:
+                        col5_list.append(row['Value']+f)
+                    else:
+                        col5_list.append(row['Value']+' '+pf)
+                if vid == 'R':
+                    if k in row['Value'] or m in row['Value']:
+                        col5_list.append(row['Value']+om)
+                    else:
+                        col5_list.append(row['Value']+' '+om)
+                if vid != 'C' and vid != 'R':
+                    col5_list.append(row['Value'])
+            else:
+                col5_list.append('')
+                
+            if row['Tolerance'] != ' ' and (row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col5_list.append(', ')
+            else:
+                col5_list.append('')
+            if row['Tolerance'] != ' ':
+                col5_list.append('+/-'+row['Tolerance']+'\%')
+            else:
+                col5_list.append('')
+                
+            if row['Voltage'] != ' ' and (row['Tolerance'] != ' ' or row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col5_list.append(', ')
+            else:
+                col5_list.append('')
+            if row['Voltage'] != ' ':
+                col5_list.append(row['Voltage']+volt)
+            else:
+                col5_list.append('')           
             col5_list.append(') ')
             col5_list.append(row['TU GOST'])
             col5_list.append(' ')
@@ -263,12 +333,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     count -=3 
                     while count > 0:                   
                         count -=1
-                        col5_list.pop(count) 
-                else:##del Value/PartNum
+                        col5_list.pop(count)  
+                else:##del Value1/PartNum
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=12              
+                        count -=9              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -276,7 +346,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=12 
+                            count -=9 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count) 
@@ -295,7 +365,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
-                    if len(col5) >= lens5:##PartNum
+                    if len(col5) >= lens5:##del Value2
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
@@ -310,7 +380,23 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 count -=16 
                                 while count > 0:
                                     count -=1
-                                    col5_list.pop(count) 
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##PartNum
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=20              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=20 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                                    
                     if len(col5) >= lens5:
                         print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                         ofile.close()
@@ -369,11 +455,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     while count > 0:                   
                         count -=1
                         col5_list.pop(count)
-                else:##del Value
+                else:##del Value1
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=12              
+                        count -=9              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1 
@@ -381,19 +467,35 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=12 
+                            count -=9 
                             while count > 0:
                                 count -=1
-                                col5_list.pop(count)  
-                    if len(col5) >= lens5:
-                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                        ofile.close()
-                        ofile =open('reports.tex', 'w')
-                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                        output_log_file.close()
-                        ifile.close()
-                        ofile.close()
-                        sys.exit()
+                                col5_list.pop(count)
+                    if len(col5) >= lens5:##del Value2
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=16              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=16 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                   
+                if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
 ################################################ 3-я строка
         col5 = ''
         count  = len(col5_list)       
@@ -442,8 +544,24 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         count -=3 
                         while count > 0:
                             count -=1
-                            col5_list.pop(count)  
-                if len(col5) >= lens5:
+                            col5_list.pop(count)
+                    else:##del Value1
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=9              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1 
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=9 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+            if len(col5) >= lens5:
                     print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                     ofile.close()
                     ofile =open('reports.tex', 'w')
@@ -486,7 +604,67 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     count -=2 
                     while count > 0:
                         count -=1
-                        col5_list.pop(count)  
+                        col5_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=3              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)                    
+        if len(col5) >= lens5:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
+################################################ 5-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if val == 0:
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count) 
+            else:##del PartDocument
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=2              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1                            
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=2 
+                        while count > 0:
+                            count -=1
+                            col5_list.pop(count)                   
             if len(col5) >= lens5:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                 ofile.close()
@@ -496,6 +674,35 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ifile.close()
                 ofile.close()
                 sys.exit()
+################################################ 6-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if val == 0:
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count)                   
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+
                 
 ################################################ Допустимые замены
 
@@ -757,7 +964,18 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     s7.append(stp)
             if man != '':
                 s7.append(man)
-            s7.append(row['Unplaced'])
+            if row['BomNote']!= ' ' and row['BomNote']!= '':
+                if len(row['BomNote']) < lens7:
+                    s7.append(row['BomNote'])
+                else:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()            
                         
             count = len(s7)
             while count > 0:
@@ -776,33 +994,79 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             s5 = []
             col5 = ''
             col5_list = []       
-            if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' ': 
+            if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' 'or row['Case']!= ' 'or row['Tolerance']!= ' ': 
                 col5_list.append(row['Name'])
                 col5_list.append(' ')
                 col5_list.append(row['PartNumber'])
                 col5_list.append(' ')
                 col5_list.append(row['PartNumberRU'])
                 col5_list.append(' (')
-                col5_list.append(row['Value'])
-                if row['TCx'] != ' ' and row['Value'] != ' ':
-                    col5_list.append('-')
+
+                if row['Case'] != ' ':
+                    col5_list.append(korp +' '+ row['Case'])
                 else:
-                    col5_list.append(' ')
-                col5_list.append(row['TCx'])
-                if row['PowerRating'] != ' 'and (row['TCx'] != ' ' or row['Value'] != ' '):
-                    col5_list.append('-')
+                    col5_list.append('')
+                    
+                if row['PowerRating'] != ' ' and row['Case'] != ' ':
+                    col5_list.append(', ')
                 else:
-                    col5_list.append(' ')
-                col5_list.append(row['PowerRating'])
-                if row['Voltage'] != ' ' and (row['PowerRating'] != ' 'or row['TCx'] != ' ' or row['Value'] != ' '):
-                    col5_list.append('-')
+                    col5_list.append('')
+                if row['PowerRating'] != ' ':   
+                    col5_list.append(row['PowerRating'])
                 else:
-                    col5_list.append(' ')            
-                col5_list.append(row['Voltage'])
+                    col5_list.append('')
+                    
+                if row['TCx'] != ' ' and (row['PowerRating'] != ' ' or row['Case'] != ' '):
+                    col5_list.append(', ')
+                else:
+                    col5_list.append('')
+                if row['TCx'] != ' ':
+                    col5_list.append(row['TCx'])
+                else:
+                    col5_list.append('')
+                    
+                if row['Value'] != ' ' and (row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                    col5_list.append(', ')
+                else:
+                    col5_list.append('')
+                if row['Value'] != ' ':
+                    if vid == 'C':
+                        if mk in row['Value']:
+                            col5_list.append(row['Value']+f)
+                        else:
+                            col5_list.append(row['Value']+' '+pf)
+                    if vid == 'R':
+                        if k in row['Value'] or m in row['Value']:
+                            col5_list.append(row['Value']+om)
+                        else:
+                            col5_list.append(row['Value']+' '+om)
+                    if vid != 'C' and vid != 'R':
+                        col5_list.append(row['Value'])
+                else:
+                    col5_list.append('')
+                    
+                if row['Tolerance'] != ' ' and (row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                    col5_list.append(', ')
+                else:
+                    col5_list.append('')
+                if row['Tolerance'] != ' ':
+                    col5_list.append('+/-'+row['Tolerance']+'\%')
+                else:
+                    col5_list.append('')
+                    
+                if row['Voltage'] != ' ' and (row['Tolerance'] != ' ' or row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                    col5_list.append(', ')
+                else:
+                    col5_list.append('')
+                if row['Voltage'] != ' ':
+                    col5_list.append(row['Voltage']+volt)
+                else:
+                    col5_list.append('')           
                 col5_list.append(') ')
                 col5_list.append(row['TU GOST'])
                 col5_list.append(' ')
                 col5_list.append(row['PartDocument'])
+                
                 val = 0
             else:
                 col5_list.append(row['Name'])
@@ -863,12 +1127,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         count -=3 
                         while count > 0:                   
                             count -=1
-                            col5_list.pop(count) 
-                    else:##del Value/PartNum
+                            col5_list.pop(count)  
+                    else:##del Value1/PartNum
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=12              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -876,7 +1140,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=12 
+                                count -=9 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count) 
@@ -895,7 +1159,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
-                        if len(col5) >= lens5:##PartNum
+                        if len(col5) >= lens5:##del Value2
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
@@ -910,7 +1174,23 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     count -=16 
                                     while count > 0:
                                         count -=1
-                                        col5_list.pop(count) 
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##PartNum
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=20              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=20 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)                                    
                         if len(col5) >= lens5:
                             print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                             ofile.close()
@@ -969,11 +1249,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         while count > 0:                   
                             count -=1
                             col5_list.pop(count)
-                    else:##del Value
+                    else:##del Value1
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=12              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1 
@@ -981,19 +1261,35 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=12 
+                                count -=9 
                                 while count > 0:
                                     count -=1
-                                    col5_list.pop(count)  
-                        if len(col5) >= lens5:
-                            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                            ofile.close()
-                            ofile =open('reports.tex', 'w')
-                            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                            output_log_file.close()
-                            ifile.close()
-                            ofile.close()
-                            sys.exit()
+                                    col5_list.pop(count)
+                        if len(col5) >= lens5:##del Value2
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=16              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=16 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)                   
+                    if len(col5) >= lens5:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
 ################################################ 3-я строка
             col5 = ''
             count  = len(col5_list)       
@@ -1042,8 +1338,24 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             count -=3 
                             while count > 0:
                                 count -=1
-                                col5_list.pop(count)  
-                    if len(col5) >= lens5:
+                                col5_list.pop(count)
+                        else:##del Value1
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=9              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1 
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=9 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                if len(col5) >= lens5:
                         print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                         ofile.close()
                         ofile =open('reports.tex', 'w')
@@ -1086,7 +1398,67 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         count -=2 
                         while count > 0:
                             count -=1
-                            col5_list.pop(count)  
+                            col5_list.pop(count)
+                    else:##del TU GOST
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=3              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=3 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                    
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 5-я строка
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if val == 0:
+                if len(col5)<lens5: 
+                    col5 = ''
+                    count  = len(col5_list)
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    while count > 0:
+                        count -=1                     
+                        col5_list.pop(count) 
+                else:##del PartDocument
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=2              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=2 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)                   
                 if len(col5) >= lens5:
                     print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                     ofile.close()
@@ -1096,7 +1468,35 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     ifile.close()
                     ofile.close()
                     sys.exit()
-                    
+################################################ 6-я строка
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if val == 0:
+                if len(col5)<lens5: 
+                    col5 = ''
+                    count  = len(col5_list)
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    while count > 0:
+                        count -=1                     
+                        col5_list.pop(count)                   
+                if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
+
 ################################################ Допустимые замены
 
             col5 = ''

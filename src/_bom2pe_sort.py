@@ -75,7 +75,13 @@ def main():
     for row in cfg_readerd:
         if row_num==0:
             cfg_headerd=row
-            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd)):
+            if not (('UnplacedStr' in cfg_headerd) and ('TestPointStr' in cfg_headerd)
+                    and ('Dop' in cfg_headerd) and ('Korp' in cfg_headerd)
+                    and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
+                    and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('Mk' in cfg_headerd)):
+                Dop;Korp;Volt;Om;pF;F
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
@@ -89,6 +95,14 @@ def main():
                 dni_str = row['UnplacedStr']
                 tp_str = row['TestPointStr']
                 dop = row['Dop']
+                korp = row['Korp']
+                volt = row['Volt']
+                om = row['Om']
+                pf = row['pF']
+                f = row['F']
+                k = row['K']
+                m = row['M']
+                mk = row['Mk']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
     
@@ -110,7 +124,7 @@ def main():
                     and ('PartNumber' in headerd) and ('PartNumberRU' in headerd) and ('Value' in headerd) and ('TU GOST' in headerd)
                     and ('PartDocument' in headerd) and ('Manufacturer' in headerd) and ('Case' in headerd) and ('TCx' in headerd)
                     and ('PowerRating' in headerd) and ('Voltage' in headerd) and ('ReplacementPN' in headerd) and ('SpecSection' in headerd)
-                    and ('BomNote' in headerd)):
+                    and ('BomNote' in headerd)and ('Tolerance' in headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
@@ -339,38 +353,82 @@ def main():
 
 
 ######################################################################################################## 2-й столбец
+        #om = row['Om']
+        #pf = row['pF']
+        #f = row['F']
+        
         val = 0
         s1 = []
         col2 = ''
         col2_list = []       
-        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' 'or row['Case']!= ' ': 
+        if row['Value']!=' ' or row['TCx']!=' ' or row['PowerRating']!=' ' or row['Voltage']!= ' 'or row['Case']!= ' 'or row['Tolerance']!= ' ': 
             col2_list.append(row['Name'])
             col2_list.append(' ')
             col2_list.append(row['PartNumber'])
             col2_list.append(' ')
             col2_list.append(row['PartNumberRU'])
             col2_list.append(' (')
-            col2_list.append(row['Value'])
-            if row['TCx'] != ' ' and row['Value'] != ' ':
-                col2_list.append('-')
+
+            if row['Case'] != ' ':
+                col2_list.append(korp +' '+ row['Case'])
             else:
-                col2_list.append(' ')
-            col2_list.append(row['TCx'])
-            if row['PowerRating'] != ' ' and (row['TCx'] != ' ' or row['Value'] != ' '):
-                col2_list.append('-')
+                col2_list.append('')
+                
+            if row['PowerRating'] != ' ' and row['Case'] != ' ':
+                col2_list.append(', ')
             else:
-                col2_list.append(' ')
-            col2_list.append(row['PowerRating'])
-            if row['Voltage'] != ' ' and (row['PowerRating'] != ' 'or row['TCx'] != ' ' or row['Value'] != ' '):
-                col2_list.append('-')
+                col2_list.append('')
+            if row['PowerRating'] != ' ':   
+                col2_list.append(row['PowerRating'])
             else:
-                col2_list.append(' ')            
-            col2_list.append(row['Voltage'])
-            if row['Case'] != ' ' and (row['Voltage'] != ' ' or row['PowerRating'] != ' 'or row['TCx'] != ' ' or row['Value'] != ' '):
-                col2_list.append('- Корпус ')
+                col2_list.append('')
+                
+            if row['TCx'] != ' ' and (row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col2_list.append(', ')
             else:
-                col2_list.append(' Корпус ')            
-            col2_list.append(row['Case'])            
+                col2_list.append('')
+            if row['TCx'] != ' ':
+                col2_list.append(row['TCx'])
+            else:
+                col2_list.append('')
+                
+            if row['Value'] != ' ' and (row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col2_list.append(', ')
+            else:
+                col2_list.append('')
+            if row['Value'] != ' ':
+                if vid == 'C':
+                    if mk in row['Value']:
+                        col2_list.append(row['Value']+f)
+                    else:
+                        col2_list.append(row['Value']+' '+pf)
+                if vid == 'R':
+                    if k in row['Value'] or m in row['Value']:
+                        col2_list.append(row['Value']+om)
+                    else:
+                        col2_list.append(row['Value']+' '+om)
+                if vid != 'C' and vid != 'R':
+                    col2_list.append(row['Value'])
+            else:
+                col2_list.append('')
+                
+            if row['Tolerance'] != ' ' and (row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col2_list.append(', ')
+            else:
+                col2_list.append('')
+            if row['Tolerance'] != ' ':
+                col2_list.append('+/-'+row['Tolerance']+'\%')
+            else:
+                col2_list.append('')
+                
+            if row['Voltage'] != ' ' and (row['Tolerance'] != ' ' or row['Value'] != ' ' or row['TCx'] != ' 'or row['PowerRating'] != ' ' or row['Case'] != ' '):
+                col2_list.append(', ')
+            else:
+                col2_list.append('')
+            if row['Voltage'] != ' ':
+                col2_list.append(row['Voltage']+volt)
+            else:
+                col2_list.append('')           
             col2_list.append(') ')
             col2_list.append(row['TU GOST'])
             col2_list.append(' ')
@@ -387,7 +445,7 @@ def main():
             col2_list.append(' ')
             col2_list.append(row['PartDocument'])            
             val = 1
-        lens2 = 50            
+        lens2 = 50
 ################################################ 1-я строка        
         count  = len(col2_list)
         while count > 0:
@@ -439,7 +497,7 @@ def main():
                     if val == 0:
                         col2 = ''
                         count  = len(col2_list) 
-                        count -=12              
+                        count -=16              
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
@@ -447,7 +505,7 @@ def main():
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
-                            count -=12 
+                            count -=16 
                             while count > 0:
                                 count -=1
                                 col2_list.pop(count) 
@@ -470,7 +528,7 @@ def main():
                         if val == 0:
                             col2 = ''
                             count  = len(col2_list) 
-                            count -=16              
+                            count -=20              
                             while count > 0:
                                 col2 = col2_list[count-1] + col2
                                 count -=1                            
@@ -478,7 +536,7 @@ def main():
                                 if col2 != '':
                                     s1.append(col2)
                                 count  = len(col2_list)
-                                count -=16 
+                                count -=20 
                                 while count > 0:
                                     count -=1
                                     col2_list.pop(count) 
@@ -545,7 +603,7 @@ def main():
                     if val == 0:
                         col2 = ''
                         count  = len(col2_list) 
-                        count -=12              
+                        count -=16              
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
@@ -553,7 +611,7 @@ def main():
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
-                            count -=12 
+                            count -=16 
                             while count > 0:
                                 count -=1
                                 col2_list.pop(count)  
@@ -712,9 +770,11 @@ def main():
         s2 = []
         col4 = ''
         col4_list = []       
+        col4_list.append(row['Unplaced'])
+        col4_list.append(' ')
         col4_list.append(row['Manufacturer'])
         col4_list.append(' ')
-        col4_list.append(row['Unplaced'])
+        col4_list.append(row['BomNote'])
         lens4 = 20
 ################################################ 1-я строка        
         count  = len(col4_list)
@@ -733,7 +793,7 @@ def main():
             while count > 0:
                 count -=1                     
                 col4_list.pop(count)             
-        else:##del Unplaced
+        else:##del BomNote
             col4 = ''
             count  = len(col4_list)            
             count -=2              
@@ -748,18 +808,33 @@ def main():
                 while count > 0:
                     count -=1                     
                     col4_list.pop(count)                                                   
-            else:
-                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                ofile.close()
-                ofile =open('reports.tex', 'w')
-                ofile.write('&'
-                +'LEN ERROR!!! %s' % (row['RefDes'])
-                +'&&'
-                +'\\'+'\\''\n')
-                output_log_file.close()
-                ifile.close()
-                ofile.close()
-                sys.exit()
+            else:##del Manufacturer
+                col4 = ''
+                count  = len(col4_list)            
+                count -=4              
+                while count > 0:
+                    col4 = col4_list[count-1] + col4
+                    count -=1                            
+                if len(col4)<lens4:
+                    if col4 != '':
+                        s2.append(col4)
+                    count  = len(col4_list)
+                    count -=4
+                    while count > 0:
+                        count -=1                     
+                        col4_list.pop(count)
+                else:   
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&'
+                    +'LEN ERROR!!! %s' % (row['RefDes'])
+                    +'&&'
+                    +'\\'+'\\''\n')
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
                 
 ################################################ 2-я строка        
         count  = len(col4_list)
@@ -777,7 +852,51 @@ def main():
             count  = len(col4_list)
             while count > 0:
                 count -=1                     
-                col4_list.pop(count)                                                               
+                col4_list.pop(count)
+        else:##del BomNote
+            col4 = ''
+            count  = len(col4_list)            
+            count -=2              
+            while count > 0:
+                col4 = col4_list[count-1] + col4
+                count -=1                            
+            if len(col4)<lens4:
+                if col4 != '':
+                    s2.append(col4)
+                count  = len(col4_list)
+                count -=2
+                while count > 0:
+                    count -=1                     
+                    col4_list.pop(count) 
+            else:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 3-я строка        
+        count  = len(col4_list)
+        while count > 0:
+            col4 = col4_list[count-1] + col4
+            count -=1
+        if len(col4)<lens4: 
+            col4 = ''
+            count  = len(col4_list)
+            while count > 0:
+                col4 = col4_list[count-1] + col4
+                count -=1
+            if col4 != '':
+                s2.append(col4)
+            count  = len(col4_list)
+            while count > 0:
+                count -=1                     
+                col4_list.pop(count)
         else:
             print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
             ofile.close()
