@@ -12,11 +12,22 @@ def main():
     o = os.name
     put = os.getcwd()
     put1 = put + '/src/'
-    if o=='nt':
-        os.system(put1+'___start.bat')
-    if o=='posix':
-        os.system('chmod +x '+put1+'___start.sh')
-        os.system('gksudo '+put1+'./___start.sh')
+    put2 = put + '/csv/'
+
+                         
+    if os.path.exists(os.path.abspath(put2+'bom_ispolnenij.txt')) and os.path.exists(os.path.abspath(put2+'varianty_ispolnenija.txt')):
+        if o=='nt':
+            os.system(put1+'___start_isp.bat')
+        if o=='posix':
+            os.system('chmod +x '+put1+'___start_isp.sh')
+            os.system('gksudo '+put1+'./___start_isp.sh')
+    else:
+        if o=='nt':
+            os.system(put1+'___start.bat')
+        if o=='posix':
+            os.system('chmod +x '+put1+'___start.sh')
+            os.system('gksudo '+put1+'./___start.sh')
+
         
 if __name__ == '__main__':
     main()

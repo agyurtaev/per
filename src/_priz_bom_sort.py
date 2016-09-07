@@ -95,10 +95,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ofile.write('&&&&\hspace{2 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'L':
-                ofile.write('&&&&\hspace{0,5 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'S':
-                ofile.write('&&&&\hspace{0,5 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
+                ofile.write('&&&&\hspace{0,1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'T':
                 ofile.write('&&&&\hspace{2 cm}\underline{Трансформаторы}&&'+'\\'+'\\''\n')
@@ -122,35 +122,34 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             if str_pn_pnr == unpl_spis[l_sp-1]:
                 priz_unpl = 1
             l_sp -= 1 
-######################################################################################################## 7-й столбец
+######################################################################################################## 7-й столбец 
         man = ''
-        if len(row['Manufacturer']) < 13: 
+        if len(row['Manufacturer']) < 11: 
             man = row['Manufacturer']
         else: 
-            if (row['Manufacturer'][12]!= 'a'
-                or row['Manufacturer'][12]!= 'e'
-                or row['Manufacturer'][12]!= 'i'
-                or row['Manufacturer'][12]!= 'j'
-                or row['Manufacturer'][12]!= 'o'
-                or row['Manufacturer'][12]!= 'q'
-                or row['Manufacturer'][12]!= 'u'
-                or row['Manufacturer'][12]!= 'y'
-                or row['Manufacturer'][12]!= ' '):
-                man = row['Manufacturer'][0:11]+'.'
+            if (row['Manufacturer'][9]!= 'a'
+                and row['Manufacturer'][9]!= 'e'
+                and row['Manufacturer'][9]!= 'i'
+                and row['Manufacturer'][9]!= 'j'
+                and row['Manufacturer'][9]!= 'o'
+                and row['Manufacturer'][9]!= 'q'
+                and row['Manufacturer'][9]!= 'u'
+                and row['Manufacturer'][9]!= 'y'
+                and row['Manufacturer'][9]!= ' '):
+                man = row['Manufacturer'][0:10]+'.'
             else:
-                if (row['Manufacturer'][11]!= 'a'
-                    or row['Manufacturer'][11]!= 'e'
-                    or row['Manufacturer'][11]!= 'i'
-                    or row['Manufacturer'][11]!= 'j'
-                    or row['Manufacturer'][11]!= 'o'
-                    or row['Manufacturer'][11]!= 'q'
-                    or row['Manufacturer'][11]!= 'u'
-                    or row['Manufacturer'][11]!= 'y'
-                    or row['Manufacturer'][11]!= ' '):
-                    man = row['Manufacturer'][0:10]+'.'        
+                if (row['Manufacturer'][8]!= 'a'
+                    and row['Manufacturer'][8]!= 'e'
+                    and row['Manufacturer'][8]!= 'i'
+                    and row['Manufacturer'][8]!= 'j'
+                    and row['Manufacturer'][8]!= 'o'
+                    and row['Manufacturer'][8]!= 'q'
+                    and row['Manufacturer'][8]!= 'u'
+                    and row['Manufacturer'][8]!= 'y'
+                    and row['Manufacturer'][8]!= ' '):
+                    man = row['Manufacturer'][0:9]+'.'        
                 else:
-                    man = row['Manufacturer'][0:9]+'.'
-
+                    man = row['Manufacturer'][0:8]+'.'
         lens7 = 10
         s7 = []
         col7 = ''
@@ -246,7 +245,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if k in row['Value'] or m in row['Value']:
                         col5_list.append(row['Value']+om)
                     else:
-                        col5_list.append(row['Value']+' '+om)
+                        col5_list.append(row['Value'])#+' '+om)
                 if vid != 'C' and vid != 'R':
                     col5_list.append(row['Value'])
             else:
@@ -257,7 +256,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             else:
                 col5_list.append('')
             if row['Tolerance'] != ' ':
-                col5_list.append('+/-'+row['Tolerance']+'\%')
+                col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
             else:
                 col5_list.append('')
                 
@@ -756,7 +755,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 
             if count == count_u:
 
-                if row['SpecSection'] != sbed or row['SpecSection'] != det or row['SpecSection'] != stizd:
+                if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                     ofile.write('&&'
                                 +str(num)
                                 +'&&'
@@ -810,7 +809,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         unpl_num.append(num_stiz) 
                     num_stiz += 1  
             else:
-                if row['SpecSection'] != sbed or row['SpecSection'] != det or row['SpecSection'] != stizd:            
+                if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:            
                     ofile.write('&&&&'
                                 +perecod(s5[number])
                                 +'&&'
@@ -886,10 +885,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     ofile.write('&&&&\hspace{2 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'L':
-                    ofile.write('&&&&\hspace{0,5 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                    ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'S':
-                    ofile.write('&&&&\hspace{0,5 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
+                    ofile.write('&&&&\hspace{0,1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'T':
                     ofile.write('&&&&\hspace{2 cm}\underline{Трансформаторы}&&'+'\\'+'\\''\n')
@@ -917,34 +916,33 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 l_sp -= 1 
 ######################################################################################################## 7-й столбец      
             man = ''
-            if len(row['Manufacturer']) < 13: 
+            if len(row['Manufacturer']) < 11: 
                 man = row['Manufacturer']
             else: 
-                if (row['Manufacturer'][12]!= 'a'
-                    or row['Manufacturer'][12]!= 'e'
-                    or row['Manufacturer'][12]!= 'i'
-                    or row['Manufacturer'][12]!= 'j'
-                    or row['Manufacturer'][12]!= 'o'
-                    or row['Manufacturer'][12]!= 'q'
-                    or row['Manufacturer'][12]!= 'u'
-                    or row['Manufacturer'][12]!= 'y'
-                    or row['Manufacturer'][12]!= ' '):
-                    man = row['Manufacturer'][0:11]+'.'
+                if (row['Manufacturer'][9]!= 'a'
+                    and row['Manufacturer'][9]!= 'e'
+                    and row['Manufacturer'][9]!= 'i'
+                    and row['Manufacturer'][9]!= 'j'
+                    and row['Manufacturer'][9]!= 'o'
+                    and row['Manufacturer'][9]!= 'q'
+                    and row['Manufacturer'][9]!= 'u'
+                    and row['Manufacturer'][9]!= 'y'
+                    and row['Manufacturer'][9]!= ' '):
+                    man = row['Manufacturer'][0:10]+'.'
                 else:
-                    if (row['Manufacturer'][11]!= 'a'
-                        or row['Manufacturer'][11]!= 'e'
-                        or row['Manufacturer'][11]!= 'i'
-                        or row['Manufacturer'][11]!= 'j'
-                        or row['Manufacturer'][11]!= 'o'
-                        or row['Manufacturer'][11]!= 'q'
-                        or row['Manufacturer'][11]!= 'u'
-                        or row['Manufacturer'][11]!= 'y'
-                        or row['Manufacturer'][11]!= ' '):
-                        man = row['Manufacturer'][0:10]+'.'
-                    
+                    if (row['Manufacturer'][8]!= 'a'
+                        and row['Manufacturer'][8]!= 'e'
+                        and row['Manufacturer'][8]!= 'i'
+                        and row['Manufacturer'][8]!= 'j'
+                        and row['Manufacturer'][8]!= 'o'
+                        and row['Manufacturer'][8]!= 'q'
+                        and row['Manufacturer'][8]!= 'u'
+                        and row['Manufacturer'][8]!= 'y'
+                        and row['Manufacturer'][8]!= ' '):
+                        man = row['Manufacturer'][0:9]+'.'        
                     else:
-                        man = row['Manufacturer'][0:9]+'.'
-            lens7 = 11
+                        man = row['Manufacturer'][0:8]+'.'                 
+            lens7 = 10
             s7 = []
             col7 = ''
             if len(row['RefDes'])<lens7:
@@ -955,9 +953,19 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 while len(stp) > lens7:                      
                     st = stp
                     while len(st) > lens7:
-                        pr = st.rfind (',')
-                        st = st[0:pr]
-                    col7 = st + ','
+                        if st[5] == '-':
+                            pr = 5
+                            st = st[0:pr+1]
+                        else:
+                            pr = st.rfind (',')
+                            st = st[0:pr]
+                    if len(st) > 5:    
+                        if st[5] =='-':
+                            col7 = st
+                        else:
+                            col7 = st + ','
+                    else:
+                        col7 = st + ','
                     s7.append(col7)                                             
                     stp = stp [pr+1:]
                 if stp != '':
@@ -1039,7 +1047,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if k in row['Value'] or m in row['Value']:
                             col5_list.append(row['Value']+om)
                         else:
-                            col5_list.append(row['Value']+' '+om)
+                            col5_list.append(row['Value'])#+' '+om)
                     if vid != 'C' and vid != 'R':
                         col5_list.append(row['Value'])
                 else:
@@ -1050,7 +1058,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 else:
                     col5_list.append('')
                 if row['Tolerance'] != ' ':
-                    col5_list.append('+/-'+row['Tolerance']+'\%')
+                    col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
                 else:
                     col5_list.append('')
                     
@@ -1546,7 +1554,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if number > count2 - 1:
                     s7.append('')  
                 if count == count_u:     
-                    if row['SpecSection'] != sbed or row['SpecSection'] != det or row['SpecSection'] != stizd:
+                    if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                         if priz_unpl == 0:
                             ofile.write('&&'
                                         +str(num)
@@ -1638,7 +1646,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                         +perecod(s7[number])
                                         +'\\'+'\\''\n')                            
                 else:
-                    if row['SpecSection'] != sbed or row['SpecSection'] != det or row['SpecSection'] != stizd:
+                    if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                         ofile.write('&&&&'
                                     +perecod(s5[number])
                                     +'&&'

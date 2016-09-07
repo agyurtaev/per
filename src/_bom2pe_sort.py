@@ -10,10 +10,14 @@ def main():
     BOM_EMPTY_ITEM= " "
 
     dr = os.path.dirname(__file__)   
-    pr = dr.rfind ('\\')
+    o = os.name
+    if o=='nt':
+        pr = dr.rfind ('\\')
+    else: 
+        pr = dr.rfind ('/')
     dr = dr[0:pr]
-    dr1 = dr + '\\csv\\'
-    dr2 = dr + '\\template\\'
+    dr1 = dr + '/csv/'
+    dr2 = dr + '/template/'
     
     def perecod(line):
         line = line.decode('cp1251').encode("utf-8")
@@ -81,7 +85,6 @@ def main():
                     and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
                     and ('K' in cfg_headerd) and ('M' in cfg_headerd)
                     and ('Mk' in cfg_headerd)):
-                Dop;Korp;Volt;Om;pF;F
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
@@ -181,7 +184,18 @@ def main():
         row_wr = row
         if row['PartNumberRU']!=BOM_EMPTY_ITEM:
             output_log_file.write('%s has Russian Part Number = {%s}, removing common part number\n' % (row['RefDes'], row['PartNumberRU']))
-            row_wr['PartNumber']=BOM_EMPTY_ITEM
+            row_wr['PartNumber']=BOM_EMPTY_ITEM         
+        l = len(row_wr['PartNumber'])
+        buf = row_wr['PartNumber']
+        while l > 0:
+            ln = len(buf)
+            if buf[l-1] == '#':
+                if l < ln:
+                    buf = buf[0:l-1]+ '\#' +buf[l:ln]
+                else:
+                    buf = buf[0:l-1]+ '\#'    
+            l -= 1
+        row_wr['PartNumber'] = buf            
         writerd.writerow(row_wr)
     ifile.close()
     ofile.close()
@@ -406,7 +420,7 @@ def main():
                     if k in row['Value'] or m in row['Value']:
                         col2_list.append(row['Value']+om)
                     else:
-                        col2_list.append(row['Value']+' '+om)
+                        col2_list.append(row['Value'])#+' '+om)
                 if vid != 'C' and vid != 'R':
                     col2_list.append(row['Value'])
             else:
@@ -417,7 +431,7 @@ def main():
             else:
                 col2_list.append('')
             if row['Tolerance'] != ' ':
-                col2_list.append('+/-'+row['Tolerance']+'\%')
+                col2_list.append('\(\pm\)'+row['Tolerance']+'\%')
             else:
                 col2_list.append('')
                 
@@ -691,6 +705,7 @@ def main():
                     
 ################################################ 4-я строка
         count  = len(col2_list)
+        col2 = ''
         while count > 0:
             col2 = col2_list[count-1] + col2
             count -=1
@@ -769,13 +784,41 @@ def main():
 ######################################################################################################## 4-й столбец
         s2 = []
         col4 = ''
-        col4_list = []       
+        col4_list = []
+        lens4 = 20
+        man = ''
+        if len(row['Manufacturer']) < lens4-2: 
+            man = row['Manufacturer']
+        else:
+            if (row['Manufacturer'][lens4-4]!= 'a'
+                and row['Manufacturer'][lens4-4]!= 'e'
+                and row['Manufacturer'][lens4-4]!= 'i'
+                and row['Manufacturer'][lens4-4]!= 'j'
+                and row['Manufacturer'][lens4-4]!= 'o'
+                and row['Manufacturer'][lens4-4]!= 'q'
+                and row['Manufacturer'][lens4-4]!= 'u'
+                and row['Manufacturer'][lens4-4]!= 'y'
+                and row['Manufacturer'][lens4-4]!= ' '):
+                man = row['Manufacturer'][0:lens4-3]+'.'
+            else:
+                if (row['Manufacturer'][lens4-5]!= 'a'
+                    and row['Manufacturer'][lens4-5]!= 'e'
+                    and row['Manufacturer'][lens4-5]!= 'i'
+                    and row['Manufacturer'][lens4-5]!= 'j'
+                    and row['Manufacturer'][lens4-5]!= 'o'
+                    and row['Manufacturer'][lens4-5]!= 'q'
+                    and row['Manufacturer'][lens4-5]!= 'u'
+                    and row['Manufacturer'][lens4-5]!= 'y'
+                    and row['Manufacturer'][lens4-5]!= ' '):
+                    man = row['Manufacturer'][0:lens4-4]+'.'
+                    
+                else:
+                    man = row['Manufacturer'][0:lens4-5]+'.'
         col4_list.append(row['Unplaced'])
         col4_list.append(' ')
-        col4_list.append(row['Manufacturer'])
+        col4_list.append(man)
         col4_list.append(' ')
         col4_list.append(row['BomNote'])
-        lens4 = 20
 ################################################ 1-я строка        
         count  = len(col4_list)
         while count > 0:
@@ -838,6 +881,7 @@ def main():
                 
 ################################################ 2-я строка        
         count  = len(col4_list)
+        col4 = ''
         while count > 0:
             col4 = col4_list[count-1] + col4
             count -=1
@@ -859,7 +903,7 @@ def main():
             count -=2              
             while count > 0:
                 col4 = col4_list[count-1] + col4
-                count -=1                            
+                count -=1
             if len(col4)<lens4:
                 if col4 != '':
                     s2.append(col4)
@@ -867,9 +911,10 @@ def main():
                 count -=2
                 while count > 0:
                     count -=1                     
-                    col4_list.pop(count) 
+                    col4_list.pop(count)       
             else:
-                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                print man
+                print 'FATAL ERROR!!!@ %s \n' % (row['RefDes'])
                 ofile.close()
                 ofile =open('reports.tex', 'w')
                 ofile.write('&'
@@ -882,6 +927,7 @@ def main():
                 sys.exit()
 ################################################ 3-я строка        
         count  = len(col4_list)
+        col4 = ''
         while count > 0:
             col4 = col4_list[count-1] + col4
             count -=1

@@ -9,10 +9,14 @@ def prizgen(perecod):
     BOM_EMPTY_ITEM= " "
     
     dr = os.path.dirname(__file__)   
-    pr = dr.rfind ('\\')
+    o = os.name
+    if o=='nt':
+        pr = dr.rfind ('\\')
+    else: 
+        pr = dr.rfind ('/')
     dr = dr[0:pr]
-    dr1 = dr + '\\csv\\'
-    dr2 = dr + '\\template\\'
+    dr1 = dr + '/csv/'
+    dr2 = dr + '/template/'
     
     if not os.path.exists(os.path.abspath(dr1+'prochie_izdelija_bom.csv')):
         print 'FATAL ERROR!!! \n' 
@@ -138,6 +142,17 @@ def prizgen(perecod):
         if row['PartDocument']!=BOM_EMPTY_ITEM:
             output_log_file.write('%s has Part Document = {%s}, removing common part number\n' % (row['RefDes'], row['PartDocument']))
             row_wr['PartNumber']=BOM_EMPTY_ITEM
+        l = len(row_wr['PartNumber'])
+        buf = row_wr['PartNumber']
+        while l > 0:
+            ln = len(buf)
+            if buf[l-1] == '#':
+                if l < ln:
+                    buf = buf[0:l-1]+ '\#' +buf[l:ln]
+                else:
+                    buf = buf[0:l-1]+ '\#'    
+            l -= 1
+        row_wr['PartNumber'] = buf  
         writerd.writerow(row_wr)
     ifile.close()
     ofile.close()

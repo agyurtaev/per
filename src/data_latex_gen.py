@@ -14,10 +14,14 @@ def main():
         return line
     
     dr = os.path.dirname(__file__)
-    pr = dr.rfind ('\\')
+    o = os.name
+    if o=='nt':
+        pr = dr.rfind ('\\')
+    else: 
+        pr = dr.rfind ('/')
     dr = dr[0:pr]
-    dr1 = dr + '\\csv\\'    
-    dr2 = dr + '\\template\\'    
+    dr1 = dr + '/csv/'    
+    dr2 = dr + '/template/'    
     ifile  = open(dr1+'dannye_dokumenta.csv', 'rb')
     reader  = csv.reader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
     row_num = 0

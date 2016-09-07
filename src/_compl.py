@@ -7,10 +7,15 @@ def complgen(perecod):
     import os
     
     dr = os.path.dirname(__file__)   
-    pr = dr.rfind ('\\')
+    o = os.name
+
+    if o=='nt':
+        pr = dr.rfind ('\\')
+    else: 
+        pr = dr.rfind ('/')
     dr = dr[0:pr]
-    dr1 = dr + '\\csv\\'
-    dr2 = dr + '\\template\\'
+    dr1 = dr + '/csv/'
+    dr2 = dr + '/template/'
     
     if not os.path.exists(os.path.abspath(dr1+'kompleksy.csv')):
         print 'FATAL ERROR!!! \n' 

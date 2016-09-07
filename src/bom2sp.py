@@ -33,7 +33,7 @@ def main():
     import _united_latex
     import _red_latex
     
-    NUM = 1
+    NUM = 15
     NUM_sbed = 0
     NUM_det = 0
     NUM_stiz = 0

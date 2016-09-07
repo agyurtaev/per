@@ -1,0 +1,602 @@
+       Variants report for Z:\PRJ\SEZ\MKm-3\PCB\MKm-3\MKm-3\PCB\MKm-3.pcb
+       ==================================================================
+Variant group: (Default)
+
+Date : 05.09.2016 14:03:37
+
++---------+--------------------------+----------+------------+
+| Ref Des | Part Number              | SW16BP   | SW16BP_3FP |
++---------+--------------------------+----------+------------+
+| BQ1     | ABM8G-25.000MHZ-18-D2Y-T |          |            |
+| BQ2     | ABM8G-25.000MHZ-18-D2Y-T |          |            |
+| BQ3     | ABM8G-25.000MHZ-18-D2Y-T | Unplaced |            |
+| BQ4     | ABM8G-25.000MHZ-18-D2Y-T |          |            |
+| C1      | C0805C475K4RAC           |          |            |
+| C2      | C0603C105K4RAC           |          |            |
+| C3      | C0402C104J4RAC           |          |            |
+| C4      | C0402C104J4RAC           |          |            |
+| C5      | C0402C104J4RAC           |          |            |
+| C6      | C0402C104J4RAC           |          |            |
+| C7      | C0603C224J4RAC           |          |            |
+| C8      | C0603C105K4RAC           |          |            |
+| C9      | C0805C475K4RAC           |          |            |
+| C10     | C0805C475K4RAC           |          |            |
+| C11     | C0805C475K4RAC           |          |            |
+| C12     | C0603C105K4RAC           |          |            |
+| C13     | C1206C226K8RAC           |          |            |
+| C14     | C1206C226K8RAC           |          |            |
+| C15     | C0603C105K4RAC           |          |            |
+| C16     | C1206C226K8RAC           | Unplaced | Unplaced   |
+| C17     | C1206C226K8RAC           |          |            |
+| C18     | C1206C226K8RAC           |          |            |
+| C19     | C0402C104J4RAC           |          |            |
+| C20     | C1206C106K3RAC           |          |            |
+| C21     | C0402C103J4RAC           |          |            |
+| C22     | C0402C104J4RAC           |          |            |
+| C23     | C0603C474J4RAC           |          |            |
+| C24     | C0402C104J4RAC           |          |            |
+| C25     | C0402C100J4RAC           |          |            |
+| C26     | C1206C226K8RAC           |          |            |
+| C27     | C1206C226K8RAC           |          |            |
+| C28     | C1206C226K8RAC           |          |            |
+| C29     | C1206C226K8RAC           |          |            |
+| C30     | C0402C104J4RAC           | Unplaced |            |
+| C31     | C0402C104J4RAC           |          |            |
+| C32     | C0402C104J4RAC           |          |            |
+| C33     | C0402C104J4RAC           |          |            |
+| C34     | C0402C104J4RAC           |          |            |
+| C35     | C0402C104J4RAC           |          |            |
+| C36     | C0402C104J4RAC           |          |            |
+| C37     | C0402C104J4RAC           |          |            |
+| C38     | C0402C104J4RAC           |          |            |
+| C39     | C0402C104J4RAC           |          |            |
+| C40     | C0402C104J4RAC           |          |            |
+| C41     | C0402C104J4RAC           |          |            |
+| C42     | C0402C104J4RAC           |          |            |
+| C43     | C0402C104J4RAC           |          |            |
+| C44     | C0402C104J4RAC           |          |            |
+| C45     | C0402C104J4RAC           |          |            |
+| C46     | C0402C104J4RAC           |          |            |
+| C47     | C0402C104J4RAC           |          |            |
+| C48     | C0402C104J4RAC           |          |            |
+| C49     | C0402C180J4RAC           |          |            |
+| C50     | C0402C180J4RAC           |          |            |
+| C51     | C0402C104J4RAC           |          |            |
+| C52     | C0402C104J4RAC           |          |            |
+| C53     | C0402C104J4RAC           |          |            |
+| C54     | C0402C104J4RAC           |          |            |
+| C55     | C0402C104J4RAC           |          |            |
+| C56     | C0402C104J4RAC           |          |            |
+| C57     | C0402C104J4RAC           |          |            |
+| C58     | C0402C104J4RAC           |          |            |
+| C59     | C0402C104J4RAC           |          |            |
+| C60     | C0402C104J4RAC           |          |            |
+| C61     | C0402C104J4RAC           |          |            |
+| C62     | C0402C104J4RAC           |          |            |
+| C63     | C0402C104J4RAC           |          |            |
+| C64     | C0402C104J4RAC           |          |            |
+| C65     | C0402C104J4RAC           |          |            |
+| C66     | C0402C104J4RAC           |          |            |
+| C67     | C0402C104J4RAC           |          |            |
+| C68     | C0402C104J4RAC           |          |            |
+| C69     | C0402C104J4RAC           |          |            |
+| C70     | C0402C104J4RAC           |          |            |
+| C71     | C0402C104J4RAC           |          |            |
+| C72     | C1206C102KGRAC           |          |            |
+| C73     | C1206C102KGRAC           |          |            |
+| C74     | C0402C104J4RAC           |          |            |
+| C75     | C0402C104J4RAC           |          |            |
+| C76     | C0402C104J4RAC           |          |            |
+| C77     | C0402C104J4RAC           |          |            |
+| C78     | C0402C104J4RAC           |          |            |
+| C79     | C0402C104J4RAC           |          |            |
+| C80     | C0402C104J4RAC           |          |            |
+| C81     | C0402C104J4RAC           |          |            |
+| C82     | C0402C104J4RAC           |          |            |
+| C83     | C0402C104J4RAC           |          |            |
+| C84     | C0402C104J4RAC           |          |            |
+| C85     | C0402C104J4RAC           |          |            |
+| C86     | C0402C104J4RAC           |          |            |
+| C87     | C0402C104J4RAC           |          |            |
+| C88     | C0402C104J4RAC           |          |            |
+| C89     | C0402C104J4RAC           |          |            |
+| C90     | C0402C104J4RAC           |          |            |
+| C91     | C0402C104J4RAC           |          |            |
+| C92     | C0402C104J4RAC           |          |            |
+| C93     | C0402C104J4RAC           |          |            |
+| C94     | C0402C104J4RAC           |          |            |
+| C95     | C0402C104J4RAC           |          |            |
+| C96     | C0402C104J4RAC           |          |            |
+| C97     | C0402C104J4RAC           |          |            |
+| C98     | C0402C104J4RAC           |          |            |
+| C99     | C0402C104J4RAC           |          |            |
+| C100    | C0402C104J4RAC           |          |            |
+| C101    | C0402C104J4RAC           |          |            |
+| C102    | C0402C104J4RAC           |          |            |
+| C103    | C0402C104J4RAC           |          |            |
+| C104    | C0402C104J4RAC           |          |            |
+| C105    | C0402C104J4RAC           |          |            |
+| C106    | C0402C104J4RAC           |          |            |
+| C107    | C0402C104J4RAC           |          |            |
+| C108    | C0402C104J4RAC           |          |            |
+| C109    | C0402C104J4RAC           |          |            |
+| C110    | C0402C104J4RAC           |          |            |
+| C111    | C0402C104J4RAC           |          |            |
+| C112    | C0402C104J4RAC           |          |            |
+| C113    | C0402C104J4RAC           |          |            |
+| C114    | C0402C104J4RAC           |          |            |
+| C115    | C0402C104J4RAC           |          |            |
+| C116    | C0402C104J4RAC           |          |            |
+| C117    | C0402C104J4RAC           |          |            |
+| C118    | C0402C104J4RAC           |          |            |
+| C119    | C0402C104J4RAC           |          |            |
+| C120    | C0402C104J4RAC           |          |            |
+| C121    | C0402C104J4RAC           |          |            |
+| C122    | C0402C104J4RAC           |          |            |
+| C123    | C0402C104J4RAC           |          |            |
+| C124    | C0402C180J4RAC           |          |            |
+| C125    | C0402C180J4RAC           |          |            |
+| C126    | C0402C104J4RAC           |          |            |
+| C127    | C0402C104J4RAC           |          |            |
+| C128    | C0402C104J4RAC           |          |            |
+| C129    | C0402C104J4RAC           |          |            |
+| C130    | C0402C104J4RAC           |          |            |
+| C131    | C0402C104J4RAC           |          |            |
+| C132    | C0402C104J4RAC           |          |            |
+| C133    | C0402C104J4RAC           |          |            |
+| C134    | C0402C104J4RAC           |          |            |
+| C135    | C0402C104J4RAC           |          |            |
+| C136    | C0402C104J4RAC           |          |            |
+| C137    | C0402C104J4RAC           |          |            |
+| C138    | C0402C104J4RAC           |          |            |
+| C139    | C0402C104J4RAC           |          |            |
+| C140    | C0402C104J4RAC           |          |            |
+| C141    | C0402C104J4RAC           |          |            |
+| C142    | C0402C104J4RAC           |          |            |
+| C143    | C0402C104J4RAC           |          |            |
+| C144    | C0402C104J4RAC           |          |            |
+| C145    | C0402C104J4RAC           |          |            |
+| C146    | C0402C104J4RAC           |          |            |
+| C147    | C1206C102KGRAC           |          |            |
+| C148    | C1206C102KGRAC           |          |            |
+| C149    | C0402C104J4RAC           |          |            |
+| C150    | C0402C104J4RAC           |          |            |
+| C151    | C0402C104J4RAC           |          |            |
+| C152    | C0402C104J4RAC           |          |            |
+| C153    | C0402C104J4RAC           |          |            |
+| C154    | C0402C104J4RAC           |          |            |
+| C155    | C0402C104J4RAC           |          |            |
+| C156    | C0402C104J4RAC           |          |            |
+| C157    | C0402C104J4RAC           |          |            |
+| C158    | C0402C104J4RAC           |          |            |
+| C159    | C0402C104J4RAC           |          |            |
+| C160    | C0402C104J4RAC           |          |            |
+| C161    | C0402C104J4RAC           |          |            |
+| C162    | C0402C104J4RAC           |          |            |
+| C163    | C0402C104J4RAC           |          |            |
+| C164    | C0402C104J4RAC           |          |            |
+| C165    | C0402C104J4RAC           |          |            |
+| C166    | C0402C104J4RAC           |          |            |
+| C167    | C0402C104J4RAC           |          |            |
+| C168    | C0402C104J4RAC           |          |            |
+| C169    | C0402C104J4RAC           |          |            |
+| C170    | C0402C104J4RAC           |          |            |
+| C171    | C0402C104J4RAC           |          |            |
+| C172    | C0402C104J4RAC           |          |            |
+| C173    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C174    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C175    | C0402C104J4RAC           | Unplaced |            |
+| C176    | C0402C104J4RAC           | Unplaced |            |
+| C177    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C178    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C179    | C0402C104J4RAC           | Unplaced |            |
+| C180    | C0402C104J4RAC           | Unplaced |            |
+| C181    | C0402C104J4RAC           |          |            |
+| C182    | C0402C104J4RAC           |          |            |
+| C183    | C0402C104J4RAC           |          |            |
+| C184    | C0402C104J4RAC           |          |            |
+| C185    | C0402C104J4RAC           |          |            |
+| C186    | C0402C104J4RAC           |          |            |
+| C187    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C188    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C189    | C0402C104J4RAC           | Unplaced |            |
+| C190    | C0402C104J4RAC           | Unplaced |            |
+| C191    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C192    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C193    | C0402C104J4RAC           | Unplaced |            |
+| C194    | C0402C104J4RAC           | Unplaced |            |
+| C195    | C0402C104J4RAC           | Unplaced |            |
+| C196    | C0402C104J4RAC           | Unplaced |            |
+| C197    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C198    | C0402C104J4RAC           | Unplaced |            |
+| C199    | C0402C104J4RAC           | Unplaced |            |
+| C200    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C201    | C1206C106K3RAC           | Unplaced |            |
+| C202    | C0402C104J4RAC           | Unplaced |            |
+| C203    | C0402C104J4RAC           | Unplaced |            |
+| C204    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C205    | C1206C106K3RAC           | Unplaced |            |
+| C206    | C0402C104J4RAC           | Unplaced |            |
+| C207    | C0402C104J4RAC           | Unplaced | Unplaced   |
+| C208    | C0402C104J4RAC           | Unplaced |            |
+| C209    | C0402C104J4RAC           | Unplaced |            |
+| C210    | C1206C106K3RAC           | Unplaced |            |
+| C211    | C0402C104J4RAC           | Unplaced |            |
+| C212    | C1206C106K3RAC           | Unplaced |            |
+| C213    | C0402C104J4RAC           | Unplaced |            |
+| C214    | C0402C104J4RAC           | Unplaced |            |
+| C215    | C1206C106K3RAC           | Unplaced |            |
+| C216    | C0402C104J4RAC           | Unplaced |            |
+| C217    | C1206C106K3RAC           | Unplaced |            |
+| C218    | T58MM106M6R3C0300        | Unplaced |            |
+| C219    | C0402C180J4RAC           | Unplaced |            |
+| C220    | C1206C106K3RAC           | Unplaced |            |
+| C221    | T58MM106M6R3C0300        | Unplaced |            |
+| C222    | C1206C106K3RAC           | Unplaced |            |
+| C223    | C0402C180J4RAC           | Unplaced |            |
+| C224    | C1206C106K3RAC           | Unplaced |            |
+| C225    | C0402C104J4RAC           | Unplaced |            |
+| C226    | C0402C104J4RAC           | Unplaced |            |
+| C227    | C0402C104J4RAC           | Unplaced |            |
+| C228    | C0402C104J4RAC           | Unplaced |            |
+| C229    | C0402C104J4RAC           | Unplaced |            |
+| C230    | C0402C104J4RAC           | Unplaced |            |
+| C231    | C0402C104J4RAC           | Unplaced |            |
+| C232    | C0402C104J4RAC           | Unplaced |            |
+| C233    | C1206C106K3RAC           | Unplaced |            |
+| C234    | C0402C393J4RAC           | Unplaced |            |
+| C235    | C0402C104J4RAC           | Unplaced |            |
+| C236    | C0402C104J4RAC           | Unplaced |            |
+| C237    | C0402C104J4RAC           | Unplaced |            |
+| C238    | C0402C104J4RAC           | Unplaced |            |
+| C239    | C1206C106K3RAC           | Unplaced |            |
+| C240    | C1206C106K3RAC           | Unplaced |            |
+| C241    | T58MM106M6R3C0300        | Unplaced |            |
+| C242    | C0402C104J4RAC           | Unplaced |            |
+| C243    | C0402C180J4RAC           |          |            |
+| C244    | C0402C104J4RAC           |          |            |
+| C245    | C0402C104J4RAC           |          |            |
+| C246    | C0402C104J4RAC           |          |            |
+| C247    | C0402C104J4RAC           |          |            |
+| C248    | C0402C104J4RAC           |          |            |
+| C249    | C0402C104J4RAC           |          |            |
+| C250    | C0805C475K4RAC           |          |            |
+| C251    | C0402C180J4RAC           |          |            |
+| C252    | C0402C104J4RAC           |          |            |
+| C253    | C0402C104J4RAC           |          |            |
+| C254    | C0402C104J4RAC           |          |            |
+| C255    | C0402C104J4RAC           |          |            |
+| C256    | C0402C104J4RAC           |          |            |
+| DA1     | MMPF0100NPANES           |          |            |
+| DA2     | LT3995IMSE#PBF           |          |            |
+| DD1     | TPS3808G01DBVRG4         |          |            |
+| DD2     | SN74LVC1G11DCKREP        |          |            |
+| DD3     | LTC4303IMS8              | Unplaced |            |
+| DD4     | 88E6097-XX-TAH-I000      |          |            |
+| DD5     | AT93C66B-XHM-T           |          |            |
+| DD6     | 88E6097-XX-TAH-I000      |          |            |
+| DD7     | AT93C66B-XHM-T           |          |            |
+| DD8     | I210-IS                  | Unplaced |            |
+| DD9     | SST25VF040B-50-4I-SAE    | Unplaced |            |
+| DD10    | MK22FX512AVLH12          |          |            |
+| DD11    | LTC4303IMS8              |          |            |
+| DD12    | AT24C32E-XHM-T           |          |            |
+| DD13    | TMP100-EP                |          |            |
+| DD14    | TMP100-EP                |          |            |
+| FU1     | SF-0603S100-2            |          |            |
+| FU2     | SF-0603S250-2            | Unplaced | Unplaced   |
+| F1      | SP0504SHTG               |          |            |
+| F2      | SP0504SHTG               |          |            |
+| F3      | SP0504SHTG               |          |            |
+| F4      | SP0504SHTG               |          |            |
+| F5      | SP0504SHTG               |          |            |
+| F6      | SP0504SHTG               |          |            |
+| F7      | SP0504SHTG               |          |            |
+| F8      | SP0504SHTG               |          |            |
+| F9      | SP0504SHTG               |          |            |
+| F10     | SP0504SHTG               |          |            |
+| F11     | SP0504SHTG               |          |            |
+| F12     | SP0504SHTG               |          |            |
+| F13     | SP0504SHTG               |          |            |
+| F14     | SP0504SHTG               |          |            |
+| F15     | SP0504SHTG               |          |            |
+| F16     | SP0504SHTG               |          |            |
+| HL1     | BL-HG036D-TRB            |          |            |
+| HL2     | BL-HG036D-TRB            |          |            |
+| HL3     | BL-HG036D-TRB            |          |            |
+| HL4     | BL-HG036D-TRB            |          |            |
+| HL5     | BL-HG036D-TRB            |          |            |
+| HL6     | BL-HG036D-TRB            |          |            |
+| HL7     | BL-HG036D-TRB            |          |            |
+| HL8     | BL-HG036D-TRB            |          |            |
+| HL9     | BL-HG036D-TRB            |          |            |
+| HL10    | BL-HG036D-TRB            |          |            |
+| HL11    | BL-HG036D-TRB            |          |            |
+| HL12    | BL-HG036D-TRB            |          |            |
+| HL13    | BL-HG036D-TRB            |          |            |
+| HL14    | BL-HG036D-TRB            |          |            |
+| HL15    | BL-HG036D-TRB            |          |            |
+| HL16    | BL-HG036D-TRB            |          |            |
+| HL17    | BL-HG036D-TRB            |          |            |
+| HL18    | L-4060VH/2GD             | Unplaced |            |
+| HL19    | L-4060VH/2GD             | Unplaced |            |
+| HL20    | BL-HG036D-TRB            | Unplaced |            |
+| HL21    | L-4060VH/2GD             | Unplaced |            |
+| HL22    | BL-HG036D-TRB            |          |            |
+| L1      | XAL4020-102MEC           |          |            |
+| L2      | XAL4020-102MEC           |          |            |
+| L3      | XAL5050-822MEB           |          |            |
+| R1      | CRCW040210K0JKED         |          |            |
+| R2      | CRCW040210K0JKED         |          |            |
+| R3      | CRCW04020000Z0ED         |          |            |
+| R4      | CRCW04020000Z0ED         |          |            |
+| R5      | CRCW04020000Z0ED         |          |            |
+| R6      | CRCW04020000Z0ED         |          |            |
+| R7      | CRCW04020000Z0ED         |          |            |
+| R8      | CRCW04020000Z0ED         |          |            |
+| R9      | CRCW04020000Z0ED         |          |            |
+| R10     | CRCW0402100KFKED         |          |            |
+| R11     | CRCW0402330RJKED         |          |            |
+| R12     | CRCW04021K62FKED         |          |            |
+| R13     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R14     | CRCW0402182KFKED         |          |            |
+| R15     | CRCW04020000Z0ED         |          |            |
+| R16     | CRCW040210K0JKED         |          |            |
+| R17     | CRCW0402576KFKED         |          |            |
+| R18     | CRCW04021M00FKED         |          |            |
+| R19     | CRCW04020000Z0ED         |          |            |
+| R20     | CRCW0402330RJKED         |          |            |
+| R21     | CRCW0402100KFKED         |          |            |
+| R22     | CRCW04020000Z0ED         |          |            |
+| R23     | CRCW04020000Z0ED         |          |            |
+| R24     | CRCW04020000Z0ED         | Unplaced |            |
+| R25     | CRCW04020000Z0ED         | Unplaced |            |
+| R26     | CRCW040210K0JKED         | Unplaced |            |
+| R27     | CRCW040210K0JKED         | Unplaced |            |
+| R28     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R29     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R30     | CRCW040210K0JKED         |          |            |
+| R31     | CRCW040210K0JKED         |          |            |
+| R32     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R33     | CRCW04020000Z0ED         |          |            |
+| R34     | CRCW040210K0JKED         |          |            |
+| R35     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R36     | CRCW040210K0JKED         |          |            |
+| R37     | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R38     | CRCW040210K0JKED         |          |            |
+| R39     | CRCW040210K0JKED         |          |            |
+| R40     | CRCW04022K00FKED         |          |            |
+| R41     | CRCW040210K0JKED         |          |            |
+| R42     | CRCW040210K0JKED         | Unplaced | Unplaced   |
+| R43     | CRCW040210K0JKED         | Unplaced | Unplaced   |
+| R44     | CRCW060375R0FKED         |          |            |
+| R45     | CRCW060375R0FKED         |          |            |
+| R46     | CRCW0402330RJKED         |          |            |
+| R47     | CRCW0402330RJKED         |          |            |
+| R48     | CRCW0402330RJKED         |          |            |
+| R49     | CRCW0402330RJKED         |          |            |
+| R50     | CRCW0402330RJKED         |          |            |
+| R51     | CRCW0402330RJKED         |          |            |
+| R52     | CRCW0402330RJKED         |          |            |
+| R53     | CRCW0402330RJKED         |          |            |
+| R54     | CRCW060375R0FKED         |          |            |
+| R55     | CRCW060375R0FKED         |          |            |
+| R56     | CRCW060375R0FKED         |          |            |
+| R57     | CRCW060375R0FKED         |          |            |
+| R58     | CRCW060375R0FKED         |          |            |
+| R59     | CRCW060375R0FKED         |          |            |
+| R60     | CRCW1206510KJKED         |          |            |
+| R61     | CRCW1206510KJKED         |          |            |
+| R62     | CRCW040249R9FKED         |          |            |
+| R63     | CRCW040249R9FKED         |          |            |
+| R64     | CRCW040249R9FKED         |          |            |
+| R65     | CRCW040249R9FKED         |          |            |
+| R66     | CRCW040249R9FKED         |          |            |
+| R67     | CRCW040249R9FKED         |          |            |
+| R68     | CRCW040249R9FKED         |          |            |
+| R69     | CRCW040249R9FKED         |          |            |
+| R70     | CRCW040249R9FKED         |          |            |
+| R71     | CRCW040249R9FKED         |          |            |
+| R72     | CRCW040249R9FKED         |          |            |
+| R73     | CRCW040249R9FKED         |          |            |
+| R74     | CRCW040249R9FKED         |          |            |
+| R75     | CRCW040249R9FKED         |          |            |
+| R76     | CRCW040249R9FKED         |          |            |
+| R77     | CRCW040249R9FKED         |          |            |
+| R78     | CRCW040249R9FKED         |          |            |
+| R79     | CRCW040249R9FKED         |          |            |
+| R80     | CRCW040249R9FKED         |          |            |
+| R81     | CRCW040249R9FKED         |          |            |
+| R82     | CRCW040249R9FKED         |          |            |
+| R83     | CRCW040249R9FKED         |          |            |
+| R84     | CRCW040249R9FKED         |          |            |
+| R85     | CRCW040249R9FKED         |          |            |
+| R86     | CRCW040249R9FKED         |          |            |
+| R87     | CRCW040249R9FKED         |          |            |
+| R88     | CRCW040249R9FKED         |          |            |
+| R89     | CRCW040249R9FKED         |          |            |
+| R90     | CRCW040249R9FKED         |          |            |
+| R91     | CRCW040249R9FKED         |          |            |
+| R92     | CRCW040249R9FKED         |          |            |
+| R93     | CRCW040249R9FKED         |          |            |
+| R94     | CRCW04020000Z0ED         |          |            |
+| R95     | CRCW040210K0JKED         |          |            |
+| R96     | CRCW04020000Z0ED         |          |            |
+| R97     | CRCW040210K0JKED         |          |            |
+| R98     | CRCW04020000Z0ED         | Unplaced |            |
+| R99     | CRCW040210K0JKED         |          |            |
+| R100    | CRCW04020000Z0ED         | Unplaced |            |
+| R101    | CRCW040210K0JKED         |          |            |
+| R102    | CRCW040210K0JKED         |          |            |
+| R103    | CRCW040210K0JKED         |          |            |
+| R104    | CRCW040210K0JKED         |          |            |
+| R105    | CRCW040210K0JKED         |          |            |
+| R106    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R107    | CRCW040210K0JKED         |          |            |
+| R108    | CRCW04020000Z0ED         |          |            |
+| R109    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R110    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R111    | CRCW040210K0JKED         |          |            |
+| R112    | CRCW04022K00FKED         |          |            |
+| R113    | CRCW040210K0JKED         | Unplaced | Unplaced   |
+| R114    | CRCW040210K0JKED         | Unplaced | Unplaced   |
+| R115    | CRCW060375R0FKED         |          |            |
+| R116    | CRCW060375R0FKED         |          |            |
+| R117    | CRCW060375R0FKED         |          |            |
+| R118    | CRCW060375R0FKED         |          |            |
+| R119    | CRCW0402330RJKED         |          |            |
+| R120    | CRCW0402330RJKED         |          |            |
+| R121    | CRCW0402330RJKED         |          |            |
+| R122    | CRCW0402330RJKED         |          |            |
+| R123    | CRCW0402330RJKED         |          |            |
+| R124    | CRCW0402330RJKED         |          |            |
+| R125    | CRCW0402330RJKED         |          |            |
+| R126    | CRCW0402330RJKED         |          |            |
+| R127    | CRCW060375R0FKED         |          |            |
+| R128    | CRCW060375R0FKED         |          |            |
+| R129    | CRCW060375R0FKED         |          |            |
+| R130    | CRCW060375R0FKED         |          |            |
+| R131    | CRCW1206510KJKED         |          |            |
+| R132    | CRCW1206510KJKED         |          |            |
+| R133    | CRCW040249R9FKED         |          |            |
+| R134    | CRCW040249R9FKED         |          |            |
+| R135    | CRCW040249R9FKED         |          |            |
+| R136    | CRCW040249R9FKED         |          |            |
+| R137    | CRCW040249R9FKED         |          |            |
+| R138    | CRCW040249R9FKED         |          |            |
+| R139    | CRCW040249R9FKED         |          |            |
+| R140    | CRCW040249R9FKED         |          |            |
+| R141    | CRCW040249R9FKED         |          |            |
+| R142    | CRCW040249R9FKED         |          |            |
+| R143    | CRCW040249R9FKED         |          |            |
+| R144    | CRCW040249R9FKED         |          |            |
+| R145    | CRCW040249R9FKED         |          |            |
+| R146    | CRCW040249R9FKED         |          |            |
+| R147    | CRCW040249R9FKED         |          |            |
+| R148    | CRCW040249R9FKED         |          |            |
+| R149    | CRCW040249R9FKED         |          |            |
+| R150    | CRCW040249R9FKED         |          |            |
+| R151    | CRCW040249R9FKED         |          |            |
+| R152    | CRCW040249R9FKED         |          |            |
+| R153    | CRCW040249R9FKED         |          |            |
+| R154    | CRCW040249R9FKED         |          |            |
+| R155    | CRCW040249R9FKED         |          |            |
+| R156    | CRCW040249R9FKED         |          |            |
+| R157    | CRCW040249R9FKED         |          |            |
+| R158    | CRCW040249R9FKED         |          |            |
+| R159    | CRCW040249R9FKED         |          |            |
+| R160    | CRCW040249R9FKED         |          |            |
+| R161    | CRCW040249R9FKED         |          |            |
+| R162    | CRCW040249R9FKED         |          |            |
+| R163    | CRCW040249R9FKED         |          |            |
+| R164    | CRCW040249R9FKED         |          |            |
+| R165    | CRCW0402330RJKED         | Unplaced |            |
+| R166    | CRCW0402330RJKED         | Unplaced |            |
+| R167    | CRCW04020000Z0ED         | Unplaced |            |
+| R168    | CRCW04020000Z0ED         | Unplaced |            |
+| R169    | CRCW04020000Z0ED         | Unplaced |            |
+| R170    | CRCW04020000Z0ED         |          |            |
+| R171    | CRCW04020000Z0ED         | Unplaced |            |
+| R172    | CRCW04020000Z0ED         |          |            |
+| R173    | CRCW04020000Z0ED         |          |            |
+| R174    | CRCW04020000Z0ED         |          |            |
+| R175    | CRCW040210K0JKED         |          |            |
+| R176    | CRCW04020000Z0ED         | Unplaced |            |
+| R177    | CRCW040210K0JKED         |          |            |
+| R178    | CRCW04020000Z0ED         | Unplaced |            |
+| R179    | CRCW040210K0JKED         |          |            |
+| R180    | CRCW040210K0JKED         |          |            |
+| R181    | CRCW040210K0JKED         |          |            |
+| R182    | CRCW040210K0JKED         |          |            |
+| R183    | CRCW040210K0JKED         |          |            |
+| R184    | CRCW04020000Z0ED         |          |            |
+| R185    | CRCW040210K0JKED         |          |            |
+| R186    | CRCW040210K0JKED         |          |            |
+| R187    | CRCW040210K0JKED         |          |            |
+| R188    | CRCW040210K0JKED         |          |            |
+| R189    | CRCW040210K0JKED         |          |            |
+| R190    | CRCW040210K0JKED         |          |            |
+| R191    | CRCW040210K0JKED         |          |            |
+| R192    | CRCW040210K0JKED         |          |            |
+| R193    | CRCW040210K0JKED         |          |            |
+| R194    | CRCW040210K0JKED         | Unplaced |            |
+| R195    | CRCW04020000Z0ED         | Unplaced |            |
+| R196    | CRCW04020000Z0ED         | Unplaced |            |
+| R197    | CRCW04020000Z0ED         | Unplaced |            |
+| R198    | CRCW040210K0JKED         | Unplaced |            |
+| R199    | CRCW040210K0JKED         | Unplaced |            |
+| R200    | CRCW040210K0JKED         | Unplaced |            |
+| R201    | CRCW040210K0JKED         | Unplaced |            |
+| R202    | CRCW040210K0JKED         | Unplaced |            |
+| R203    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R204    | CRCW040233R0JKED         | Unplaced |            |
+| R205    | CRCW040233R0JKED         | Unplaced | Unplaced   |
+| R206    | CRCW040233R0JKED         | Unplaced | Unplaced   |
+| R207    | CRCW040233R0JKED         | Unplaced |            |
+| R208    | CRCW040210K0JKED         | Unplaced |            |
+| R209    | CRCW04020000Z0ED         | Unplaced |            |
+| R210    | CRCW04020000Z0ED         | Unplaced |            |
+| R211    | CRCW040210K0JKED         | Unplaced |            |
+| R212    | CRCW040210K0JKED         | Unplaced |            |
+| R213    | CRCW04024K99FKED         | Unplaced |            |
+| R214    | CRCW0402330RJKED         | Unplaced |            |
+| R215    | CRCW0402330RJKED         | Unplaced |            |
+| R216    | CRCW0402330RJKED         | Unplaced |            |
+| R217    | CRCW040210K0JKED         | Unplaced |            |
+| R218    | CRCW04020000Z0ED         | Unplaced |            |
+| R219    | CRCW040210K0JKED         | Unplaced |            |
+| R220    | CRCW040233R0JKED         |          |            |
+| R221    | CRCW040233R0JKED         |          |            |
+| R222    | CRCW040233R0JKED         |          |            |
+| R223    | CRCW040233R0JKED         |          |            |
+| R224    | CRCW040233R0JKED         |          |            |
+| R225    | CRCW040233R0JKED         |          |            |
+| R226    | CRCW040233R0JKED         |          |            |
+| R227    | CRCW040233R0JKED         |          |            |
+| R228    | CRCW040210K0JKED         |          |            |
+| R229    | CRCW040210K0JKED         |          |            |
+| R230    | CRCW04020000Z0ED         |          |            |
+| R231    | CRCW04020000Z0ED         |          |            |
+| R232    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R233    | CRCW04020000Z0ED         |          |            |
+| R234    | CRCW04020000Z0ED         | Unplaced | Unplaced   |
+| R235    | CRCW0402330RJKED         |          |            |
+| R236    | CRCW040210K0JKED         |          |            |
+| R237    | CRCW040210K0JKED         |          |            |
+| T1      | TG110-EMX6NXLF           |          |            |
+| T2      | TG110-EMX6NXLF           |          |            |
+| T3      | TG110-EMX6NXLF           |          |            |
+| T4      | TG110-EMX6NXLF           |          |            |
+| VD1     | SS5P6-M3/86A             |          |            |
+| VD2     | SMAJ12A-E3/5A            |          |            |
+| VD3     | SMP3V3-M3/84A            | Unplaced | Unplaced   |
+| XP1     | ASP-153860-01            |          |            |
+| XP2     | ASP-153860-01            |          |            |
+| XP3     | 53261-1071               |          |            |
+| XS1     | 74441-0001               | Unplaced |            |
+| XS2     | 74737-0010               | Unplaced |            |
+| XS3     | 74441-0001               | Unplaced |            |
+| XS4     | 74737-0010               | Unplaced |            |
+| XS5     | 74441-0001               | Unplaced |            |
+| XS6     | 74737-0010               | Unplaced |            |
+| ZH1     | BLM18PG121SN1D           |          |            |
+| ZH2     | BLM18PG121SN1D           |          |            |
+| ZH3     | BLM18PG121SN1D           |          |            |
+| ZH4     | BLM18PG121SN1D           |          |            |
+| ZH5     | BLM18PG121SN1D           |          |            |
+| ZH6     | BLM18PG121SN1D           |          |            |
+| ZH7     | BLM18PG121SN1D           |          |            |
+| ZH8     | BLM18PG121SN1D           |          |            |
+| ZH9     | BLM18PG121SN1D           |          |            |
+| ZH10    | BLM18PG121SN1D           |          |            |
+| ZH11    | BLM18PG121SN1D           |          |            |
+| ZH12    | BLM18PG121SN1D           |          |            |
+| ZH13    | BLM18PG121SN1D           |          |            |
+| ZH14    | BLM18PG121SN1D           |          |            |
+| ZH15    | BLM18PG121SN1D           | Unplaced |            |
+| ZH16    | BLM18PG121SN1D           | Unplaced |            |
+| ZH17    | BLM18PG121SN1D           | Unplaced |            |
+| ZH18    | BLM18PG121SN1D           | Unplaced |            |
+| ZH19    | BLM18PG121SN1D           | Unplaced |            |
+| ZH20    | BLM18PG121SN1D           | Unplaced |            |
++---------+--------------------------+----------+------------+
