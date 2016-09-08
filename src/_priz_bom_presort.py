@@ -48,7 +48,7 @@ def presort():
                     and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
                     and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
                     and ('K' in cfg_headerd) and ('M' in cfg_headerd)
-                    and ('Mk' in cfg_headerd)
+                    and ('Mk' in cfg_headerd) and ('k' in cfg_headerd)
                     ):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
@@ -71,16 +71,22 @@ def presort():
                 k = row['K']
                 m = row['M']
                 mk = row['Mk']
+                K = row['k']
+                
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
     
 ## Первый проход: проверка атрибутов
+    pr_ch = 0
     ifile  = open(dr1+'prochie_izdelija_bom.csv', 'rb')
     reader  = csv.reader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
     row_num = 0
-    for row in reader:
+    for row in ifile:
         if row_num==0:
             header=row
+        if row_num==1:
+            if row[0:3] == '---':
+                pr_ch = 1
         row_num+=1
     ifile.seek(0)
     readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
@@ -104,6 +110,107 @@ def presort():
                 output_log_file.write("[INFO] CSV file header is loaded succesfully. header={%s}\n" %(header))
         row_num+=1
     ifile.close()
+
+    if pr_ch == 1:
+        ifile  = open(dr1+'prochie_izdelija_bom.csv', "rb")
+        ofile =open('projectname_tdd_1.csv', 'wb')
+        row_num = 0
+        for row in ifile:
+            if row_num != 1:
+                ofile.write(row)
+            row_num+=1       
+        ifile.close()
+        ofile.close()
+        ifile  = open('projectname_tdd_1.csv', "rb")
+        ofile =open(dr1+'prochie_izdelija_bom.csv', 'wb')
+        for row in ifile:
+            ofile.write(row)      
+        ifile.close()
+        ofile.close() 
+
+    ifile  = open(dr1+'prochie_izdelija_bom.csv', "rb")
+    ofile =open('projectname_tdd_1.csv', 'wb')
+    row_num = 0
+    for row in ifile:
+        if row_num == 0:
+            ofile.write('RefDes;Name;PartNumber;PartNumberRU;Value;TU GOST;PartDocument;Manufacturer;Unplaced;Case;TCx;PowerRating;Voltage;ReplacementPN;SpecSection;BomNote;Tolerance''\n')
+        else:
+            ofile.write(row)
+        row_num+=1       
+    ifile.close()
+    ofile.close()
+    ifile  = open('projectname_tdd_1.csv', "rb")
+    ofile =open(dr1+'prochie_izdelija_bom.csv', 'wb')
+    for row in ifile:
+        ofile.write(row)      
+    ifile.close()
+    ofile.close()
+    
+    ifile  = open(dr1+'prochie_izdelija_bom.csv', 'rb')
+    reader = csv.reader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
+    row_num = 0
+    for row in reader:
+        if row_num==0:
+            header=row       
+        row_num += 1
+    ifile.seek(0)
+    readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
+    ofile  = open('projectname_tdd_1.csv', "wb")
+    writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
+    writerd.writeheader()
+    def conv(a):
+        buf = a
+        if buf != '' and buf != ' ':        
+            l = len(buf)
+            s = buf[l-1]
+            while s == ' ':
+                l = len(buf)
+                buf = buf[0:l-1]
+                l = len(buf)
+                s = buf[l-1]        
+                if l==1:
+                    break
+        if buf == '':
+           buf = ' ' 
+        return buf 
+    for row in readerd:
+        row['RefDes'] = conv(row['RefDes'])
+        row['Name'] = conv(row['Name'])
+        row['PartNumber'] = conv(row['PartNumber'])
+        row['PartNumberRU'] = conv(row['PartNumberRU'])
+        row['Value'] = conv(row['Value'])
+        row['TU GOST'] = conv(row['TU GOST'])
+        row['PartDocument'] = conv(row['PartDocument'])
+        row['Manufacturer'] = conv(row['Manufacturer'])
+        row['Unplaced'] = conv(row['Unplaced'])
+        row['Case'] = conv(row['Case'])
+        row['TCx'] = conv(row['TCx'])
+        row['PowerRating'] = conv(row['PowerRating'])
+        row['Voltage'] = conv(row['Voltage'])
+        row['ReplacementPN'] = conv(row['ReplacementPN'])
+        row['SpecSection'] = conv(row['SpecSection'])
+        row['BomNote'] = conv(row['BomNote'])
+        row['Tolerance'] = conv(row['Tolerance'])
+        l = len(row['Value'])
+        if row['Value'][l-1] == K:
+            buf = row['Value']
+            buf = buf[0:l-1] + k
+            row['Value'] = buf
+        l = len(row['Tolerance'])    
+        if row['Tolerance'][l-1] == '%':
+            buf = row['Tolerance']
+            buf = buf[0:l-1]
+            row['Tolerance'] = buf
+        writerd.writerow(row)
+    ifile.close()
+    ofile.close()
+
+    ifile  = open('projectname_tdd_1.csv', "rb")
+    ofile =open(dr1+'prochie_izdelija_bom.csv', 'wb')
+    for row in ifile:
+        ofile.write(row)      
+    ifile.close()
+    ofile.close()
 
 ## Второй проход: Работа с неустановленными
     ifile  = open(dr1+'prochie_izdelija_bom.csv', 'rb')

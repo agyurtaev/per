@@ -63,7 +63,7 @@ def main():
             ofile.write('\ESKDdocName{перечень элементов}')
                             
             if row['signature'] != '':
-                ofile.write('\ESKDsignature{'+perecod(row['signature'])+'}')
+                ofile.write('\ESKDsignature{'+perecod(row['signature'])+' ПЭ3 }')
             else:
                 ofile.write('\ESKDsignature{}')
 
@@ -127,7 +127,7 @@ def main():
             else:
                 ofile.write('\ESKDtitle{}')
 
-            ofile.write('\ESKDdocName{спецификация}')
+            ofile.write('\ESKDdocName{}')
                             
             if row['signature'] != '':
                 ofile.write('\ESKDsignature{'+perecod(row['signature'])+'}')
@@ -198,7 +198,7 @@ def main():
             ofile.write('\ESKDdocName{ведомость покупных}')
                             
             if row['signature'] != '':
-                ofile.write('\ESKDsignature{'+perecod(row['signature'])+'}')
+                ofile.write('\ESKDsignature{'+perecod(row['signature'])+' ВП }')
             else:
                 ofile.write('\ESKDsignature{}')
 
@@ -266,7 +266,7 @@ def main():
             ofile.write('\ESKDdocName{ведомость покупных}')
                             
             if row['signature'] != '':
-                ofile.write('\ESKDsignature{'+perecod(row['signature'])+'}')
+                ofile.write('\ESKDsignature{'+perecod(row['signature'])+' ВП }')
             else:
                 ofile.write('\ESKDsignature{}')
 

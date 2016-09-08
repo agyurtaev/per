@@ -81,15 +81,19 @@ def isp():
     writerd.writeheader()
     def conv(a):
         buf = a
-        l = len(buf)
-        s = buf[l-1]
-        while s == ' ':
+        if buf != '' and buf != ' ':  
             l = len(buf)
-            buf = buf[0:l-1]
-            l = len(buf)
-            s = buf[l-1]        
-            if l==1:
-                break
+            s = buf[l-1]
+            while s == ' ':
+                l = len(buf)
+                buf = buf[0:l-1]
+                l = len(buf)
+                if l > 0:
+                    s = buf[l-1]        
+                if l==1:
+                    break
+        if buf == '':
+           buf = ' ' 
         return buf 
     for row in readerd:
         row['RefDes'] = conv(row['RefDes'])

@@ -355,9 +355,9 @@ def prizgen(perecod):
             if vid == 'K':
                 ofile.write('&\hspace{2 cm}\\textit{\underline{Реле}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'L':
-                ofile.write('&\hspace{0,5 cm}\\textit{\underline{Катушки индуктивности / Дроссели}}&&&&&&&&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{0,1 cm}\\textit{\underline{Катушки индуктивности / Дроссели}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'S':
-                ofile.write('&\hspace{0,5 cm}\\textit{\underline{Механичесие устройства коммутации}}&&&&&&&&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{0,1 cm}\\textit{\underline{Механичесие устройства коммутации}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'T':
                 ofile.write('&\hspace{2 cm}\\textit{\underline{Трансформаторы}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'V':
@@ -729,12 +729,13 @@ def prizgen(perecod):
 
         col5 = ''
         if row['ReplacementPN']!=' ':
-            col5 = dop + ' (' + row['ReplacementPN']+')'
+            col5 = '( ' +dop +' '+ row['ReplacementPN']+' )'
             if len(col5)<lens5:
                 s5.append(col5)
             else:
-                s5.append(dop)
-                col5 = '(' + row['ReplacementPN']+')'
+                col5 = '( '+ dop
+                s5.append(col5)
+                col5 = row['ReplacementPN']+' )'
                 if len(col5)<lens5:
                     s5.append(col5)
                 else:

@@ -25,5 +25,7 @@ TIMEOUT /T 1 /NOBREAK
 pdflatex case_sort.tex -output-directory=%RODDIR%\output\ -aux-directory=%CURRENTDIR%
 TIMEOUT /T 1 /NOBREAK
 remove_tex_trash.py
+TIMEOUT /T 1 /NOBREAK
+rename_pdf.py
 
 

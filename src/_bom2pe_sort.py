@@ -440,7 +440,7 @@ def main():
             else:
                 col2_list.append('')
             if row['Voltage'] != ' ':
-                col2_list.append(row['Voltage']+volt)
+                col2_list.append(row['Voltage']+' '+volt)
             else:
                 col2_list.append('')           
             col2_list.append(') ')
@@ -507,11 +507,11 @@ def main():
                     while count > 0:                   
                         count -=1
                         col2_list.pop(count) 
-                else:##del Value/PartNum
+                else:##del volt/PartNum
                     if val == 0:
                         col2 = ''
                         count  = len(col2_list) 
-                        count -=16              
+                        count -=6              
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
@@ -519,7 +519,7 @@ def main():
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
-                            count -=16 
+                            count -=6 
                             while count > 0:
                                 count -=1
                                 col2_list.pop(count) 
@@ -537,7 +537,88 @@ def main():
                             count -=8 
                             while count > 0:                   
                                 count -=1
-                                col2_list.pop(count) 
+                                col2_list.pop(count)
+           
+                    if len(col2) >= lens2:##tol
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=8              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##val
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=10              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=10 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##tc
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=12              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=12 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##pow
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=14              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=14 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##case
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=16              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=16 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
                     if len(col2) >= lens2:##PartNum
                         if val == 0:
                             col2 = ''
@@ -613,11 +694,11 @@ def main():
                     while count > 0:                   
                         count -=1
                         col2_list.pop(count) 
-                else:##del Value
+                else:##del volt
                     if val == 0:
                         col2 = ''
                         count  = len(col2_list) 
-                        count -=16              
+                        count -=6              
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
@@ -625,10 +706,90 @@ def main():
                             if col2 != '':
                                 s1.append(col2)
                             count  = len(col2_list)
-                            count -=16 
+                            count -=6 
                             while count > 0:
                                 count -=1
-                                col2_list.pop(count)  
+                                col2_list.pop(count) 
+                    if len(col2) >= lens2:##tol
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=8              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##val
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=10              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=10 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##tc
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=12              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=12 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##pow
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=14              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=14 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
+                    if len(col2) >= lens2:##case
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=16              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=16 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count)
                     if len(col2) >= lens2:
                         print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                         ofile.close()
@@ -689,7 +850,87 @@ def main():
                         count -=3 
                         while count > 0:
                             count -=1
-                            col2_list.pop(count)  
+                            col2_list.pop(count)
+                    else:##del volt
+                        if val == 0:
+                            col2 = ''
+                            count  = len(col2_list) 
+                            count -=6              
+                            while count > 0:
+                                col2 = col2_list[count-1] + col2
+                                count -=1                            
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=6 
+                                while count > 0:
+                                    count -=1
+                                    col2_list.pop(count) 
+                        if len(col2) >= lens2:##tol
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=8              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=8 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count)
+                        if len(col2) >= lens2:##val
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=10              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=10 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count)
+                        if len(col2) >= lens2:##tc
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=12              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=12 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count)
+                        if len(col2) >= lens2:##pow
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=14              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=14 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count)                            
                 if len(col2) >= lens2:
                     print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                     ofile.close()
@@ -736,7 +977,87 @@ def main():
                     count -=2 
                     while count > 0:
                         count -=1
-                        col2_list.pop(count)  
+                        col2_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col2 = ''
+                        count  = len(col2_list) 
+                        count -=3              
+                        while count > 0:
+                            col2 = col2_list[count-1] + col2
+                            count -=1                            
+                        if len(col2)<lens2:
+                            if col2 != '':
+                                s1.append(col2)
+                            count  = len(col2_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col2_list.pop(count)
+                        else:##del volt
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=6              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count) 
+                            if len(col2) >= lens2:##tol
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=8              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
+                            if len(col2) >= lens2:##val
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=10              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=10 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
+                            if len(col2) >= lens2:##tc
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=12              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=12 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
             if len(col2) >= lens2:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                 ofile.close()
@@ -749,11 +1070,434 @@ def main():
                 ifile.close()
                 ofile.close()
                 sys.exit()
+################################################ 5-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col2 = ''
+                count  = len(col2_list) 
+                count -=2              
+                while count > 0:
+                    col2 = col2_list[count-1] + col2
+                    count -=1                            
+                if len(col2)<lens2:
+                    if col2 != '':
+                        s1.append(col2)
+                    count  = len(col2_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col2_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col2 = ''
+                        count  = len(col2_list) 
+                        count -=3              
+                        while count > 0:
+                            col2 = col2_list[count-1] + col2
+                            count -=1                            
+                        if len(col2)<lens2:
+                            if col2 != '':
+                                s1.append(col2)
+                            count  = len(col2_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col2_list.pop(count)
+                        else:##del volt
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=6              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count) 
+                            if len(col2) >= lens2:##tol
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=8              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
+                            if len(col2) >= lens2:##val
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=10              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=10 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
 
+            if len(col2) >= lens2:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 6-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col2 = ''
+                count  = len(col2_list) 
+                count -=2              
+                while count > 0:
+                    col2 = col2_list[count-1] + col2
+                    count -=1                            
+                if len(col2)<lens2:
+                    if col2 != '':
+                        s1.append(col2)
+                    count  = len(col2_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col2_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col2 = ''
+                        count  = len(col2_list) 
+                        count -=3              
+                        while count > 0:
+                            col2 = col2_list[count-1] + col2
+                            count -=1                            
+                        if len(col2)<lens2:
+                            if col2 != '':
+                                s1.append(col2)
+                            count  = len(col2_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col2_list.pop(count)
+                        else:##del volt
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=6              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count) 
+                            if len(col2) >= lens2:##tol
+                                if val == 0:
+                                    col2 = ''
+                                    count  = len(col2_list) 
+                                    count -=8              
+                                    while count > 0:
+                                        col2 = col2_list[count-1] + col2
+                                        count -=1                            
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:
+                                            count -=1
+                                            col2_list.pop(count)
+
+            if len(col2) >= lens2:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 7-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col2 = ''
+                count  = len(col2_list) 
+                count -=2              
+                while count > 0:
+                    col2 = col2_list[count-1] + col2
+                    count -=1                            
+                if len(col2)<lens2:
+                    if col2 != '':
+                        s1.append(col2)
+                    count  = len(col2_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col2_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col2 = ''
+                        count  = len(col2_list) 
+                        count -=3              
+                        while count > 0:
+                            col2 = col2_list[count-1] + col2
+                            count -=1                            
+                        if len(col2)<lens2:
+                            if col2 != '':
+                                s1.append(col2)
+                            count  = len(col2_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col2_list.pop(count)
+                        else:##del volt
+                            if val == 0:
+                                col2 = ''
+                                count  = len(col2_list) 
+                                count -=6              
+                                while count > 0:
+                                    col2 = col2_list[count-1] + col2
+                                    count -=1                            
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col2_list.pop(count) 
+
+            if len(col2) >= lens2:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 8-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col2 = ''
+                count  = len(col2_list) 
+                count -=2              
+                while count > 0:
+                    col2 = col2_list[count-1] + col2
+                    count -=1                            
+                if len(col2)<lens2:
+                    if col2 != '':
+                        s1.append(col2)
+                    count  = len(col2_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col2_list.pop(count)
+                else:##del TU GOST
+                    if val == 0:
+                        col2 = ''
+                        count  = len(col2_list) 
+                        count -=3              
+                        while count > 0:
+                            col2 = col2_list[count-1] + col2
+                            count -=1                            
+                        if len(col2)<lens2:
+                            if col2 != '':
+                                s1.append(col2)
+                            count  = len(col2_list)
+                            count -=3 
+                            while count > 0:
+                                count -=1
+                                col2_list.pop(count)
+
+            if len(col2) >= lens2:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 9-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        else:##del PartDocument
+            if val == 0:
+                col2 = ''
+                count  = len(col2_list) 
+                count -=2              
+                while count > 0:
+                    col2 = col2_list[count-1] + col2
+                    count -=1                            
+                if len(col2)<lens2:
+                    if col2 != '':
+                        s1.append(col2)
+                    count  = len(col2_list)
+                    count -=2 
+                    while count > 0:
+                        count -=1
+                        col2_list.pop(count)
+            if len(col2) >= lens2:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 10-я строка
+        count  = len(col2_list)
+        col2 = ''
+        while count > 0:
+            col2 = col2_list[count-1] + col2
+            count -=1
+        if len(col2)<lens2: 
+            col2 = ''
+            count  = len(col2_list)
+            while count > 0:
+                col2 = col2_list[count-1] + col2
+                count -=1
+            if col2 != '':
+                s1.append(col2)
+            count  = len(col2_list)
+            while count > 0:
+                count -=1                     
+                col2_list.pop(count) 
+        if len(col2) >= lens2:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&'
+            +'LEN ERROR!!! %s' % (row['RefDes'])
+            +'&&'
+            +'\\'+'\\''\n')
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
 ################################################ Допустимые замены
         col2 = ''
         if row['ReplacementPN']!=' ':
-            col2 = dop + ' (' + row['ReplacementPN']+')'
+            col2 = '( ' + dop + ' ' + row['ReplacementPN']+' )'
             if len(col2)<50:
                 s1.append(col2)
             else:
@@ -780,7 +1524,14 @@ def main():
             count -=1
             if s1[count]== ' ':
                 s1.pop(count)
-                
+                count = len(s1)
+        count = len(s1)        
+        while count > 0:
+            count -=1
+            strok = s1[count]
+            if strok[0]== ',':
+                strok = strok[1:]
+            s1[count] = strok 
 ######################################################################################################## 4-й столбец
         s2 = []
         col4 = ''
@@ -817,8 +1568,6 @@ def main():
         col4_list.append(row['Unplaced'])
         col4_list.append(' ')
         col4_list.append(man)
-        col4_list.append(' ')
-        col4_list.append(row['BomNote'])
 ################################################ 1-я строка        
         count  = len(col4_list)
         while count > 0:
@@ -835,8 +1584,8 @@ def main():
             count  = len(col4_list)
             while count > 0:
                 count -=1                     
-                col4_list.pop(count)             
-        else:##del BomNote
+                col4_list.pop(count)                                                               
+        else:##del Manufacturer
             col4 = ''
             count  = len(col4_list)            
             count -=2              
@@ -850,34 +1599,19 @@ def main():
                 count -=2
                 while count > 0:
                     count -=1                     
-                    col4_list.pop(count)                                                   
-            else:##del Manufacturer
-                col4 = ''
-                count  = len(col4_list)            
-                count -=4              
-                while count > 0:
-                    col4 = col4_list[count-1] + col4
-                    count -=1                            
-                if len(col4)<lens4:
-                    if col4 != '':
-                        s2.append(col4)
-                    count  = len(col4_list)
-                    count -=4
-                    while count > 0:
-                        count -=1                     
-                        col4_list.pop(count)
-                else:   
-                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                    ofile.close()
-                    ofile =open('reports.tex', 'w')
-                    ofile.write('&'
-                    +'LEN ERROR!!! %s' % (row['RefDes'])
-                    +'&&'
-                    +'\\'+'\\''\n')
-                    output_log_file.close()
-                    ifile.close()
-                    ofile.close()
-                    sys.exit()
+                    col4_list.pop(count)
+            else:   
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&'
+                +'LEN ERROR!!! %s' % (row['RefDes'])
+                +'&&'
+                +'\\'+'\\''\n')
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
                 
 ################################################ 2-я строка        
         count  = len(col4_list)
@@ -896,55 +1630,9 @@ def main():
             count  = len(col4_list)
             while count > 0:
                 count -=1                     
-                col4_list.pop(count)
-        else:##del BomNote
-            col4 = ''
-            count  = len(col4_list)            
-            count -=2              
-            while count > 0:
-                col4 = col4_list[count-1] + col4
-                count -=1
-            if len(col4)<lens4:
-                if col4 != '':
-                    s2.append(col4)
-                count  = len(col4_list)
-                count -=2
-                while count > 0:
-                    count -=1                     
-                    col4_list.pop(count)       
-            else:
-                print man
-                print 'FATAL ERROR!!!@ %s \n' % (row['RefDes'])
-                ofile.close()
-                ofile =open('reports.tex', 'w')
-                ofile.write('&'
-                +'LEN ERROR!!! %s' % (row['RefDes'])
-                +'&&'
-                +'\\'+'\\''\n')
-                output_log_file.close()
-                ifile.close()
-                ofile.close()
-                sys.exit()
-################################################ 3-я строка        
-        count  = len(col4_list)
-        col4 = ''
-        while count > 0:
-            col4 = col4_list[count-1] + col4
-            count -=1
-        if len(col4)<lens4: 
-            col4 = ''
-            count  = len(col4_list)
-            while count > 0:
-                col4 = col4_list[count-1] + col4
-                count -=1
-            if col4 != '':
-                s2.append(col4)
-            count  = len(col4_list)
-            while count > 0:
-                count -=1                     
-                col4_list.pop(count)
+                col4_list.pop(count)      
         else:
-            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            print 'FATAL ERROR!!!@ %s \n' % (row['RefDes'])
             ofile.close()
             ofile =open('reports.tex', 'w')
             ofile.write('&'
@@ -955,18 +1643,36 @@ def main():
             ifile.close()
             ofile.close()
             sys.exit()
-
+################################################ BomNote
+        col4 = ''
+        if row['BomNote']!=' ':
+            if len(row['BomNote'])<lens4:
+                s2.append(row['BomNote'])            
+            else:
+                stp = row['BomNote']
+                while len(stp) > lens4:                      
+                    stm = stp
+                    while len(stm) > lens4:
+                        pr = stm.rfind (' ')
+                        stm = stm[0:pr]
+                    col7 = stm
+                    s2.append(col7)                                             
+                    stp = stp [pr+1:]
+                if stp != '':
+                    s2.append(stp)
+                    
         count = len(s2)
         while count > 0:
             count -=1
             if s2[count]== '  ':
                 s2.pop(count)
+                count = len(s2)
         count = len(s2)        
         while count > 0:
             count -=1
             if s2[count]== ' ':
-                s2.pop(count)            
-            
+                s2.pop(count)
+                count = len(s2)          
 ########################################################################################################
         count1 = len(s1)
         count2 = len(s2)      

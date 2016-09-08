@@ -38,3 +38,6 @@ mv $DIRECTORY/__ved_poc.pdf ./output/__ved_poc.pdf
 mv $DIRECTORY/__reg_izm.pdf ./output/__reg_izm.pdf
 mv $DIRECTORY/case_sort.pdf ./output/case_sort.pdf
 sleep 1
+cd $DIRECTORY
+python $DIRECTORY/rename_pdf.py
+sleep 1

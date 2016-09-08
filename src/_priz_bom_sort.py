@@ -168,20 +168,72 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 stp = stp [pr+1:]
             if stp != '':
                 s7.append(stp)
-        if man != '':
+        if man != '' and man != ' ':
             s7.append(man)
+            
         if row['BomNote']!= ' ' and row['BomNote']!= '':
-            if len(row['BomNote']) < lens7:
-                s7.append(row['BomNote'])
+            if len(row['BomNote'])<lens7:
+                    s7.append(row['BomNote'])            
             else:
-                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                ofile.close()
-                ofile =open('reports.tex', 'w')
-                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                output_log_file.close()
-                ifile.close()
-                ofile.close()
-                sys.exit()
+                s = []
+                sch = 0
+                st = row['BomNote']
+                l = len(st)
+                while l > 0:
+                    if st[l-1] == ' ':
+                        sch += 1
+                        s.append(l-1)
+                    l -= 1
+                s.reverse()
+                if sch == 0:  
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
+                sc = 0
+                nach = 0
+                kon = s[sc]
+                while sch > 0:
+                    if len(st[nach:kon]) < lens7:
+                        nach = s[sc]+1
+                        if len(s)> sc+1:
+                            kon = s[sc+1]
+                        sc += 1                           
+                    else:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()     
+                    sch -= 1
+                if not len(st[nach:]) < lens7:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
+                        
+                stp = row['BomNote']
+                while len(stp) > lens7:                      
+                    st = stp
+                    while len(st) > lens7:
+                        pr = st.rfind (' ')
+                        st = st[0:pr]
+                    col7 = st
+                    s7.append(col7)                                             
+                    stp = stp [pr+1:]
+                if stp != '':
+                    s7.append(stp)
             
         count = len(s7)
         while count > 0:
@@ -194,7 +246,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             count -=1
             if s7[count]== ' ':
                 s7.pop(count)
-       
+                count = len(s7)
 ######################################################################################################## 5-й столбец
         val = 0
         s5 = []
@@ -265,13 +317,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             else:
                 col5_list.append('')
             if row['Voltage'] != ' ':
-                col5_list.append(row['Voltage']+volt)
+                col5_list.append(row['Voltage']+' '+volt)
             else:
                 col5_list.append('')           
             col5_list.append(') ')
             col5_list.append(row['TU GOST'])
-            col5_list.append(' ')
-            col5_list.append(row['PartDocument'])
             val = 0
         else:
             col5_list.append(row['Name'])
@@ -280,12 +330,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             col5_list.append(' ')
             col5_list.append(row['PartNumberRU'])
             col5_list.append(' ')
-            col5_list.append(row['TU GOST'])
-            col5_list.append(' ')
-            col5_list.append(row['PartDocument'])            
-            val = 1
-            
-        lens5 = 30      
+            col5_list.append(row['TU GOST'])          
+            val = 1  
+        lens5 = 28      
 ################################################ 1-я строка
         count  = len(col5_list)
         while count > 0:
@@ -302,11 +349,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             count  = len(col5_list)
             while count > 0:
                 count -=1                     
-                col5_list.pop(count)             
-        else:##del PartDocument
+                col5_list.pop(count)                                                              
+        else:##del TU GOST
             col5 = ''
-            count  = len(col5_list)            
-            count -=2              
+            count  = len(col5_list) 
+            count -=1              
             while count > 0:
                 col5 = col5_list[count-1] + col5
                 count -=1                            
@@ -314,30 +361,46 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if col5 != '':
                     s5.append(col5)
                 count  = len(col5_list)
-                count -=2
-                while count > 0:
-                    count -=1                     
-                    col5_list.pop(count)                                                   
-            else:##del TU GOST
-                col5 = ''
-                count  = len(col5_list) 
-                count -=3              
-                while count > 0:
-                    col5 = col5_list[count-1] + col5
-                    count -=1                            
-                if len(col5)<lens5:
-                    if col5 != '':
-                        s5.append(col5)
-                    count  = len(col5_list)
-                    count -=3 
-                    while count > 0:                   
-                        count -=1
-                        col5_list.pop(count)  
-                else:##del Value1/PartNum
+                count -=1 
+                while count > 0:                   
+                    count -=1
+                    col5_list.pop(count)  
+            else:##del volt/PartNum
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=4              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1                            
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=4 
+                        while count > 0:
+                            count -=1
+                            col5_list.pop(count) 
+                if val == 1:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=6              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1                            
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=6 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count) 
+                if len(col5) >= lens5:##del tol
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=9              
+                        count -=6              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -345,11 +408,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=9 
+                            count -=6 
                             while count > 0:
                                 count -=1
-                                col5_list.pop(count) 
-                    if val == 1:
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del val
+                    if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
                         count -=8              
@@ -361,50 +425,83 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 s5.append(col5)
                             count  = len(col5_list)
                             count -=8 
-                            while count > 0:                   
+                            while count > 0:
                                 count -=1
-                                col5_list.pop(count) 
-                    if len(col5) >= lens5:##del Value2
-                        if val == 0:
-                            col5 = ''
-                            count  = len(col5_list) 
-                            count -=16              
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del tc
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=10              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=10 
                             while count > 0:
-                                col5 = col5_list[count-1] + col5
-                                count -=1                            
-                            if len(col5)<lens5:
-                                if col5 != '':
-                                    s5.append(col5)
-                                count  = len(col5_list)
-                                count -=16 
-                                while count > 0:
-                                    count -=1
-                                    col5_list.pop(count)
-                    if len(col5) >= lens5:##PartNum
-                        if val == 0:
-                            col5 = ''
-                            count  = len(col5_list) 
-                            count -=20              
+                                count -=1
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del pow
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=12              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=12 
                             while count > 0:
-                                col5 = col5_list[count-1] + col5
-                                count -=1                            
-                            if len(col5)<lens5:
-                                if col5 != '':
-                                    s5.append(col5)
-                                count  = len(col5_list)
-                                count -=20 
-                                while count > 0:
-                                    count -=1
-                                    col5_list.pop(count)                                    
-                    if len(col5) >= lens5:
-                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                        ofile.close()
-                        ofile =open('reports.tex', 'w')
-                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                        output_log_file.close()
-                        ifile.close()
-                        ofile.close()
-                        sys.exit()
+                                count -=1
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del case
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=14              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=14 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)                                
+                if len(col5) >= lens5:##PartNum
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=18              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=18 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)
+                
+                if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
 
 ################################################ 2-я строка
         col5 = ''
@@ -424,10 +521,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             while count > 0:
                 count -=1                     
                 col5_list.pop(count)
-        else:##del PartDocument
+        else:##del TU GOST
             col5 = ''
-            count  = len(col5_list)            
-            count -=2              
+            count  = len(col5_list) 
+            count -=1              
             while count > 0:
                 col5 = col5_list[count-1] + col5
                 count -=1
@@ -435,66 +532,115 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if col5 != '':
                     s5.append(col5)
                 count  = len(col5_list)
-                count -=2
-                while count > 0:
-                    count -=1                     
-                    col5_list.pop(count)
-            else:##del TU GOST
-                col5 = ''
-                count  = len(col5_list) 
-                count -=3              
-                while count > 0:
-                    col5 = col5_list[count-1] + col5
+                count -=1 
+                while count > 0:                   
                     count -=1
-                if len(col5)<lens5:
-                    if col5 != '':
-                        s5.append(col5)
-                    count  = len(col5_list)
-                    count -=3 
-                    while count > 0:                   
-                        count -=1
-                        col5_list.pop(count)
-                else:##del Value1
+                    col5_list.pop(count)
+            else:##del volt
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=4              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1                            
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=4 
+                        while count > 0:
+                            count -=1
+                            col5_list.pop(count) 
+                if len(col5) >= lens5:##del tol
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=9              
+                        count -=6              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
-                            count -=1 
+                            count -=1                            
                         if len(col5)<lens5:
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=9 
+                            count -=6 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
-                    if len(col5) >= lens5:##del Value2
-                        if val == 0:
-                            col5 = ''
-                            count  = len(col5_list) 
-                            count -=16              
+                if len(col5) >= lens5:##del val
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=8              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=8 
                             while count > 0:
-                                col5 = col5_list[count-1] + col5
-                                count -=1                            
-                            if len(col5)<lens5:
-                                if col5 != '':
-                                    s5.append(col5)
-                                count  = len(col5_list)
-                                count -=16 
-                                while count > 0:
-                                    count -=1
-                                    col5_list.pop(count)                   
-                if len(col5) >= lens5:
-                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                    ofile.close()
-                    ofile =open('reports.tex', 'w')
-                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                    output_log_file.close()
-                    ifile.close()
-                    ofile.close()
-                    sys.exit()
+                                count -=1
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del tc
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=10              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=10 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del pow
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=12              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=12 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)
+                if len(col5) >= lens5:##del case
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=14              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=14 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count)                                
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
 ################################################ 3-я строка
         col5 = ''
         count  = len(col5_list)       
@@ -512,63 +658,112 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             count  = len(col5_list)
             while count > 0:
                 count -=1                     
-                col5_list.pop(count) 
-        else:##del PartDocument
-            col5 = ''
-            count  = len(col5_list)            
-            count -=2              
-            while count > 0:
-                col5 = col5_list[count-1] + col5
-                count -=1                            
-            if len(col5)<lens5:
-                if col5 != '':
-                    s5.append(col5)
-                count  = len(col5_list)
-                count -=2
+                col5_list.pop(count)                                                   
+        else:##del TU GOST
+            if val == 0:
+                col5 = ''
+                count  = len(col5_list) 
+                count -=1              
                 while count > 0:
-                    count -=1                     
-                    col5_list.pop(count)                                                   
-            else:##del TU GOST
-                if val == 0:
-                    col5 = ''
-                    count  = len(col5_list) 
-                    count -=3              
-                    while count > 0:
-                        col5 = col5_list[count-1] + col5
-                        count -=1                            
-                    if len(col5)<lens5:
-                        if col5 != '':
-                            s5.append(col5)
-                        count  = len(col5_list)
-                        count -=3 
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)
+                else:##del volt
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
                         while count > 0:
-                            count -=1
-                            col5_list.pop(count)
-                    else:##del Value1
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=9              
+                            count -=6              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
-                                count -=1 
+                                count -=1                            
                             if len(col5)<lens5:
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=9 
+                                count -=6 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
-            if len(col5) >= lens5:
-                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                    ofile.close()
-                    ofile =open('reports.tex', 'w')
-                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                    output_log_file.close()
-                    ifile.close()
-                    ofile.close()
-                    sys.exit()
+                    if len(col5) >= lens5:##del val
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=8              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=8 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del tc
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=10              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=10 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del pow
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=12              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=12 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+        if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
 
 ################################################ 4-я строка
         col5 = ''
@@ -588,27 +783,27 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             while count > 0:
                 count -=1                     
                 col5_list.pop(count) 
-        else:##del PartDocument
+        else:##del TU GOST
             if val == 0:
                 col5 = ''
                 count  = len(col5_list) 
-                count -=2              
+                count -=1              
                 while count > 0:
                     col5 = col5_list[count-1] + col5
-                    count -=1                            
+                    count -=1
                 if len(col5)<lens5:
                     if col5 != '':
                         s5.append(col5)
                     count  = len(col5_list)
-                    count -=2 
-                    while count > 0:
+                    count -=1 
+                    while count > 0:                   
                         count -=1
                         col5_list.pop(count)
-                else:##del TU GOST
+                else:##del volt
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=3              
+                        count -=4              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -616,11 +811,59 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=3 
+                            count -=4 
                             while count > 0:
                                 count -=1
-                                col5_list.pop(count)                    
-        if len(col5) >= lens5:
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=6              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=6 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del val
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=8              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=8 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del tc
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=10              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=10 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                   
+        if (len(col5)-6) >= lens5:
             print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
             ofile.close()
             ofile =open('reports.tex', 'w')
@@ -635,45 +878,272 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
         while count > 0:
             col5 = col5_list[count-1] + col5
             count -=1
-        if val == 0:
-            if len(col5)<lens5: 
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del TU GOST
+            if val == 0:
                 col5 = ''
-                count  = len(col5_list)
+                count  = len(col5_list) 
+                count -=1              
                 while count > 0:
                     col5 = col5_list[count-1] + col5
                     count -=1
-                if col5 != '':
-                    s5.append(col5)
-                count  = len(col5_list)
-                while count > 0:
-                    count -=1                     
-                    col5_list.pop(count) 
-            else:##del PartDocument
-                if val == 0:
-                    col5 = ''
-                    count  = len(col5_list) 
-                    count -=2              
-                    while count > 0:
-                        col5 = col5_list[count-1] + col5
-                        count -=1                            
-                    if len(col5)<lens5:
-                        if col5 != '':
-                            s5.append(col5)
-                        count  = len(col5_list)
-                        count -=2 
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)
+                else:##del volt
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
                         while count > 0:
-                            count -=1
-                            col5_list.pop(count)                   
-            if len(col5) >= lens5:
-                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                ofile.close()
-                ofile =open('reports.tex', 'w')
-                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                output_log_file.close()
-                ifile.close()
-                ofile.close()
-                sys.exit()
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=6              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=6 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del val
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=8              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=8 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                 
+        if len(col5) >= lens5:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
 ################################################ 6-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del TU GOST
+            if val == 0:
+                col5 = ''
+                count  = len(col5_list) 
+                count -=1              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)
+                else:##del volt
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=6              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=6 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+               
+        if len(col5) >= lens5:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
+################################################ 7-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del TU GOST
+            if val == 0:
+                col5 = ''
+                count  = len(col5_list) 
+                count -=1              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)
+                else:##del volt
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+               
+        if len(col5) >= lens5:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
+################################################ 8-я строка
+        col5 = ''
+        count  = len(col5_list)
+        while count > 0:
+            col5 = col5_list[count-1] + col5
+            count -=1
+        if len(col5)<lens5: 
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if col5 != '':
+                s5.append(col5)
+            count  = len(col5_list)
+            while count > 0:
+                count -=1                     
+                col5_list.pop(count) 
+        else:##del TU GOST
+            if val == 0:
+                col5 = ''
+                count  = len(col5_list) 
+                count -=1              
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if len(col5)<lens5:
+                    if col5 != '':
+                        s5.append(col5)
+                    count  = len(col5_list)
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)           
+        if len(col5) >= lens5:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
+
+################################################ 9-я строка            
         col5 = ''
         count  = len(col5_list)
         while count > 0:
@@ -691,7 +1161,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 count  = len(col5_list)
                 while count > 0:
                     count -=1                     
-                    col5_list.pop(count)                   
+                    col5_list.pop(count)                    
             if len(col5) >= lens5:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                 ofile.close()
@@ -701,18 +1171,18 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ifile.close()
                 ofile.close()
                 sys.exit()
-
                 
 ################################################ Допустимые замены
 
         col5 = ''
         if row['ReplacementPN']!=' ':
-            col5 = dop + ' (' + row['ReplacementPN']+')'
+            col5 = '( ' + dop +' '+ row['ReplacementPN']+' )'
             if len(col5)<lens5:
                 s5.append(col5)
             else:
-                s5.append(dop)
-                col5 = '(' + row['ReplacementPN']+')'
+                col5 = '( ' + dop
+                s5.append(col5)
+                col5 = row['ReplacementPN']+' )'
                 if len(col5)<lens5:
                     s5.append(col5)
                 else:
@@ -736,43 +1206,85 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             count -=1
             if s5[count]== ' ':
                 s5.pop(count)
-
+                count = len(s5)
+        count = len(s5)        
+        while count > 0:
+            count -=1
+            strok = s5[count]
+            if strok[0]== ',':
+                strok = strok[1:]
+            s5[count] = strok  
+              
+######################################################################################################## 4-й столбец
+        lens4 = 28
+        s4 = []
+        col4 = ''
+        if len(row['PartDocument'])<lens4:
+            if row['PartDocument'] != ' ' and row['PartDocument'] != ' ':
+                s4.append(row['PartDocument'])
+        else:
+            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+            ofile.close()
+            ofile =open('reports.tex', 'w')
+            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+            output_log_file.close()
+            ifile.close()
+            ofile.close()
+            sys.exit()
+            
+        count = len(s4)
+        while count > 0:
+            count -=1
+            if s4[count]== '  ':
+                s4.pop(count)
+                count = len(s4)
+        count = len(s4)        
+        while count > 0:
+            count -=1
+            if s4[count]== ' ':
+                s4.pop(count)
+                count = len(s4)
 ########################################################################################################
         count1 = len(s5)
-        count2 = len(s7)      
+        count2 = len(s7)
+        count3 = len(s4)
         if count1 > count2:
             count = count1
         else:
             count = count2
         count_u = count
         number = 0
-
         while count > 0:
             if number > count1 - 1:
                 s5.append('')                                
             if number > count2 - 1:
                 s7.append('')
-                
+            if number > count3 - 1:
+                s4.append('')    
             if count == count_u:
 
                 if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                     ofile.write('&&'
                                 +str(num)
-                                +'&&'
+                                +'&'
+                                +perecod(s4[number])
+                                +'&'
                                 +perecod(s5[number])
                                 +'&'
                                 +perecod(row['kol'])
                                 +'&'
                                 +perecod(s7[number])
                                 +'\\'+'\\''\n')
-                    ofile_info_case.write(str(num)+'&'+row['Case']+'\\'+'\\''\n')
+                    ofile_info_case.write(str(num)+'&'+perecod(row['Case'])+'\\'+'\\''\n')
                     if priz_unpl == 1:
                         unpl_num.append(num)
                     num += 1
                 if row['SpecSection'] == sbed:
                     ofile_sbed.write('&&'
                                 +str(num_sbed)
-                                +'&&'
+                                +'&'
+                                +perecod(s4[number])
+                                +'&'
                                 +perecod(s5[number])
                                 +'&'
                                 +perecod(row['kol'])
@@ -785,7 +1297,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if row['SpecSection'] == det:
                     ofile_det.write('&&'
                                 +str(num_det)
-                                +'&&'
+                                +'&'
+                                +perecod(s4[number])
+                                +'&'
                                 +perecod(s5[number])
                                 +'&'
                                 +perecod(row['kol'])
@@ -798,7 +1312,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if row['SpecSection'] == stizd:
                     ofile_stiz.write('&&'
                                 +str(num_stiz)
-                                +'&&'
+                                +'&'
+                                +perecod(s4[number])
+                                +'&'
                                 +perecod(s5[number])
                                 +'&'
                                 +perecod(row['kol'])
@@ -970,21 +1486,73 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     stp = stp [pr+1:]
                 if stp != '':
                     s7.append(stp)
+        
             if man != '':
                 s7.append(man)
+                
             if row['BomNote']!= ' ' and row['BomNote']!= '':
                 if len(row['BomNote']) < lens7:
                     s7.append(row['BomNote'])
                 else:
-                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                    ofile.close()
-                    ofile =open('reports.tex', 'w')
-                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                    output_log_file.close()
-                    ifile.close()
-                    ofile.close()
-                    sys.exit()            
-                        
+                    s = []
+                    sch = 0
+                    st = row['BomNote']
+                    l = len(st)
+                    while l > 0:
+                        if st[l-1] == ' ':
+                            sch += 1
+                            s.append(l-1)
+                        l -= 1
+                    s.reverse()
+                    if sch == 0:  
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
+                    sc = 0
+                    nach = 0
+                    kon = s[sc]
+                    while sch > 0:
+                        if len(st[nach:kon]) < lens7:
+                            nach = s[sc]+1
+                            if len(s)> sc+1:
+                                kon = s[sc+1]
+                            sc += 1                           
+                        else:
+                            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                            ofile.close()
+                            ofile =open('reports.tex', 'w')
+                            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                            output_log_file.close()
+                            ifile.close()
+                            ofile.close()
+                            sys.exit()     
+                        sch -= 1
+                    if not len(st[nach:]) < lens7:
+                            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                            ofile.close()
+                            ofile =open('reports.tex', 'w')
+                            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                            output_log_file.close()
+                            ifile.close()
+                            ofile.close()
+                            sys.exit()
+                            
+                    stp = row['BomNote']
+                    while len(stp) > lens7:                      
+                        st = stp
+                        while len(st) > lens7:
+                            pr = st.rfind (' ')
+                            st = st[0:pr]
+                        col7 = st
+                        s7.append(col7)                                             
+                        stp = stp [pr+1:]
+                    if stp != '':
+                        s7.append(stp)
             count = len(s7)
             while count > 0:
                 count -=1
@@ -996,7 +1564,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 count -=1
                 if s7[count]== ' ':
                     s7.pop(count)
-           
+                    count = len(s7)
 ######################################################################################################## 5-й столбец
             val = 0
             s5 = []
@@ -1058,7 +1626,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 else:
                     col5_list.append('')
                 if row['Tolerance'] != ' ':
-                    col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                    col5_list.append('\(\pm\) '+row['Tolerance']+'\%')
                 else:
                     col5_list.append('')
                     
@@ -1067,14 +1635,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 else:
                     col5_list.append('')
                 if row['Voltage'] != ' ':
-                    col5_list.append(row['Voltage']+volt)
+                    col5_list.append(row['Voltage']+' '+volt)
                 else:
                     col5_list.append('')           
                 col5_list.append(') ')
-                col5_list.append(row['TU GOST'])
-                col5_list.append(' ')
-                col5_list.append(row['PartDocument'])
-                
+                col5_list.append(row['TU GOST'])               
                 val = 0
             else:
                 col5_list.append(row['Name'])
@@ -1083,12 +1648,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 col5_list.append(' ')
                 col5_list.append(row['PartNumberRU'])
                 col5_list.append(' ')
-                col5_list.append(row['TU GOST'])
-                col5_list.append(' ')
-                col5_list.append(row['PartDocument'])            
+                col5_list.append(row['TU GOST'])          
                 val = 1
                 
-            lens5 = 30      
+            lens5 = 28      
 ################################################ 1-я строка
             count  = len(col5_list)
             while count > 0:
@@ -1105,11 +1668,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 count  = len(col5_list)
                 while count > 0:
                     count -=1                     
-                    col5_list.pop(count)             
-            else:##del PartDocument
+                    col5_list.pop(count)                                                              
+            else:##del TU GOST
                 col5 = ''
-                count  = len(col5_list)            
-                count -=2              
+                count  = len(col5_list) 
+                count -=1              
                 while count > 0:
                     col5 = col5_list[count-1] + col5
                     count -=1                            
@@ -1117,30 +1680,46 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if col5 != '':
                         s5.append(col5)
                     count  = len(col5_list)
-                    count -=2
-                    while count > 0:
-                        count -=1                     
-                        col5_list.pop(count)                                                   
-                else:##del TU GOST
-                    col5 = ''
-                    count  = len(col5_list) 
-                    count -=3              
-                    while count > 0:
-                        col5 = col5_list[count-1] + col5
-                        count -=1                            
-                    if len(col5)<lens5:
-                        if col5 != '':
-                            s5.append(col5)
-                        count  = len(col5_list)
-                        count -=3 
-                        while count > 0:                   
-                            count -=1
-                            col5_list.pop(count)  
-                    else:##del Value1/PartNum
+                    count -=1 
+                    while count > 0:                   
+                        count -=1
+                        col5_list.pop(count)  
+                else:##del volt/PartNum
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if val == 1:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=6              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=6 
+                            while count > 0:                   
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=9              
+                            count -=6              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1148,11 +1727,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=9 
+                                count -=6 
                                 while count > 0:
                                     count -=1
-                                    col5_list.pop(count) 
-                        if val == 1:
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del val
+                        if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
                             count -=8              
@@ -1164,50 +1744,83 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     s5.append(col5)
                                 count  = len(col5_list)
                                 count -=8 
-                                while count > 0:                   
+                                while count > 0:
                                     count -=1
-                                    col5_list.pop(count) 
-                        if len(col5) >= lens5:##del Value2
-                            if val == 0:
-                                col5 = ''
-                                count  = len(col5_list) 
-                                count -=16              
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del tc
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=10              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=10 
                                 while count > 0:
-                                    col5 = col5_list[count-1] + col5
-                                    count -=1                            
-                                if len(col5)<lens5:
-                                    if col5 != '':
-                                        s5.append(col5)
-                                    count  = len(col5_list)
-                                    count -=16 
-                                    while count > 0:
-                                        count -=1
-                                        col5_list.pop(count)
-                        if len(col5) >= lens5:##PartNum
-                            if val == 0:
-                                col5 = ''
-                                count  = len(col5_list) 
-                                count -=20              
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del pow
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=12              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=12 
                                 while count > 0:
-                                    col5 = col5_list[count-1] + col5
-                                    count -=1                            
-                                if len(col5)<lens5:
-                                    if col5 != '':
-                                        s5.append(col5)
-                                    count  = len(col5_list)
-                                    count -=20 
-                                    while count > 0:
-                                        count -=1
-                                        col5_list.pop(count)                                    
-                        if len(col5) >= lens5:
-                            print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                            ofile.close()
-                            ofile =open('reports.tex', 'w')
-                            ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                            output_log_file.close()
-                            ifile.close()
-                            ofile.close()
-                            sys.exit()
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del case
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=14              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=14 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                                
+                    if len(col5) >= lens5:##PartNum
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=18              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=18 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    
+                    if len(col5) >= lens5:
+                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                        ofile.close()
+                        ofile =open('reports.tex', 'w')
+                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                        output_log_file.close()
+                        ifile.close()
+                        ofile.close()
+                        sys.exit()
 
 ################################################ 2-я строка
             col5 = ''
@@ -1227,10 +1840,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 while count > 0:
                     count -=1                     
                     col5_list.pop(count)
-            else:##del PartDocument
+            else:##del TU GOST
                 col5 = ''
-                count  = len(col5_list)            
-                count -=2              
+                count  = len(col5_list) 
+                count -=1              
                 while count > 0:
                     col5 = col5_list[count-1] + col5
                     count -=1
@@ -1238,66 +1851,115 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if col5 != '':
                         s5.append(col5)
                     count  = len(col5_list)
-                    count -=2
-                    while count > 0:
-                        count -=1                     
-                        col5_list.pop(count)
-                else:##del TU GOST
-                    col5 = ''
-                    count  = len(col5_list) 
-                    count -=3              
-                    while count > 0:
-                        col5 = col5_list[count-1] + col5
+                    count -=1 
+                    while count > 0:                   
                         count -=1
-                    if len(col5)<lens5:
-                        if col5 != '':
-                            s5.append(col5)
-                        count  = len(col5_list)
-                        count -=3 
-                        while count > 0:                   
-                            count -=1
-                            col5_list.pop(count)
-                    else:##del Value1
+                        col5_list.pop(count)
+                else:##del volt
+                    if val == 0:
+                        col5 = ''
+                        count  = len(col5_list) 
+                        count -=4              
+                        while count > 0:
+                            col5 = col5_list[count-1] + col5
+                            count -=1                            
+                        if len(col5)<lens5:
+                            if col5 != '':
+                                s5.append(col5)
+                            count  = len(col5_list)
+                            count -=4 
+                            while count > 0:
+                                count -=1
+                                col5_list.pop(count) 
+                    if len(col5) >= lens5:##del tol
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=9              
+                            count -=6              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
-                                count -=1 
+                                count -=1                            
                             if len(col5)<lens5:
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=9 
+                                count -=6 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
-                        if len(col5) >= lens5:##del Value2
-                            if val == 0:
-                                col5 = ''
-                                count  = len(col5_list) 
-                                count -=16              
+                    if len(col5) >= lens5:##del val
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=8              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=8 
                                 while count > 0:
-                                    col5 = col5_list[count-1] + col5
-                                    count -=1                            
-                                if len(col5)<lens5:
-                                    if col5 != '':
-                                        s5.append(col5)
-                                    count  = len(col5_list)
-                                    count -=16 
-                                    while count > 0:
-                                        count -=1
-                                        col5_list.pop(count)                   
-                    if len(col5) >= lens5:
-                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                        ofile.close()
-                        ofile =open('reports.tex', 'w')
-                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                        output_log_file.close()
-                        ifile.close()
-                        ofile.close()
-                        sys.exit()
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del tc
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=10              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=10 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del pow
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=12              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=12 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)
+                    if len(col5) >= lens5:##del case
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=14              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=14 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count)                                
+                if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
 ################################################ 3-я строка
             col5 = ''
             count  = len(col5_list)       
@@ -1315,63 +1977,112 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 count  = len(col5_list)
                 while count > 0:
                     count -=1                     
-                    col5_list.pop(count) 
-            else:##del PartDocument
-                col5 = ''
-                count  = len(col5_list)            
-                count -=2              
-                while count > 0:
-                    col5 = col5_list[count-1] + col5
-                    count -=1                            
-                if len(col5)<lens5:
-                    if col5 != '':
-                        s5.append(col5)
-                    count  = len(col5_list)
-                    count -=2
+                    col5_list.pop(count)                                                   
+            else:##del TU GOST
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=1              
                     while count > 0:
-                        count -=1                     
-                        col5_list.pop(count)                                                   
-                else:##del TU GOST
-                    if val == 0:
-                        col5 = ''
-                        count  = len(col5_list) 
-                        count -=3              
-                        while count > 0:
-                            col5 = col5_list[count-1] + col5
-                            count -=1                            
-                        if len(col5)<lens5:
-                            if col5 != '':
-                                s5.append(col5)
-                            count  = len(col5_list)
-                            count -=3 
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=1 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count)
+                    else:##del volt
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=4              
                             while count > 0:
-                                count -=1
-                                col5_list.pop(count)
-                        else:##del Value1
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=4 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count) 
+                        if len(col5) >= lens5:##del tol
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=9              
+                                count -=6              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
-                                    count -=1 
+                                    count -=1                            
                                 if len(col5)<lens5:
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=9 
+                                    count -=6 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
-                if len(col5) >= lens5:
-                        print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                        ofile.close()
-                        ofile =open('reports.tex', 'w')
-                        ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                        output_log_file.close()
-                        ifile.close()
-                        ofile.close()
-                        sys.exit()
+                        if len(col5) >= lens5:##del val
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=8              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=8 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##del tc
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=10              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=10 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##del pow
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=12              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=12 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+            if len(col5) >= lens5:
+                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                    ofile.close()
+                    ofile =open('reports.tex', 'w')
+                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                    output_log_file.close()
+                    ifile.close()
+                    ofile.close()
+                    sys.exit()
 
 ################################################ 4-я строка
             col5 = ''
@@ -1391,27 +2102,27 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 while count > 0:
                     count -=1                     
                     col5_list.pop(count) 
-            else:##del PartDocument
+            else:##del TU GOST
                 if val == 0:
                     col5 = ''
                     count  = len(col5_list) 
-                    count -=2              
+                    count -=1              
                     while count > 0:
                         col5 = col5_list[count-1] + col5
-                        count -=1                            
+                        count -=1
                     if len(col5)<lens5:
                         if col5 != '':
                             s5.append(col5)
                         count  = len(col5_list)
-                        count -=2 
-                        while count > 0:
+                        count -=1 
+                        while count > 0:                   
                             count -=1
                             col5_list.pop(count)
-                    else:##del TU GOST
+                    else:##del volt
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=3              
+                            count -=4              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1419,11 +2130,59 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=3 
+                                count -=4 
                                 while count > 0:
                                     count -=1
-                                    col5_list.pop(count)                    
-            if len(col5) >= lens5:
+                                    col5_list.pop(count) 
+                        if len(col5) >= lens5:##del tol
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=6              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##del val
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=8              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=8 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##del tc
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=10              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=10 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)                   
+            if (len(col5)-6) >= lens5:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                 ofile.close()
                 ofile =open('reports.tex', 'w')
@@ -1438,45 +2197,272 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             while count > 0:
                 col5 = col5_list[count-1] + col5
                 count -=1
-            if val == 0:
-                if len(col5)<lens5: 
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count) 
+            else:##del TU GOST
+                if val == 0:
                     col5 = ''
-                    count  = len(col5_list)
+                    count  = len(col5_list) 
+                    count -=1              
                     while count > 0:
                         col5 = col5_list[count-1] + col5
                         count -=1
-                    if col5 != '':
-                        s5.append(col5)
-                    count  = len(col5_list)
-                    while count > 0:
-                        count -=1                     
-                        col5_list.pop(count) 
-                else:##del PartDocument
-                    if val == 0:
-                        col5 = ''
-                        count  = len(col5_list) 
-                        count -=2              
-                        while count > 0:
-                            col5 = col5_list[count-1] + col5
-                            count -=1                            
-                        if len(col5)<lens5:
-                            if col5 != '':
-                                s5.append(col5)
-                            count  = len(col5_list)
-                            count -=2 
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=1 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count)
+                    else:##del volt
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=4              
                             while count > 0:
-                                count -=1
-                                col5_list.pop(count)                   
-                if len(col5) >= lens5:
-                    print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
-                    ofile.close()
-                    ofile =open('reports.tex', 'w')
-                    ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
-                    output_log_file.close()
-                    ifile.close()
-                    ofile.close()
-                    sys.exit()
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=4 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count) 
+                        if len(col5) >= lens5:##del tol
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=6              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                        if len(col5) >= lens5:##del val
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=8              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=8 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)                 
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
 ################################################ 6-я строка
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count) 
+            else:##del TU GOST
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=1              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=1 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count)
+                    else:##del volt
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=4              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=4 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count) 
+                        if len(col5) >= lens5:##del tol
+                            if val == 0:
+                                col5 = ''
+                                count  = len(col5_list) 
+                                count -=6              
+                                while count > 0:
+                                    col5 = col5_list[count-1] + col5
+                                    count -=1                            
+                                if len(col5)<lens5:
+                                    if col5 != '':
+                                        s5.append(col5)
+                                    count  = len(col5_list)
+                                    count -=6 
+                                    while count > 0:
+                                        count -=1
+                                        col5_list.pop(count)
+                   
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 7-я строка
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count) 
+            else:##del TU GOST
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=1              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=1 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count)
+                    else:##del volt
+                        if val == 0:
+                            col5 = ''
+                            count  = len(col5_list) 
+                            count -=4              
+                            while count > 0:
+                                col5 = col5_list[count-1] + col5
+                                count -=1                            
+                            if len(col5)<lens5:
+                                if col5 != '':
+                                    s5.append(col5)
+                                count  = len(col5_list)
+                                count -=4 
+                                while count > 0:
+                                    count -=1
+                                    col5_list.pop(count) 
+                   
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+################################################ 8-я строка
+            col5 = ''
+            count  = len(col5_list)
+            while count > 0:
+                col5 = col5_list[count-1] + col5
+                count -=1
+            if len(col5)<lens5: 
+                col5 = ''
+                count  = len(col5_list)
+                while count > 0:
+                    col5 = col5_list[count-1] + col5
+                    count -=1
+                if col5 != '':
+                    s5.append(col5)
+                count  = len(col5_list)
+                while count > 0:
+                    count -=1                     
+                    col5_list.pop(count) 
+            else:##del TU GOST
+                if val == 0:
+                    col5 = ''
+                    count  = len(col5_list) 
+                    count -=1              
+                    while count > 0:
+                        col5 = col5_list[count-1] + col5
+                        count -=1
+                    if len(col5)<lens5:
+                        if col5 != '':
+                            s5.append(col5)
+                        count  = len(col5_list)
+                        count -=1 
+                        while count > 0:                   
+                            count -=1
+                            col5_list.pop(count)           
+            if len(col5) >= lens5:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+
+################################################ 9-я строка            
             col5 = ''
             count  = len(col5_list)
             while count > 0:
@@ -1494,7 +2480,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     count  = len(col5_list)
                     while count > 0:
                         count -=1                     
-                        col5_list.pop(count)                   
+                        col5_list.pop(count)                    
                 if len(col5) >= lens5:
                     print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
                     ofile.close()
@@ -1504,17 +2490,17 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     ifile.close()
                     ofile.close()
                     sys.exit()
-
 ################################################ Допустимые замены
 
             col5 = ''
             if row['ReplacementPN']!=' ':
-                col5 = dop + ' (' + row['ReplacementPN']+')'
+                col5 = '( ' + dop + ' ' + row['ReplacementPN']+' )'
                 if len(col5)<lens5:
                     s5.append(col5)
                 else:
-                    s5.append(dop)
-                    col5 = '(' + row['ReplacementPN']+')'
+                    col5 = '( ' + dop
+                    s5.append(col5)
+                    col5 = row['ReplacementPN']+' )'
                     if len(col5)<lens5:
                         s5.append(col5)
                     else:
@@ -1538,27 +2524,61 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 count -=1
                 if s5[count]== ' ':
                     s5.pop(count)
-
+                    count = len(s5)
+######################################################################################################## 4-й столбец
+            lens4 = 28
+            s4 = []
+            col4 = ''
+            if len(row['PartDocument'])<lens4:
+                if row['PartDocument'] != ' ' and row['PartDocument'] != ' ':
+                    s4.append(row['PartDocument'])
+            else:
+                print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
+                ofile.close()
+                ofile =open('reports.tex', 'w')
+                ofile.write('&&&'+'LEN ERROR!!! %s' % (row['RefDes'])+'&&&'+'\\'+'\\''\n')                        
+                output_log_file.close()
+                ifile.close()
+                ofile.close()
+                sys.exit()
+                
+            count = len(s4)
+            while count > 0:
+                count -=1
+                if s4[count]== '  ':
+                    s4.pop(count)
+                    count = len(s4)
+            count = len(s4)        
+            while count > 0:
+                count -=1
+                if s4[count]== ' ':
+                    s4.pop(count)
+                    count = len(s4)
 ########################################################################################################        
             count1 = len(s5)
-            count2 = len(s7)      
+            count2 = len(s7)
+            count3 = len(s4)
             if count1 > count2:
                 count = count1
             else:
                 count = count2
             count_u = count
-            number = 0      
+            number = 0
             while count > 0:
                 if number > count1 - 1:
                     s5.append('')                                
                 if number > count2 - 1:
-                    s7.append('')  
+                    s7.append('')
+                if number > count3 - 1:
+                    s4.append('') 
                 if count == count_u:     
                     if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                         if priz_unpl == 0:
                             ofile.write('&&'
                                         +str(num)
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1566,12 +2586,14 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                         +perecod(s7[number])
                                         +'\\'+'\\''\n')
                             
-                            ofile_info_case.write(str(num)+'&'+row['Case']+'\\'+'\\''\n')
+                            ofile_info_case.write(str(num)+'&'+perecod(row['Case'])+'\\'+'\\''\n')
                             num += 1
                         if priz_unpl == 1:
                             ofile.write('&&'
                                         +str(unpl_num[unpl_poz])
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1583,7 +2605,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 0:
                             ofile_sbed.write('&&'
                                         +str(num_sbed)
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1594,7 +2618,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 1:
                             ofile_sbed.write('&&'
                                         +str(unpl_num[unpl_poz])
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1605,7 +2631,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 0:
                             ofile_det.write('&&'
                                         +str(num_det)
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1616,7 +2644,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 1:
                             ofile_det.write('&&'
                                         +str(unpl_num[unpl_poz])
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1627,7 +2657,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 0:
                             ofile_stiz.write('&&'
                                         +str(num_stiz)
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1638,7 +2670,9 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if priz_unpl == 1:
                             ofile_stiz.write('&&'
                                         +str(unpl_num[unpl_poz])
-                                        +'&&'
+                                        +'&'
+                                        +perecod(s4[number])
+                                        +'&'
                                         +perecod(s5[number])
                                         +'&'
                                         +perecod(row['kol'])
@@ -1671,6 +2705,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     +'&&'
                                     +perecod(s7[number])
                                     +'\\'+'\\''\n')                 
+
                 number += 1
                 count -= 1
             vidpred = vid
