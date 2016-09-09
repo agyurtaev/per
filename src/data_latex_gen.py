@@ -88,27 +88,27 @@ def main():
                 ofile.write('\ESKDscale{}')
 
             if row['author'] != '':
-                ofile.write('\ESKDauthor{'+perecod(row['author'])+'}')
+                ofile.write('\ESKDauthor{\\footnotesize'+perecod(row['author'])+'}')
             else:
                 ofile.write('\ESKDauthor{}')  
 
             if row['checker'] != '':
-                ofile.write('\ESKDchecker{'+perecod(row['checker'])+'}')
+                ofile.write('\ESKDchecker{\\footnotesize'+perecod(row['checker'])+'}')
             else:
                 ofile.write('\ESKDchecker{}')
 
             if row['tcontr'] != '':
-                ofile.write('\ESKDcolumnXIfIII{'+perecod(row['tcontr'])+'}')
+                ofile.write('\ESKDcolumnXIfIII{\\footnotesize'+perecod(row['tcontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfIII{}')
                             
             if row['ncontr'] != '':
-                ofile.write('\ESKDcolumnXIfV{'+perecod(row['ncontr'])+'}')
+                ofile.write('\ESKDcolumnXIfV{\\footnotesize'+perecod(row['ncontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfV{}')
 
             if row['approvedBy'] != '':
-                ofile.write('\ESKDapprovedBy{'+perecod(row['approvedBy'])+'}')
+                ofile.write('\ESKDapprovedBy{\\footnotesize'+perecod(row['approvedBy'])+'}')
             else:
                 ofile.write('\ESKDapprovedBy{}')
                             
@@ -155,27 +155,27 @@ def main():
                 ofile.write('\ESKDscale{}')
 
             if row['author'] != '':
-                ofile.write('\ESKDauthor{'+perecod(row['author'])+'}')
+                ofile.write('\ESKDauthor{\\footnotesize'+perecod(row['author'])+'}')
             else:
                 ofile.write('\ESKDauthor{}')  
 
             if row['checker'] != '':
-                ofile.write('\ESKDchecker{'+perecod(row['checker'])+'}')
+                ofile.write('\ESKDchecker{\\footnotesize'+perecod(row['checker'])+'}')
             else:
                 ofile.write('\ESKDchecker{}')
 
             if row['tcontr'] != '':
-                ofile.write('\ESKDcolumnXIfIII{'+perecod(row['tcontr'])+'}')
+                ofile.write('\ESKDcolumnXIfIII{\\footnotesize'+perecod(row['tcontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfIII{}')
                             
             if row['ncontr'] != '':
-                ofile.write('\ESKDcolumnXIfV{'+perecod(row['ncontr'])+'}')
+                ofile.write('\ESKDcolumnXIfV{\\footnotesize'+perecod(row['ncontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfV{}')
 
             if row['approvedBy'] != '':
-                ofile.write('\ESKDapprovedBy{'+perecod(row['approvedBy'])+'}')
+                ofile.write('\ESKDapprovedBy{\\footnotesize'+perecod(row['approvedBy'])+'}')
             else:
                 ofile.write('\ESKDapprovedBy{}')
                             
@@ -223,27 +223,27 @@ def main():
                 ofile.write('\ESKDscale{}')
 
             if row['author'] != '':
-                ofile.write('\ESKDauthor{'+perecod(row['author'])+'}')
+                ofile.write('\ESKDauthor{\\footnotesize'+perecod(row['author'])+'}')
             else:
                 ofile.write('\ESKDauthor{}')  
 
             if row['checker'] != '':
-                ofile.write('\ESKDchecker{'+perecod(row['checker'])+'}')
+                ofile.write('\ESKDchecker{\\footnotesize'+perecod(row['checker'])+'}')
             else:
                 ofile.write('\ESKDchecker{}')
 
             if row['tcontr'] != '':
-                ofile.write('\ESKDcolumnXIfIII{'+perecod(row['tcontr'])+'}')
+                ofile.write('\ESKDcolumnXIfIII{\\footnotesize'+perecod(row['tcontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfIII{}')
                             
             if row['ncontr'] != '':
-                ofile.write('\ESKDcolumnXIfV{'+perecod(row['ncontr'])+'}')
+                ofile.write('\ESKDcolumnXIfV{\\footnotesize'+perecod(row['ncontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfV{}')
 
             if row['approvedBy'] != '':
-                ofile.write('\ESKDapprovedBy{'+perecod(row['approvedBy'])+'}')
+                ofile.write('\ESKDapprovedBy{\\footnotesize'+perecod(row['approvedBy'])+'}')
             else:
                 ofile.write('\ESKDapprovedBy{}')
                             
@@ -291,27 +291,27 @@ def main():
                 ofile.write('\ESKDscale{}')
 
             if row['author'] != '':
-                ofile.write('\ESKDauthor{'+perecod(row['author'])+'}')
+                ofile.write('\ESKDauthor{\\footnotesize'+perecod(row['author'])+'}')
             else:
                 ofile.write('\ESKDauthor{}')  
 
             if row['checker'] != '':
-                ofile.write('\ESKDchecker{'+perecod(row['checker'])+'}')
+                ofile.write('\ESKDchecker{\\footnotesize'+perecod(row['checker'])+'}')
             else:
                 ofile.write('\ESKDchecker{}')
 
             if row['tcontr'] != '':
-                ofile.write('\ESKDcolumnXIfIII{'+perecod(row['tcontr'])+'}')
+                ofile.write('\ESKDcolumnXIfIII{\\footnotesize'+perecod(row['tcontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfIII{}')
                             
             if row['ncontr'] != '':
-                ofile.write('\ESKDcolumnXIfV{'+perecod(row['ncontr'])+'}')
+                ofile.write('\ESKDcolumnXIfV{\\footnotesize'+perecod(row['ncontr'])+'}')
             else:
                 ofile.write('\ESKDcolumnXIfV{}')
 
             if row['approvedBy'] != '':
-                ofile.write('\ESKDapprovedBy{'+perecod(row['approvedBy'])+'}')
+                ofile.write('\ESKDapprovedBy{\\footnotesize'+perecod(row['approvedBy'])+'}')
             else:
                 ofile.write('\ESKDapprovedBy{}')
         row_num+=1

@@ -347,7 +347,7 @@ def prizgen(perecod):
             if vid == 'B':
                 ofile.write('&\hspace{1 cm}\\textit{\underline{Кварцевые резонаторы}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'F':
-                ofile.write('&\hspace{2 cm}\\textit{\underline{Предохранители}}&&&&&&&&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{2 cm}\\textit{\underline{Устройства защиты}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'G':
                 ofile.write('&\hspace{2 cm}\\textit{\underline{Генераторы}}&&&&&&&&&'+'\\'+'\\''\n')
             if vid == 'H':

@@ -52,5 +52,8 @@ def main():
     if os.path.exists(os.path.abspath('bom_ispolnenij_2.csv')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'bom_ispolnenij_2.csv')
         os.remove(path)
+    if os.path.exists(put4 + 'dannye_dokumenta_1.csv'):
+        path = put4 + 'dannye_dokumenta_1.csv'
+        os.remove(path) 
 if __name__ == '__main__':
     main()

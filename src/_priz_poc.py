@@ -28,6 +28,8 @@ def prizgen(num,perecod):
     ofile =open('reports_priz_poc.tex', 'w')
     row_num = 0
     raz = 0
+    p = 0
+    pr = 0
     for row in readerd:
         if row_num==0:
             headerd=row
@@ -39,8 +41,11 @@ def prizgen(num,perecod):
                 ifile.close()
                 ofile.close()
                 sys.exit()
+        if row_num==0:
+            if row['Poz'] !='' or row['Kol'] !='' or row['Name'] !='' or row['Prim'] !='':
+                p = 1
         row_num += 1
-    if row_num > 0:   
+    if row_num > 0 and p==1:   
         ofile.write('&&&&&&'+'\\'+'\\''\n')
         raz = 1
     ifile.seek(0)
@@ -105,7 +110,7 @@ def prizgen(num,perecod):
                         s7.append(stp)
                         
             if len(row['Name'])<lens5:
-                        s5.append(row['Name'])
+                s5.append(row['Name'])
             else:
                 stp = row['Name']
                 while len(stp) > lens5:                      
@@ -118,6 +123,32 @@ def prizgen(num,perecod):
                     stp = stp [pr+1:]
                 if stp != '':
                     s5.append(stp)
+                    
+            count = len(s5)
+            while count > 0:
+                count -=1
+                if s5[count]== '  ':
+                    s5.pop(count)
+                    count = len(s5)
+            count = len(s5)        
+            while count > 0:
+                count -=1
+                if s5[count]== ' ':
+                    s5.pop(count)
+                    count = len(s5)
+
+            count = len(s7)
+            while count > 0:
+                count -=1
+                if s7[count]== '  ':
+                    s7.pop(count)
+                    count = len(s7)
+            count = len(s7)        
+            while count > 0:
+                count -=1
+                if s7[count]== ' ':
+                    s7.pop(count)
+                    count = len(s7)
 
             count1 = len(s5)
             count2 = len(s7)
@@ -132,8 +163,8 @@ def prizgen(num,perecod):
                 if number > count1 - 1:
                     s5.append('')                                
                 if number > count2 - 1:
-                    s7.append('')   
-                if count == count_u:
+                    s7.append('')
+                if count == count_u and (s5 != [''] or s7 != ['']):
                     if row['Poz'] == '0':
                         ofile.write('&&'
                                         +'&'

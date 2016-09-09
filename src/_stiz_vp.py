@@ -27,6 +27,7 @@ def stizgen(perecod):
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_stiz.tex', 'w')
     row_num = 0
+    p = 0
     for row in readerd:
         if row_num==0:
             headerd=row
@@ -38,8 +39,11 @@ def stizgen(perecod):
                 ifile.close()
                 ofile.close()
                 sys.exit()
+        if row_num==0:
+            if row['Poz'] !='' or row['Kol'] !='' or row['Name'] !='' or row['Prim'] !='':
+                p = 1
         row_num += 1
-    if row_num > 0:   
+    if row_num > 0 and p==1:   
         ofile.write('&&&&&&&&&&'+'\\'+'\\''\n')       
         doc_title = '&\hspace{1 cm}\\textit{\underline{Стандартные изделия}}&&&&&&&&&'+'\\'+'\\''\n'
         ofile.write(doc_title)  

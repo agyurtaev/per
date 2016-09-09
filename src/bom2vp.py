@@ -52,6 +52,13 @@ def main():
     else:
         ofile.write('\setcounter{page}{0}')  
     ofile.close()
+    ofile =open('row_num_con.tex', 'w')
+    #if row_num > 3:
+        #row_num+=1
+    ofile.write('\includepdf[pages={1-'+str(row_num-1)+'}]{__ved_poc}')   
+    #else:
+    #    ofile.write('\setcounter{page}{0}')  
+    ofile.close()
 if __name__ == '__main__':
     main()
 

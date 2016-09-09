@@ -28,6 +28,7 @@ def matergen(perecod):
     readerd = csv.DictReader(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_mater.tex', 'w')
     row_num = 0
+    p = 0
     for row in readerd:
         if row_num==0:
             headerd=row
@@ -39,8 +40,11 @@ def matergen(perecod):
                 ifile.close()
                 ofile.close()
                 sys.exit()
+        if row_num==0:
+            if row['Prim'] !='' or row['Kol'] !='' or row['Name'] !='' or row['Prim'] !='':
+                p = 1
         row_num += 1
-    if row_num > 0:   
+    if row_num > 0 and p==1:   
         ofile.write('&&&&&&&&&&'+'\\'+'\\''\n')  
         doc_title = '&\hspace{2 cm}\\textit{\underline{Материалы}}&&&&&&&&&'+'\\'+'\\''\n'
         ofile.write(doc_title)

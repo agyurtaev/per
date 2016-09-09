@@ -173,7 +173,25 @@ def main():
         os.remove(path)
     if os.path.exists(os.path.abspath('case_sort.synctex.gz')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'case_sort.synctex.gz')
-        os.remove(path)        
+        os.remove(path)
+    if os.path.exists(os.path.abspath('concat.aux')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'concat.aux')
+        #os.remove(path)
+    if os.path.exists(os.path.abspath('concat.dvi')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'concat.dvi')
+        #os.remove(path)
+    if os.path.exists(os.path.abspath('concat.log')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'concat.log')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('concat.out')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'concat.out')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('concat.synctex.gz')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'concat.synctex.gz')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('row_num_con.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'row_num_con.tex')
+        os.remove(path)       
 if __name__ == '__main__':
     main()
 

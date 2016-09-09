@@ -23,6 +23,8 @@ pdflatex $DIRECTORY/__ved_poc.tex
 sleep 1
 pdflatex $DIRECTORY/__reg_izm.tex
 sleep 1
+pdflatex $DIRECTORY/concat.tex
+sleep 1
 python $DIRECTORY/case_sort.py
 sleep 1
 pdflatex $DIRECTORY/case_sort.tex
@@ -32,8 +34,7 @@ sleep 1
 cd ..
 mv $DIRECTORY/_per.pdf ./output/_per.pdf
 mv $DIRECTORY/__spec.pdf ./output/__spec.pdf
-mv $DIRECTORY/__ved_poc.pdf ./output/__ved_poc.pdf
-mv $DIRECTORY/__reg_izm.pdf ./output/__reg_izm.pdf
+mv $DIRECTORY/concat.pdf ./output/concat.pdf
 mv $DIRECTORY/case_sort.pdf ./output/case_sort.pdf
 sleep 1
 cd $DIRECTORY

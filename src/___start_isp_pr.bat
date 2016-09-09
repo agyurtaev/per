@@ -16,9 +16,11 @@ pdflatex _per.tex -output-directory=%RODDIR%\output\ -aux-directory=%CURRENTDIR%
 TIMEOUT /T 1 /NOBREAK
 bom2vp.py
 TIMEOUT /T 1 /NOBREAK
-pdflatex __ved_poc.tex -output-directory=%RODDIR%\output\ -aux-directory=%CURRENTDIR%
+pdflatex __ved_poc.tex -output-directory=%CURRENTDIR% -aux-directory=%CURRENTDIR%
 TIMEOUT /T 1 /NOBREAK
-pdflatex __reg_izm.tex -output-directory=%RODDIR%\output\ -aux-directory=%CURRENTDIR%
+pdflatex __reg_izm.tex -output-directory=%CURRENTDIR% -aux-directory=%CURRENTDIR%
+TIMEOUT /T 1 /NOBREAK
+pdflatex concat.tex -output-directory=%RODDIR%\output\ -aux-directory=%CURRENTDIR%
 TIMEOUT /T 1 /NOBREAK
 case_sort.py
 TIMEOUT /T 1 /NOBREAK

@@ -28,6 +28,8 @@ def detgen(num,perecod):
     ofile =open('reports_det.tex', 'w')
     row_num = 0
     raz = 0
+    p = 0
+    pr = 0
     for row in readerd:
         if row_num==0:
             headerd=row
@@ -40,14 +42,18 @@ def detgen(num,perecod):
                 ifile.close()
                 ofile.close()
                 sys.exit()
+        if row_num==0:
+            if row['Form'] !='' or row['Oboz'] !='' or row['Name'] !='' or row['Prim'] !='' or row['Poz'] !='' or row['Kol'] !='':
+                p = 1
         row_num += 1
-    if row_num > 0:
+    if row_num > 0 and p==1:
         header=row
         ofile.write('&&&&&&'+'\\'+'\\''\n')    
         doc_title = '&&&&\hspace{2 cm}\underline{Детали}&&'+'\\'+'\\''\n'
         ofile.write(doc_title)
         ofile.write('&&&&&&'+'\\'+'\\''\n')
         raz = 1
+        pr = 1
     ifile.seek(0)
     row_num = 0
     lens7 = 10
@@ -123,6 +129,33 @@ def detgen(num,perecod):
                     stp = stp [pr+1:]
                 if stp != '':
                     s5.append(stp)
+                    
+            count = len(s5)
+            while count > 0:
+                count -=1
+                if s5[count]== '  ':
+                    s5.pop(count)
+                    count = len(s5)
+            count = len(s5)        
+            while count > 0:
+                count -=1
+                if s5[count]== ' ':
+                    s5.pop(count)
+                    count = len(s5)
+
+            count = len(s7)
+            while count > 0:
+                count -=1
+                if s7[count]== '  ':
+                    s7.pop(count)
+                    count = len(s7)
+            count = len(s7)        
+            while count > 0:
+                count -=1
+                if s7[count]== ' ':
+                    s7.pop(count)
+                    count = len(s7)
+
 
             count1 = len(s5)
             count2 = len(s7)
@@ -138,7 +171,7 @@ def detgen(num,perecod):
                     s5.append('')                                
                 if number > count2 - 1:
                     s7.append('')   
-                if count == count_u:
+                if count == count_u and (s5 != [''] or s7 != ['']):
                     if row['Poz'] == '0':
                         ofile.write(perecod(row['Form'])
                                         +'&&'
@@ -214,9 +247,15 @@ def detgen(num,perecod):
     for row in readerd:
         if row['SpecSection']==det:
             prib_num += 1
+    if prib_num > 0 and pr == 0:
+        ofile =open('reports_sbed.tex', 'w')
+        ofile.write('&&&&&&'+'\\'+'\\''\n')    
+        doc_title = '&&&&\hspace{2 cm}\underline{Детали}&&'+'\\'+'\\''\n'
+        ofile.write(doc_title)
+        ofile.write('&&&&&&'+'\\'+'\\''\n')
+        ofile.close()
     ifile.close()
     num = num + prib_num
-    
     if raz > 0 or prib_num != 0:
         num += 5
 

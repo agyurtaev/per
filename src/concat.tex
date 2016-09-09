@@ -1,0 +1,17 @@
+\documentclass[version=last, pagesize=auto, paper=a4]{scrartcl}
+\usepackage{pdfpages}
+
+\begin{document}
+
+\KOMAoptions{paper=a3,paper=landscape}
+\recalctypearea
+%\includepdf[pages=-]{__ved_poc}
+\input{row_num_con}
+%\includepdf[pages={1-10}]{__ved_poc}
+\clearpage
+
+\KOMAoptions{paper=a4,paper=portrait}
+\recalctypearea
+\includepdf[pages=1]{__reg_izm}
+
+\end{document}

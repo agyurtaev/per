@@ -83,7 +83,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ofile.write('&&&&\hspace{1 cm}\underline{Кварцевые резонаторы}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'F':
-                ofile.write('&&&&\hspace{2 cm}\underline{Предохранители}&&'+'\\'+'\\''\n')
+                ofile.write('&&&&\hspace{1 cm}\underline{Устройства защиты}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'G':
                 ofile.write('&&&&\hspace{2 cm}\underline{Генераторы}&&'+'\\'+'\\''\n')
@@ -248,6 +248,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 s7.pop(count)
                 count = len(s7)
 ######################################################################################################## 5-й столбец
+        tol = 0
         val = 0
         s5 = []
         col5 = ''
@@ -308,7 +309,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             else:
                 col5_list.append('')
             if row['Tolerance'] != ' ':
-                col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                if 'PPM' in row['Tolerance'] or 'ppm' in row['Tolerance']:
+                    col5_list.append(row['Tolerance'])
+                else:
+                    col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                    tol = 1
             else:
                 col5_list.append('')
                 
@@ -387,7 +392,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     count -=6              
                     while count > 0:
                         col5 = col5_list[count-1] + col5
-                        count -=1                            
+                        count -=1
                     if len(col5)<lens5:
                         if col5 != '':
                             s5.append(col5)
@@ -544,12 +549,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     while count > 0:
                         col5 = col5_list[count-1] + col5
                         count -=1                            
-                    if len(col5)<lens5:
+                    if len(col5)-7<lens5:
                         if col5 != '':
                             s5.append(col5)
                         count  = len(col5_list)
-                        count -=4 
-                        while count > 0:
+                        count -=6 
+                        while count > 0:                   
                             count -=1
                             col5_list.pop(count) 
                 if len(col5) >= lens5:##del tol
@@ -687,8 +692,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
                     if len(col5) >= lens5:##del tol
@@ -811,8 +816,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
                     if len(col5) >= lens5:##del tol
@@ -918,10 +923,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
-                                col5_list.pop(count) 
+                                col5_list.pop(count)
                     if len(col5) >= lens5:##del tol
                         if val == 0:
                             col5 = ''
@@ -1009,10 +1014,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
-                                col5_list.pop(count) 
+                                col5_list.pop(count)  
                     if len(col5) >= lens5:##del tol
                         if val == 0:
                             col5 = ''
@@ -1085,8 +1090,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
                
@@ -1389,7 +1394,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     ofile.write('&&&&\hspace{1 cm}\underline{Кварцевые резонаторы}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'F':
-                    ofile.write('&&&&\hspace{2 cm}\underline{Предохранители}&&'+'\\'+'\\''\n')
+                    ofile.write('&&&&\hspace{1 cm}\underline{Устройства защиты}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'G':
                     ofile.write('&&&&\hspace{2 cm}\underline{Генераторы}&&'+'\\'+'\\''\n')
@@ -1566,6 +1571,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     s7.pop(count)
                     count = len(s7)
 ######################################################################################################## 5-й столбец
+            tol = 0
             val = 0
             s5 = []
             col5 = ''
@@ -1626,7 +1632,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 else:
                     col5_list.append('')
                 if row['Tolerance'] != ' ':
-                    col5_list.append('\(\pm\) '+row['Tolerance']+'\%')
+                    if 'PPM' in row['Tolerance'] or 'ppm' in row['Tolerance']:
+                        col5_list.append(row['Tolerance'])
+                    else:
+                        col5_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                        tol = 1
                 else:
                     col5_list.append('')
                     
@@ -1706,7 +1716,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         count -=6              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
-                            count -=1                            
+                            count -=1
                         if len(col5)<lens5:
                             if col5 != '':
                                 s5.append(col5)
@@ -1863,12 +1873,12 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
-                        if len(col5)<lens5:
+                        if len(col5)-7<lens5:
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
-                            while count > 0:
+                            count -=6 
+                            while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
                     if len(col5) >= lens5:##del tol
@@ -2006,8 +2016,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=4 
-                                while count > 0:
+                                count -=6 
+                                while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
                         if len(col5) >= lens5:##del tol
@@ -2130,8 +2140,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=4 
-                                while count > 0:
+                                count -=6 
+                                while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
                         if len(col5) >= lens5:##del tol
@@ -2237,10 +2247,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=4 
-                                while count > 0:
+                                count -=6 
+                                while count > 0:                   
                                     count -=1
-                                    col5_list.pop(count) 
+                                    col5_list.pop(count)
                         if len(col5) >= lens5:##del tol
                             if val == 0:
                                 col5 = ''
@@ -2328,10 +2338,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=4 
-                                while count > 0:
+                                count -=6 
+                                while count > 0:                   
                                     count -=1
-                                    col5_list.pop(count) 
+                                    col5_list.pop(count)  
                         if len(col5) >= lens5:##del tol
                             if val == 0:
                                 col5 = ''
@@ -2404,8 +2414,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=4 
-                                while count > 0:
+                                count -=6 
+                                while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
                    
@@ -2525,6 +2535,13 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if s5[count]== ' ':
                     s5.pop(count)
                     count = len(s5)
+            count = len(s5)        
+            while count > 0:
+                count -=1
+                strok = s5[count]
+                if strok[0]== ',':
+                    strok = strok[1:]
+                s5[count] = strok 
 ######################################################################################################## 4-й столбец
             lens4 = 28
             s4 = []

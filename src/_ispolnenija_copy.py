@@ -45,6 +45,8 @@ def isp(num,nazv_isp):
             if row ['RefDes'] == rowa ['RefDes']:
                 if rowa[nazv_isp[num]] == 'Unplaced':
                     row['Unplaced'] = '*'
+                else:
+                    row['Unplaced'] = ' '
                 if row['PartNumber'] == ' ':
                     row['PartNumber'] = rowa['PartNumber']
                 writerd.writerow(row)
@@ -63,13 +65,14 @@ def isp(num,nazv_isp):
             header=row       
         row_num += 1
     ifile.close()
+    
     ifile  = open(dr1 + 'dannye_dokumenta_1.csv', 'rb')
     readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
     
     ofile  = open(dr1 +'dannye_dokumenta.csv', "wb")
     writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
     writerd.writeheader()
-    
+    print 
     for row in readerd:
         l = len(row['signature'])
         buf = row['signature']

@@ -331,7 +331,7 @@ def main():
                 ofile.write('&\hspace{2 cm}\underline{Кварцевые резонаторы}&&'+'\\'+'\\''\n')
                 st += 1
             if vid == 'F':
-                ofile.write('&\hspace{3 cm}\underline{Предохранители}&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{1 cm}\underline{Устройства защиты}&&'+'\\'+'\\''\n')
                 st += 1
             if vid == 'G':
                 ofile.write('&\hspace{3 cm}\underline{Генераторы}&&'+'\\'+'\\''\n')
@@ -370,7 +370,7 @@ def main():
         #om = row['Om']
         #pf = row['pF']
         #f = row['F']
-        
+        tol = 0
         val = 0
         s1 = []
         col2 = ''
@@ -431,7 +431,11 @@ def main():
             else:
                 col2_list.append('')
             if row['Tolerance'] != ' ':
-                col2_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                if 'PPM' in row['Tolerance'] or 'ppm' in row['Tolerance']:
+                    col2_list.append(row['Tolerance'])
+                else:
+                    col2_list.append('\(\pm\)'+row['Tolerance']+'\%')
+                    tol = 1
             else:
                 col2_list.append('')
                 
@@ -459,7 +463,7 @@ def main():
             col2_list.append(' ')
             col2_list.append(row['PartDocument'])            
             val = 1
-        lens2 = 50
+        lens2 = 60
 ################################################ 1-я строка        
         count  = len(col2_list)
         while count > 0:
@@ -529,16 +533,25 @@ def main():
                         count -=8              
                         while count > 0:
                             col2 = col2_list[count-1] + col2
-                            count -=1                            
-                        if len(col2)<lens2:
-                            if col2 != '':
-                                s1.append(col2)
-                            count  = len(col2_list)
-                            count -=8 
-                            while count > 0:                   
-                                count -=1
-                                col2_list.pop(count)
-           
+                            count -=1
+                        if tol == 0:
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:                   
+                                    count -=1
+                                    col2_list.pop(count)
+                        else:
+                             if len(col2)-5<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:                   
+                                    count -=1
+                                    col2_list.pop(count)          
                     if len(col2) >= lens2:##tol
                         if val == 0:
                             col2 = ''
@@ -702,14 +715,24 @@ def main():
                         while count > 0:
                             col2 = col2_list[count-1] + col2
                             count -=1                            
-                        if len(col2)<lens2:
-                            if col2 != '':
-                                s1.append(col2)
-                            count  = len(col2_list)
-                            count -=6 
-                            while count > 0:
-                                count -=1
-                                col2_list.pop(count) 
+                        if tol == 0:
+                            if len(col2)<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:                   
+                                    count -=1
+                                    col2_list.pop(count)
+                        else:
+                             if len(col2)-5<lens2:
+                                if col2 != '':
+                                    s1.append(col2)
+                                count  = len(col2_list)
+                                count -=8 
+                                while count > 0:                   
+                                    count -=1
+                                    col2_list.pop(count)   
                     if len(col2) >= lens2:##tol
                         if val == 0:
                             col2 = ''
@@ -723,7 +746,7 @@ def main():
                                     s1.append(col2)
                                 count  = len(col2_list)
                                 count -=8 
-                                while count > 0:
+                                while count > 0:                   
                                     count -=1
                                     col2_list.pop(count)
                     if len(col2) >= lens2:##val
@@ -859,14 +882,24 @@ def main():
                             while count > 0:
                                 col2 = col2_list[count-1] + col2
                                 count -=1                            
-                            if len(col2)<lens2:
-                                if col2 != '':
-                                    s1.append(col2)
-                                count  = len(col2_list)
-                                count -=6 
-                                while count > 0:
-                                    count -=1
-                                    col2_list.pop(count) 
+                            if tol == 0:
+                                if len(col2)<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=8 
+                                    while count > 0:                   
+                                        count -=1
+                                        col2_list.pop(count)
+                            else:
+                                 if len(col2)-5<lens2:
+                                    if col2 != '':
+                                        s1.append(col2)
+                                    count  = len(col2_list)
+                                    count -=8 
+                                    while count > 0:                   
+                                        count -=1
+                                        col2_list.pop(count)   
                         if len(col2) >= lens2:##tol
                             if val == 0:
                                 col2 = ''
@@ -1002,14 +1035,24 @@ def main():
                                 while count > 0:
                                     col2 = col2_list[count-1] + col2
                                     count -=1                            
-                                if len(col2)<lens2:
-                                    if col2 != '':
-                                        s1.append(col2)
-                                    count  = len(col2_list)
-                                    count -=6 
-                                    while count > 0:
-                                        count -=1
-                                        col2_list.pop(count) 
+                                if tol == 0:
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)
+                                else:
+                                     if len(col2)-5<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)    
                             if len(col2) >= lens2:##tol
                                 if val == 0:
                                     col2 = ''
@@ -1128,14 +1171,24 @@ def main():
                                 while count > 0:
                                     col2 = col2_list[count-1] + col2
                                     count -=1                            
-                                if len(col2)<lens2:
-                                    if col2 != '':
-                                        s1.append(col2)
-                                    count  = len(col2_list)
-                                    count -=6 
-                                    while count > 0:
-                                        count -=1
-                                        col2_list.pop(count) 
+                                if tol == 0:
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)
+                                else:
+                                     if len(col2)-5<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)    
                             if len(col2) >= lens2:##tol
                                 if val == 0:
                                     col2 = ''
@@ -1239,14 +1292,24 @@ def main():
                                 while count > 0:
                                     col2 = col2_list[count-1] + col2
                                     count -=1                            
-                                if len(col2)<lens2:
-                                    if col2 != '':
-                                        s1.append(col2)
-                                    count  = len(col2_list)
-                                    count -=6 
-                                    while count > 0:
-                                        count -=1
-                                        col2_list.pop(count) 
+                                if tol == 0:
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)
+                                else:
+                                     if len(col2)-5<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)   
                             if len(col2) >= lens2:##tol
                                 if val == 0:
                                     col2 = ''
@@ -1334,14 +1397,24 @@ def main():
                                 while count > 0:
                                     col2 = col2_list[count-1] + col2
                                     count -=1                            
-                                if len(col2)<lens2:
-                                    if col2 != '':
-                                        s1.append(col2)
-                                    count  = len(col2_list)
-                                    count -=6 
-                                    while count > 0:
-                                        count -=1
-                                        col2_list.pop(count) 
+                                if tol == 0:
+                                    if len(col2)<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)
+                                else:
+                                     if len(col2)-5<lens2:
+                                        if col2 != '':
+                                            s1.append(col2)
+                                        count  = len(col2_list)
+                                        count -=8 
+                                        while count > 0:                   
+                                            count -=1
+                                            col2_list.pop(count)    
 
             if len(col2) >= lens2:
                 print 'FATAL ERROR!!! %s \n' % (row['RefDes'])
