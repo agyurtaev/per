@@ -38,6 +38,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -69,6 +70,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -100,6 +102,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -131,6 +134,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -162,6 +166,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -196,6 +201,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -227,6 +233,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -258,6 +265,7 @@ def main():
         else:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol_p += 1    
@@ -281,6 +289,7 @@ def main():
         if row_num == 0:
             st = row
             l = len(st)
+            kol_p = 0
             while l > 0:
                 if st[l-1] == ';':
                     kol += 1    
