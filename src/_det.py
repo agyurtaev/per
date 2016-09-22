@@ -173,44 +173,47 @@ def detgen(num,perecod):
                     s7.append('')   
                 if count == count_u and (s5 != [''] or s7 != ['']):
                     if row['Poz'] == '0':
-                        ofile.write(perecod(row['Form'])
-                                        +'&&'
-                                        +'&'
-                                        +perecod(row['Oboz'])
-                                        +'&'
-                                        +perecod(s5[number])
-                                        +'&'
-                                        +perecod(row['Kol'])
-                                        +'&'
-                                        +perecod(s7[number])
-                                        +'\\'+'\\''\n')
+                        if p==1:
+                            ofile.write(perecod(row['Form'])
+                                            +'&&'
+                                            +'&'
+                                            +perecod(row['Oboz'])
+                                            +'&'
+                                            +perecod(s5[number])
+                                            +'&'
+                                            +perecod(row['Kol'])
+                                            +'&'
+                                            +perecod(s7[number])
+                                            +'\\'+'\\''\n')
 
                     else:
-                        ofile.write(perecod(row['Form'])
-                                        +'&&'
-                                        +str(num)
-                                        #+row['Poz'].decode('cp1251').encode("utf-8")
+                        if p==1:
+                            ofile.write(perecod(row['Form'])
+                                            +'&&'
+                                            +str(num)
+                                            #+row['Poz'].decode('cp1251').encode("utf-8")
+                                            +'&'
+                                            +perecod(row['Oboz'])
+                                            +'&'
+                                            +perecod(s5[number])
+                                            +'&'
+                                            +perecod(row['Kol'])
+                                            +'&'
+                                            +perecod(s7[number])
+                                            +'\\'+'\\''\n')
+                            num += 1                  
+                else:
+                    if p==1:
+                        ofile.write('&&'
                                         +'&'
-                                        +perecod(row['Oboz'])
                                         +'&'
                                         +perecod(s5[number])
                                         +'&'
-                                        +perecod(row['Kol'])
                                         +'&'
                                         +perecod(s7[number])
                                         +'\\'+'\\''\n')
-                        num += 1                  
-                else:
-                    ofile.write('&&'
-                                    +'&'
-                                    +'&'
-                                    +perecod(s5[number])
-                                    +'&'
-                                    +'&'
-                                    +perecod(s7[number])
-                                    +'\\'+'\\''\n')
-                    if row['Poz'] != '0':
-                        num += 1                     
+                        if row['Poz'] != '0':
+                            num += 1                     
                 number += 1
                 count -= 1  
         row_num += 1

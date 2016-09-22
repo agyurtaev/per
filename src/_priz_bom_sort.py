@@ -51,6 +51,14 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
     ifile  = open('projectname_tdd_1.csv', "rb")
     readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
     readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
+    prizn = 0
+    for row in readerd:
+        if row['RefDes'] == ' ':
+            prizn = 1
+    ifile.close()
+    ifile  = open('projectname_tdd_1.csv', "rb")
+    readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
+    readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     ofile =open('reports_priz_bom.tex', 'w')
     ofile_sbed =open('reports_sbed_bom.tex', 'w')
     ofile_det =open('reports_det_bom.tex', 'w')
@@ -58,10 +66,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
     ofile_info_case =open('reports_info_case.tex', 'w')    
     vid = ''
     vidpred = ''
-    ofile.write('&&&&&&'+'\\'+'\\''\n')
-    doc_title = '&&&&\hspace{2 cm}\underline{Прочие изделия}&&'+'\\'+'\\''\n'
-    ofile.write(doc_title)
-    ofile.write('&&&&&&'+'\\'+'\\''\n')
+    if prizn != 1:
+        ofile.write('&&&&&&'+'\\'+'\\''\n')
+        doc_title = '&&&&\hspace{2 cm}\underline{Прочие изделия}&&'+'\\'+'\\''\n'
+        ofile.write(doc_title)
+        ofile.write('&&&&&&'+'\\'+'\\''\n')
     for row in readerd:
         vid = row['RefDes'][0]
     
@@ -328,6 +337,36 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             col5_list.append(') ')
             col5_list.append(row['TU GOST'])
             val = 0
+            if row['Case'] == ' ':
+                col5_list[5] = ' '
+                col5_list[7] = ' (' 
+                if row['PowerRating'] == ' ':
+                    col5_list[7] = ' '
+                    col5_list[9] = ' ('
+                    if row['TCx'] == ' ':
+                        col5_list[9] = ' '
+                        col5_list[11] = ' ('
+                        if row['Value'] == ' ':
+                            col5_list[11] = ' '
+                            col5_list[13] = ' ('                            
+                            if row['Tolerance'] == ' ':
+                                col5_list[13] = ' '
+                                col5_list[15] = ' ('                             
+            if row['Voltage'] == ' ':
+                col5_list[17] = ' '
+                col5_list[15] = ') '
+                if row['Tolerance'] == ' ':
+                    col5_list[15] = ' '
+                    col5_list[13] = ') '
+                    if row['Value'] == ' ':
+                        col5_list[13] = ' '
+                        col5_list[11] = ') '
+                        if row['TCx'] == ' ':
+                            col5_list[11] = ' '
+                            col5_list[9] = ') '
+                            if row['PowerRating'] == ' ':
+                                col5_list[9] = ' '
+                                col5_list[7] = ') '                                        
         else:
             col5_list.append(row['Name'])
             col5_list.append(' ')
@@ -361,7 +400,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             count -=1              
             while count > 0:
                 col5 = col5_list[count-1] + col5
-                count -=1                            
+                count -=1
             if len(col5)<lens5:
                 if col5 != '':
                     s5.append(col5)
@@ -374,15 +413,15 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if val == 0:
                     col5 = ''
                     count  = len(col5_list) 
-                    count -=4              
+                    count -=3              
                     while count > 0:
                         col5 = col5_list[count-1] + col5
-                        count -=1                            
+                        count -=1
                     if len(col5)<lens5:
                         if col5 != '':
                             s5.append(col5)
                         count  = len(col5_list)
-                        count -=4 
+                        count -=3 
                         while count > 0:
                             count -=1
                             col5_list.pop(count) 
@@ -405,7 +444,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=6              
+                        count -=5              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -413,7 +452,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=5 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -421,7 +460,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=8              
+                        count -=7              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -429,7 +468,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=8 
+                            count -=7 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -437,7 +476,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=10              
+                        count -=9              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -445,7 +484,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=10 
+                            count -=9 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -453,7 +492,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=12              
+                        count -=11              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -461,7 +500,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=12 
+                            count -=11 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -545,7 +584,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 if val == 0:
                     col5 = ''
                     count  = len(col5_list) 
-                    count -=4              
+                    count -=3              
                     while count > 0:
                         col5 = col5_list[count-1] + col5
                         count -=1                            
@@ -553,7 +592,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if col5 != '':
                             s5.append(col5)
                         count  = len(col5_list)
-                        count -=6 
+                        count -=3 
                         while count > 0:                   
                             count -=1
                             col5_list.pop(count) 
@@ -561,7 +600,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=6              
+                        count -=5              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -569,7 +608,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=5 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -577,7 +616,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=8              
+                        count -=7              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -585,7 +624,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=8 
+                            count -=7 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -593,7 +632,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=10              
+                        count -=9              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -601,7 +640,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=10 
+                            count -=9 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -609,7 +648,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=12              
+                        count -=11              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -617,7 +656,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=12 
+                            count -=11 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count)
@@ -684,7 +723,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -692,7 +731,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
@@ -700,7 +739,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -708,7 +747,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -716,7 +755,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=8              
+                            count -=7              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -724,7 +763,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=8 
+                                count -=7 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -732,7 +771,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=10              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -740,7 +779,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=10 
+                                count -=9 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -748,7 +787,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=12              
+                            count -=11              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -756,7 +795,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=12 
+                                count -=11 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -808,7 +847,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -816,7 +855,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
@@ -824,7 +863,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -832,7 +871,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -840,7 +879,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=8              
+                            count -=7              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -848,7 +887,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=8 
+                                count -=7 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -856,7 +895,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=10              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -864,7 +903,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=10 
+                                count -=9 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)                   
@@ -915,7 +954,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -923,7 +962,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count)
@@ -931,7 +970,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -939,7 +978,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -947,7 +986,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=8              
+                            count -=7              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -955,7 +994,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=8 
+                                count -=7 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)                 
@@ -1006,7 +1045,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -1014,7 +1053,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count)  
@@ -1022,7 +1061,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1030,7 +1069,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1082,7 +1121,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -1090,7 +1129,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
@@ -1269,21 +1308,23 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             if count == count_u:
 
                 if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
-                    ofile.write('&&'
-                                +str(num)
-                                +'&'
-                                +perecod(s4[number])
-                                +'&'
-                                +perecod(s5[number])
-                                +'&'
-                                +perecod(row['kol'])
-                                +'&'
-                                +perecod(s7[number])
-                                +'\\'+'\\''\n')
-                    ofile_info_case.write(str(num)+'&'+perecod(row['Case'])+'\\'+'\\''\n')
-                    if priz_unpl == 1:
-                        unpl_num.append(num)
-                    num += 1
+                    if prizn != 1:
+                        ofile.write('&&'
+                                    +str(num)
+                                    +'&'
+                                    +perecod(s4[number])
+                                    +'&'
+                                    +perecod(s5[number])
+                                    +'&'
+                                    +perecod(row['kol'])
+                                    +'&'
+                                    +perecod(s7[number])
+                                    +'\\'+'\\''\n')
+                        ofile_info_case.write(str(num)+'&'+perecod(row['Case'])+'\\'+'\\''\n')
+                        if priz_unpl == 1:
+                            unpl_num.append(num)
+                        num += 1
+                      
                 if row['SpecSection'] == sbed:
                     ofile_sbed.write('&&'
                                 +str(num_sbed)
@@ -1330,12 +1371,13 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         unpl_num.append(num_stiz) 
                     num_stiz += 1  
             else:
-                if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:            
+                
+                if row['SpecSection'] != sbed and row['SpecSection'] != det and row['SpecSection'] != stizd:
                     ofile.write('&&&&'
                                 +perecod(s5[number])
                                 +'&&'
                                 +perecod(s7[number])
-                                +'\\'+'\\''\n')
+                                +'\\'+'\\''\n')                       
                 if row['SpecSection'] == sbed:
                     ofile_sbed.write('&&&&'
                                 +perecod(s5[number])
@@ -1651,6 +1693,36 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 col5_list.append(') ')
                 col5_list.append(row['TU GOST'])               
                 val = 0
+                if row['Case'] == ' ':
+                    col5_list[5] = ' '
+                    col5_list[7] = ' (' 
+                    if row['PowerRating'] == ' ':
+                        col5_list[7] = ' '
+                        col5_list[9] = ' ('
+                        if row['TCx'] == ' ':
+                            col5_list[9] = ' '
+                            col5_list[11] = ' ('
+                            if row['Value'] == ' ':
+                                col5_list[11] = ' '
+                                col5_list[13] = ' ('                            
+                                if row['Tolerance'] == ' ':
+                                    col5_list[13] = ' '
+                                    col5_list[15] = ' ('                             
+                if row['Voltage'] == ' ':
+                    col5_list[17] = ' '
+                    col5_list[15] = ') '
+                    if row['Tolerance'] == ' ':
+                        col5_list[15] = ' '
+                        col5_list[13] = ') '
+                        if row['Value'] == ' ':
+                            col5_list[13] = ' '
+                            col5_list[11] = ') '
+                            if row['TCx'] == ' ':
+                                col5_list[11] = ' '
+                                col5_list[9] = ') '
+                                if row['PowerRating'] == ' ':
+                                    col5_list[9] = ' '
+                                    col5_list[7] = ') '  
             else:
                 col5_list.append(row['Name'])
                 col5_list.append(' ')
@@ -1698,7 +1770,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -1706,7 +1778,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=4 
+                            count -=3 
                             while count > 0:
                                 count -=1
                                 col5_list.pop(count) 
@@ -1729,7 +1801,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1737,7 +1809,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1745,7 +1817,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=8              
+                            count -=7              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1753,7 +1825,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=8 
+                                count -=7 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1761,7 +1833,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=10              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1769,7 +1841,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=10 
+                                count -=9 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1777,7 +1849,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=12              
+                            count -=11              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1785,7 +1857,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=12 
+                                count -=11 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1869,7 +1941,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if val == 0:
                         col5 = ''
                         count  = len(col5_list) 
-                        count -=4              
+                        count -=3              
                         while count > 0:
                             col5 = col5_list[count-1] + col5
                             count -=1                            
@@ -1877,7 +1949,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if col5 != '':
                                 s5.append(col5)
                             count  = len(col5_list)
-                            count -=6 
+                            count -=3 
                             while count > 0:                   
                                 count -=1
                                 col5_list.pop(count) 
@@ -1885,7 +1957,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=6              
+                            count -=5              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1893,7 +1965,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=5 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1901,7 +1973,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=8              
+                            count -=7              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1909,7 +1981,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=8 
+                                count -=7 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1917,7 +1989,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=10              
+                            count -=9              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1925,7 +1997,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=10 
+                                count -=9 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -1933,7 +2005,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=12              
+                            count -=11              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -1941,7 +2013,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=12 
+                                count -=11 
                                 while count > 0:
                                     count -=1
                                     col5_list.pop(count)
@@ -2008,7 +2080,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=4              
+                            count -=3              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -2016,7 +2088,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=3 
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
@@ -2024,7 +2096,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=6              
+                                count -=5              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2032,7 +2104,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=6 
+                                    count -=5 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2040,7 +2112,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=8              
+                                count -=7              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2048,7 +2120,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=8 
+                                    count -=7 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2056,7 +2128,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=10              
+                                count -=9              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2064,7 +2136,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=10 
+                                    count -=9 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2072,7 +2144,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=12              
+                                count -=11              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2080,7 +2152,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=12 
+                                    count -=11 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2132,7 +2204,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=4              
+                            count -=3              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -2140,7 +2212,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=3 
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 
@@ -2148,7 +2220,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=6              
+                                count -=5              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2156,7 +2228,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=6 
+                                    count -=5 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2164,7 +2236,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=8              
+                                count -=7              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2172,7 +2244,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=8 
+                                    count -=7 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2180,7 +2252,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=10              
+                                count -=9              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2188,7 +2260,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=10 
+                                    count -=9 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)                   
@@ -2239,7 +2311,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=4              
+                            count -=3              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -2247,7 +2319,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=3 
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count)
@@ -2255,7 +2327,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=6              
+                                count -=5              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2263,7 +2335,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=6 
+                                    count -=5 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2271,7 +2343,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=8              
+                                count -=7              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2279,7 +2351,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=8 
+                                    count -=7 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)                 
@@ -2330,7 +2402,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=4              
+                            count -=3              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -2338,7 +2410,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=3 
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count)  
@@ -2346,7 +2418,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                             if val == 0:
                                 col5 = ''
                                 count  = len(col5_list) 
-                                count -=6              
+                                count -=5              
                                 while count > 0:
                                     col5 = col5_list[count-1] + col5
                                     count -=1                            
@@ -2354,7 +2426,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     if col5 != '':
                                         s5.append(col5)
                                     count  = len(col5_list)
-                                    count -=6 
+                                    count -=5 
                                     while count > 0:
                                         count -=1
                                         col5_list.pop(count)
@@ -2406,7 +2478,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if val == 0:
                             col5 = ''
                             count  = len(col5_list) 
-                            count -=4              
+                            count -=3              
                             while count > 0:
                                 col5 = col5_list[count-1] + col5
                                 count -=1                            
@@ -2414,7 +2486,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 if col5 != '':
                                     s5.append(col5)
                                 count  = len(col5_list)
-                                count -=6 
+                                count -=3 
                                 while count > 0:                   
                                     count -=1
                                     col5_list.pop(count) 

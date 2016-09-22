@@ -191,7 +191,30 @@ def main():
         os.remove(path)
     if os.path.exists(os.path.abspath('row_num_con.tex')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'row_num_con.tex')
-        os.remove(path)       
+        os.remove(path)
+    if os.path.exists(os.path.abspath('reports_sp_ob.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_sp_ob.tex')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('reports_sp.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_sp.tex')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('reports_pe_ob.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_pe_ob.tex')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('reports_pe.tex')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'reports_pe.tex')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('partn_new.txt')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'partn_new.txt')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('partn_old.txt')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'partn_old.txt')
+        os.remove(path)        
+    if os.path.exists(os.path.abspath('partn_old1.txt')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'partn_old1.txt')
+        os.remove(path)
+
+        
 if __name__ == '__main__':
     main()
 

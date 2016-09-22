@@ -253,7 +253,10 @@ def main():
     writerd.writeheader()
     row1 = {}  
     for row in readerd:
-        row['kol'] = 1     
+        if row['RefDes'] != ' ':
+            row['kol'] = 1
+        else:
+            row['kol'] = ' '    
         writerd.writerow(row)
     output_log_file.write('Add kol. Last writeble RefDes %s\n' % (row['RefDes']))
     ifile.close()

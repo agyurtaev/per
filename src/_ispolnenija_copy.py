@@ -39,54 +39,46 @@ def isp(num,nazv_isp):
     ofile  = open(dr1 +'prochie_izdelija_bom.csv', "wb")
     writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
     writerd.writeheader()
-    
+    ch_str = 0
     for row in readerd:
         for rowa in readerda:
             if row ['RefDes'] == rowa ['RefDes']:
-                if rowa[nazv_isp[num]] == 'Unplaced':
-                    row['Unplaced'] = '*'
-                else:
-                    row['Unplaced'] = ' '
+                
+                pr = 0
+                pr_u = 0
+                num_ch = len(nazv_isp)      
+                while num_ch > 0:
+                    if rowa[nazv_isp[num_ch-1]] == 'Unplaced':
+                        row['Unplaced'] = '*'
+                        pr_u = 1
+                    num_ch -= 1
+                    
+                num_ch = len(nazv_isp)   
+                while num_ch > 0:
+                    if rowa[nazv_isp[num_ch-1]] != 'Unplaced':
+                        row['Unplaced'] = ' '
+                        pr = 1
+                    num_ch -= 1
+                    
                 if row['PartNumber'] == ' ':
                     row['PartNumber'] = rowa['PartNumber']
-                writerd.writerow(row)
+
+                if pr_u == 1 and pr == 1:
+                    if rowa[nazv_isp[num]] != 'Unplaced':
+                        row['Unplaced'] = ' '
+                        ch_str += 1
+                        writerd.writerow(row)
+                        
         ifilea.seek(0)
-    ifile.close()
-    ifilea.close()    
-    ofile.close()
-##########
-    copyfile(dr1 + 'dannye_dokumenta.csv', dr1 + 'dannye_dokumenta_1.csv')
+
+    if ch_str == 0:
+        writerd.writerow({'PartDocument': ' ', 'Manufacturer': ' ', 'Case': ' ',
+                          'Name': ' ', 'TCx': ' ', 'ReplacementPN': ' ',
+                          'PowerRating': ' ', 'Value': ' ', 'TU GOST': ' ',
+                          'Voltage': ' ', 'Unplaced': ' ', 'SpecSection': ' ',
+                          'PartNumber': ' ', 'RefDes': ' ', 'Tolerance': ' ',
+                          'BomNote': ' ', 'PartNumberRU': ' '})
     
-    ifile  = open(dr1 + 'dannye_dokumenta_1.csv', 'rb')
-    reader = csv.reader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE)
-    row_num = 0
-    for row in reader:
-        if row_num==0:
-            header=row       
-        row_num += 1
-    ifile.close()
-    
-    ifile  = open(dr1 + 'dannye_dokumenta_1.csv', 'rb')
-    readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
-    
-    ofile  = open(dr1 +'dannye_dokumenta.csv', "wb")
-    writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
-    writerd.writeheader()
-    print 
-    for row in readerd:
-        l = len(row['signature'])
-        buf = row['signature']
-        while l > 0:
-            if buf[l-1] == '-':
-                buf = buf[0:l-1]    
-            l -= 1
-        row['signature'] = buf
-        if num != 0:
-            if num < 10:
-                row['signature'] = row['signature']+'-0'+str(num)
-            else:
-                row['signature'] = row['signature']+'-'+str(num)
-        writerd.writerow(row)
     ifile.close()
     ifilea.close()    
     ofile.close()

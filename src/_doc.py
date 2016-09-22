@@ -142,17 +142,18 @@ def docgen(perecod):
                 if number > count2 - 1:
                     s7.append('')   
                 if count == count_u:
-                    ofile.write(perecod(row['Form'])
-                                    +'&'
-                                    +'&'
-                                    +'&'
-                                    +perecod(row['Oboz'])
-                                    +'&'
-                                    +perecod(s5[number])
-                                    +'&'
-                                    +'&'
-                                    +perecod(s7[number])
-                                    +'\\'+'\\''\n')                    
+                    if p==1:
+                        ofile.write(perecod(row['Form'])
+                                        +'&'
+                                        +'&'
+                                        +'&'
+                                        +perecod(row['Oboz'])
+                                        +'&'
+                                        +perecod(s5[number])
+                                        +'&'
+                                        +'&'
+                                        +perecod(s7[number])
+                                        +'\\'+'\\''\n')                    
                 else:
                     ofile.write('&'
                                     +'&'

@@ -34,6 +34,17 @@ def main():
     import _red_latex
     
     NUM = 15
+    
+    if os.path.exists(os.path.abspath('num.txt')):
+        ifile  = open('num.txt', "rb")
+        for row in ifile:
+            NUM = int(row)
+            NUM += 5
+        ifile.close()
+    else:
+        NUM = 15
+    
+    
     NUM_sbed = 0
     NUM_det = 0
     NUM_stiz = 0
@@ -76,7 +87,14 @@ def main():
 #################################- редактирование latex;
     _red_latex.visstr()
     
-
+    ofile =open('num.txt', 'w')
+    ofile.write(str(NUM))
+    ofile.close()
+    
+    ofile =open('partn_old.txt', 'w')
+    ofile.close()
+    
+    
 if __name__ == '__main__':
     main()
 

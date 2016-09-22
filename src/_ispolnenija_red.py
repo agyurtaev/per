@@ -27,13 +27,13 @@ def isp():
 
 ## Проверка наличия файлов
     if not os.path.isfile(os.path.abspath(dr1+'bom_ispolnenij.txt')):
-        print 'FATAL ERROR!!! \n'
+        print 'bom_ispolnenij error \n'
         sys.exit()        
     if not os.path.exists(os.path.abspath(dr1+'varianty_ispolnenija.txt')):
-        print 'FATAL ERROR!!! \n' 
+        print 'varianty_ispolnenija error \n' 
         sys.exit()
     if not os.path.exists(os.path.abspath('_ispolnenija_red.cfg')):
-        print 'FATAL ERROR!!! \n' 
+        print '_ispolnenija_red error \n' 
         sys.exit()
     if not os.path.exists(os.path.join((dr1), 'dannye_dokumenta.csv')):
         copyfile(dr2 + 'dannye_dokumenta.csv', dr1 + 'dannye_dokumenta.csv') 
@@ -45,7 +45,7 @@ def isp():
         if row_num==0:
             cfg_headerd=row
             if not (('K' in cfg_headerd) and ('k' in cfg_headerd)):
-                print 'FATAL ERROR!!! \n' 
+                print '_ispolnenija_red header error \n' 
                 sys.exit()
             else:
                 K = row['K']

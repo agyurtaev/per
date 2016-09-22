@@ -54,12 +54,12 @@ def main():
     ifile.close()
     if o=='nt':
         copyfile(put1 + '_per.pdf', put1 + nazv+' '+pe+'.pdf')
-        copyfile(put1 + 'concat.pdf', put1 + nazv+' '+vp+'.pdf')
+        #copyfile(put1 + 'concat.pdf', put1 + nazv+' '+vp+'.pdf')
         copyfile(put1 + '__spec.pdf', put1 + nazv+'.pdf')
         copyfile(put1 + 'case_sort.pdf', put1 + nazv+' '+korp+'.pdf')
     else:
         copyfile(put1 + '_per.pdf', put1 + nazv.decode('cp1251').encode("utf-8")+' '+pe.decode('cp1251').encode("utf-8")+'.pdf')
-        copyfile(put1 + 'concat.pdf', put1 + nazv.decode('cp1251').encode("utf-8")+' '+vp.decode('cp1251').encode("utf-8")+'.pdf')
+        #copyfile(put1 + 'concat.pdf', put1 + nazv.decode('cp1251').encode("utf-8")+' '+vp.decode('cp1251').encode("utf-8")+'.pdf')
         copyfile(put1 + '__spec.pdf', put1 + nazv.decode('cp1251').encode("utf-8")+'.pdf')
         copyfile(put1 + 'case_sort.pdf', put1 + nazv.decode('cp1251').encode("utf-8")+' '+korp.decode('cp1251').encode("utf-8")+'.pdf')
         
