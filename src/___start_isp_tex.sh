@@ -5,11 +5,11 @@ DIRECTORY=`dirname "$ABSOLUTE_FILENAME"`
 
 cd $DIRECTORY
 sleep 1
-cp $DIRECTORY/reports_sp_ob.tex $DIRECTORY/reports.tex
+cp $DIRECTORY/reports_sp.tex $DIRECTORY/reports.tex
 sleep 1
 pdflatex $DIRECTORY/__spec.tex
 sleep 1
-cp $DIRECTORY/reports_pe_ob.tex $DIRECTORY/reports.tex
+cp $DIRECTORY/reports_pe.tex $DIRECTORY/reports.tex
 sleep 1
 pdflatex $DIRECTORY/_per.tex
 sleep 1

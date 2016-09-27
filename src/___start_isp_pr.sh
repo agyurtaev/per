@@ -7,11 +7,11 @@ cd $DIRECTORY
 
 python $DIRECTORY/bom2sp_isp.py
 sleep 1
-cp  $DIRECTORY/reports.tex  $DIRECTORY/reports_sp_ob.tex 
+cp  $DIRECTORY/reports.tex  $DIRECTORY/reports_sp.tex 
 sleep 1
 python $DIRECTORY/_bom2pe_sort.py
 sleep 1
-cp  $DIRECTORY/reports.tex  $DIRECTORY/reports_pe_ob.tex
+cp  $DIRECTORY/reports.tex  $DIRECTORY/reports_pe.tex
 
 
 
