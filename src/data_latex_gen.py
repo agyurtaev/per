@@ -35,7 +35,7 @@ def main():
     for row in readerd:
         if row_num==0:
             headerd=row
-            if not (('title' in headerd) and ('docName' in headerd) and ('signature' in headerd)
+            if not (('title' in headerd) and ('docName' in headerd) and ('signature' in headerd) and ('signature_pp' in headerd)
                     and ('mass' in headerd) and ('scale' in headerd) and ('author' in headerd) and ('checker' in headerd)
                     and ('tcontr' in headerd) and ('ncontr' in headerd) and ('approvedBy' in headerd) and ('material' in headerd)
                     and ('letter1' in headerd) and ('letter2' in headerd) and ('letter3' in headerd)):
@@ -67,6 +67,11 @@ def main():
             else:
                 ofile.write('\ESKDsignature{}')
 
+            if row['signature_pp'] != '':
+                ofile.write('\ESKDcolumnXXV{'+perecod(row['signature_pp'])+'}')
+            else:
+                ofile.write('\ESKDcolumnXXV{}')
+                
             if (row['letter1'] != '') or (row['letter2'] != '') or (row['letter3'] != ''):
                 ofile.write('\ESKDletter{'+perecod(row['letter1'])+'}{'+perecod(row['letter2'])+'}{'+perecod(row['letter3'])+'}')
             else:
@@ -133,6 +138,11 @@ def main():
                 ofile.write('\ESKDsignature{'+perecod(row['signature'])+'}')
             else:
                 ofile.write('\ESKDsignature{}')
+                
+            if row['signature_pp'] != '':
+                ofile.write('\ESKDcolumnXXV{'+perecod(row['signature_pp'])+'}')
+            else:
+                ofile.write('\ESKDcolumnXXV{}')
 
             if (row['letter1'] != '') or (row['letter2'] != '') or (row['letter3'] != ''):
                 ofile.write('\ESKDletter{'+perecod(row['letter1'])+'}{'+perecod(row['letter2'])+'}{'+perecod(row['letter3'])+'}')
@@ -202,6 +212,11 @@ def main():
             else:
                 ofile.write('\ESKDsignature{}')
 
+            if row['signature_pp'] != '':
+                ofile.write('\ESKDcolumnXXV{'+perecod(row['signature_pp'])+'}')
+            else:
+                ofile.write('\ESKDcolumnXXV{}')
+
             if (row['letter1'] != '') or (row['letter2'] != '') or (row['letter3'] != ''):
                 ofile.write('\ESKDletter{'+perecod(row['letter1'])+'}{'+perecod(row['letter2'])+'}{'+perecod(row['letter3'])+'}')
             else:
@@ -269,6 +284,11 @@ def main():
                 ofile.write('\ESKDsignature{'+perecod(row['signature'])+' ВП }')
             else:
                 ofile.write('\ESKDsignature{}')
+
+            if row['signature_pp'] != '':
+                ofile.write('\ESKDcolumnXXV{'+perecod(row['signature_pp'])+'}')
+            else:
+                ofile.write('\ESKDcolumnXXV{}')
 
             if (row['letter1'] != '') or (row['letter2'] != '') or (row['letter3'] != ''):
                 ofile.write('\ESKDletter{'+perecod(row['letter1'])+'}{'+perecod(row['letter2'])+'}{'+perecod(row['letter3'])+'}')

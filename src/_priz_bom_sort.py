@@ -1508,6 +1508,16 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             lens7 = 10
             s7 = []
             col7 = ''
+            
+            zv = row['RefDes']
+            
+            ff = zv.rfind('*')
+            while ff != -1:
+                zv = zv[0:ff]+zv[ff+1:]
+                ff = zv.rfind('*')
+            
+            row['RefDes'] = zv
+            
             if len(row['RefDes'])<lens7:
                 if row['RefDes'] != '':
                     s7.append(row['RefDes'])            

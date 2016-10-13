@@ -213,8 +213,12 @@ def main():
     if os.path.exists(os.path.abspath('partn_old1.txt')):
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'partn_old1.txt')
         os.remove(path)
-
-        
+    if os.path.exists(os.path.abspath('partn_old1.txt')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'partn_old1.txt')
+        os.remove(path)
+    if os.path.exists(os.path.abspath('num.txt')):
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'num.txt')
+        os.remove(path)        
 if __name__ == '__main__':
     main()
 

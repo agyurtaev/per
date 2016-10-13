@@ -135,7 +135,16 @@ def docgen(perecod):
                 count = count2
             count_u = count
             number = 0
+            
+            zv = row['Form']
+            
+            ff = zv.rfind('*')
+            while ff != -1:
+                zv = zv[0:ff]+'\(\\ast\)'+zv[ff+1:]
+                ff = zv.rfind('*')
+            row['Form'] = zv
 
+            
             while count > 0:
                 if number > count1 - 1:
                     s5.append('')                                

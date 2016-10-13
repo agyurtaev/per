@@ -503,9 +503,205 @@ def presort():
         ofile.write(row)        
     ifile.close()
     ifilea.close()
-    ofile.close() 
+    ofile.close()
 
+#########################################
     
+## Одиннадцатый проход: Упорядочение по PartNum
+## уст    
+    ifile  = open('projectname_tdd_1.csv', "rb")
+    readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
+    ofile  = open('projectname_tdd_1_b.csv', "wb")
+    writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
+    ofile_u  = open('projectname_tdd_1_u.csv', "wb")
+    writerdu = csv.DictWriter(ofile_u, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)  
+    writerdu.writeheader()
+    up_spis = []
+    vid = ''
+    vidpred = ''
+    row_num = 0
+    ln_up_sp = 0
+    for row in readerd:   
+        vid = row['RefDes'][0]
+        if vid == 'D' or vid == 'd':
+            vid = row['RefDes'][0] + row['RefDes'][1]
+        if vid == 'V' or vid == 'v':
+            vid = row['RefDes'][0] + row['RefDes'][1]
+        if row_num == 0:
+            vidpred = vid
+        if vid != vidpred:
+            ofile.close()
+            ifile_b  = open('projectname_tdd_1_b.csv', "rb")
+            readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+            for rowa in readerda:
+                up_spis.append(rowa['PartNumber'])
+            ifile_b.close()
+            
+            up_spis.sort()
+            
+            ln_up_sp = len(up_spis)
+            up_sp_count = 0
+            while ln_up_sp > 0:
+                ifile_b  = open('projectname_tdd_1_b.csv', "rb")
+                readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+                for rowa in readerda:
+                    if rowa['PartNumber'] == up_spis[up_sp_count]:
+                        writerdu.writerow(rowa)
+                ifile_b.close()
+                up_sp_count += 1
+                ln_up_sp -= 1
+            
+            
+            up_spis = []
+            ofile  = open('projectname_tdd_1_b.csv', "wb")
+            writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)    
+            writerd.writeheader()
+            writerd.writerow(row)
+        else:
+            writerd.writerow(row)
+        row_num+=1
+        vidpred = vid
+        
+
+    ifile.close()
+    ofile.close()
+    
+    ifile_b  = open('projectname_tdd_1_b.csv', "rb")
+    readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+    for rowa in readerda:
+        up_spis.append(rowa['PartNumber'])
+    ifile_b.close()
+    
+    up_spis.sort()
+    ln_up_sp = len(up_spis)
+    up_sp_count = 0
+    while ln_up_sp > 0:
+        ifile_b  = open('projectname_tdd_1_b.csv', "rb")
+        readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+        for rowa in readerda:
+            if rowa['PartNumber'] == up_spis[up_sp_count]:
+                writerdu.writerow(rowa)
+        ifile_b.close()
+        up_sp_count += 1
+        ln_up_sp -= 1
+
+    ofile_u.close()
+    #print 'ok'
+    #c = raw_input()
+
+## неуст    
+    ifile  = open('projectname_tdd_3.csv', "rb")
+    readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
+    ofile  = open('projectname_tdd_3_b.csv', "wb")
+    writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)
+    ofile_u  = open('projectname_tdd_3_u.csv', "wb")
+    writerdu = csv.DictWriter(ofile_u, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)  
+    writerdu.writeheader()
+    up_spis = []
+    vid = ''
+    vidpred = ''
+    row_num = 0
+    ln_up_sp = 0
+    for row in readerd:   
+        vid = row['RefDes'][0]
+        if vid == 'D' or vid == 'd':
+            vid = row['RefDes'][0] + row['RefDes'][1]
+        if vid == 'V' or vid == 'v':
+            vid = row['RefDes'][0] + row['RefDes'][1]
+        if row_num == 0:
+            vidpred = vid
+        if vid != vidpred:
+            ofile.close()
+            ifile_b  = open('projectname_tdd_3_b.csv', "rb")
+            readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+            for rowa in readerda:
+                up_spis.append(rowa['PartNumber'])
+            ifile_b.close()
+            
+            up_spis.sort()
+            
+            ln_up_sp = len(up_spis)
+            up_sp_count = 0
+            while ln_up_sp > 0:
+                ifile_b  = open('projectname_tdd_3_b.csv', "rb")
+                readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+                for rowa in readerda:
+                    if rowa['PartNumber'] == up_spis[up_sp_count]:
+                        writerdu.writerow(rowa)
+                ifile_b.close()
+                up_sp_count += 1
+                ln_up_sp -= 1
+            
+            
+            up_spis = []
+            ofile  = open('projectname_tdd_3_b.csv', "wb")
+            writerd = csv.DictWriter(ofile, delimiter=';',fieldnames=header, quoting=csv.QUOTE_NONE)    
+            writerd.writeheader()
+            writerd.writerow(row)
+        else:
+            writerd.writerow(row)
+        row_num+=1
+        vidpred = vid
+        
+
+    ifile.close()
+    ofile.close()
+    
+    ifile_b  = open('projectname_tdd_3_b.csv', "rb")
+    readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+    for rowa in readerda:
+        up_spis.append(rowa['PartNumber'])
+    ifile_b.close()
+    
+    up_spis.sort()
+    ln_up_sp = len(up_spis)
+    up_sp_count = 0
+    while ln_up_sp > 0:
+        ifile_b  = open('projectname_tdd_3_b.csv', "rb")
+        readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
+        for rowa in readerda:
+            if rowa['PartNumber'] == up_spis[up_sp_count]:
+                writerdu.writerow(rowa)
+        ifile_b.close()
+        up_sp_count += 1
+        ln_up_sp -= 1
+
+    ofile_u.close()
+
+
+
+#########################################
+    ifile  = open('projectname_tdd_1_u.csv', "rb")
+    ofile =open('projectname_tdd_1.csv', 'wb')
+    for row in ifile:
+        ofile.write(row)
+    ifile.close()
+    ofile.close()
+#########################################
+    ifile  = open('projectname_tdd_3_u.csv', "rb")
+    ofile =open('projectname_tdd_3.csv', 'wb')
+    for row in ifile:
+        ofile.write(row)
+    ifile.close()
+    ofile.close()
+
+    if os.path.exists(os.path.abspath('projectname_tdd_3_u.csv')):        
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_3_u.csv')
+        os.remove(path)
+
+    if os.path.exists(os.path.abspath('projectname_tdd_3_b.csv')):        
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_3_b.csv')
+        os.remove(path)
+
+    if os.path.exists(os.path.abspath('projectname_tdd_1_u.csv')):        
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1_u.csv')
+        os.remove(path)
+
+    if os.path.exists(os.path.abspath('projectname_tdd_1_b.csv')):        
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1_b.csv')
+        os.remove(path)
+        
+
     output_log_file.close()
 
     return unpl_spis
