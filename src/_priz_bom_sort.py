@@ -20,7 +20,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     and ('Korp' in cfg_headerd)
                     and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
                     and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
-                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd) and ('Gn' in cfg_headerd)
                     and ('Mk' in cfg_headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
@@ -43,11 +43,17 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 k = row['K']
                 m = row['M']
                 mk = row['Mk']
+                gn = row['Gn']
+                
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
      
 ## Одиннадцатый проход: Латех
     unpl_num = []
+    l_unpl_num = len(unpl_spis)
+    while l_unpl_num > 0:
+        unpl_num.append('')
+        l_unpl_num -= 1     
     ifile  = open('projectname_tdd_1.csv', "rb")
     readerd = csv.DictReader(ifile, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
     readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
@@ -104,7 +110,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ofile.write('&&&&\hspace{2 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'L':
-                ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                #ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                ofile.write('&&&&\hspace{2 cm}\underline{Дроссели}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'S':
                 ofile.write('&&&&\hspace{0,1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
@@ -125,11 +132,13 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             output_log_file.write('Add category %s \n' % vid)
             ofile.write('&&&&&&'+'\\'+'\\''\n')
         priz_unpl = 0
+        unpl_poz_p = 0
         l_sp = len(unpl_spis)
         str_pn_pnr = row['PartNumber']+row['PartNumberRU']
         while l_sp > 0:
             if str_pn_pnr == unpl_spis[l_sp-1]:
                 priz_unpl = 1
+                unpl_poz_p = l_sp - 1
             l_sp -= 1 
 ######################################################################################################## 7-й столбец 
         man = ''
@@ -298,6 +307,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             else:
                 col5_list.append('')
             if row['Value'] != ' ':
+                if vid == 'L':
+                    col5_list.append(row['Value']+gn)
                 if vid == 'C':
                     if mk in row['Value']:
                         col5_list.append(row['Value']+f)
@@ -307,8 +318,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if k in row['Value'] or m in row['Value']:
                         col5_list.append(row['Value']+om)
                     else:
-                        col5_list.append(row['Value'])#+' '+om)
-                if vid != 'C' and vid != 'R':
+                        col5_list.append(row['Value']+' '+om)
+                if vid == 'Z':
+                    col5_list.append(row['Value']+' '+om)               
+                if vid != 'C' and vid != 'R'and vid != 'L'and vid != 'Z':
                     col5_list.append(row['Value'])
             else:
                 col5_list.append('')
@@ -548,6 +561,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     sys.exit()
 
 ################################################ 2-я строка
+        lens5 = 32
         col5 = ''
         count  = len(col5_list)
         while count > 0:
@@ -1322,7 +1336,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                     +'\\'+'\\''\n')
                         ofile_info_case.write(str(num)+'&'+perecod(row['Case'])+'\\'+'\\''\n')
                         if priz_unpl == 1:
-                            unpl_num.append(num)
+                            unpl_num.insert(unpl_poz_p,num)
+                            if unpl_num[unpl_poz_p+1] == '':
+                                unpl_num.pop(unpl_poz_p+1)
+                            else:
+                                unpl_num.pop()
                         num += 1
                       
                 if row['SpecSection'] == sbed:
@@ -1338,7 +1356,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 +perecod(s7[number])
                                 +'\\'+'\\''\n')
                     if priz_unpl == 1:
-                        unpl_num.append(num_sbed)  
+                        unpl_num.insert(unpl_poz_p,num_sbed)
+                        if unpl_num[unpl_poz_p+1] == '':
+                            unpl_num.pop(unpl_poz_p+1)
+                        else:
+                            unpl_num.pop() 
                     num_sbed += 1
                 if row['SpecSection'] == det:
                     ofile_det.write('&&'
@@ -1353,7 +1375,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 +perecod(s7[number])
                                 +'\\'+'\\''\n')
                     if priz_unpl == 1:
-                        unpl_num.append(num_det) 
+                        unpl_num.insert(unpl_poz_p,num_det)
+                        if unpl_num[unpl_poz_p+1] == '':
+                            unpl_num.pop(unpl_poz_p+1)
+                        else:
+                            unpl_num.pop()  
                     num_det += 1
                 if row['SpecSection'] == stizd:
                     ofile_stiz.write('&&'
@@ -1368,7 +1394,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                                 +perecod(s7[number])
                                 +'\\'+'\\''\n')
                     if priz_unpl == 1:
-                        unpl_num.append(num_stiz) 
+                        unpl_num.insert(unpl_poz_p,num_stiz)
+                        if unpl_num[unpl_poz_p+1] == '':
+                            unpl_num.pop(unpl_poz_p+1)
+                        else:
+                            unpl_num.pop() 
                     num_stiz += 1  
             else:
                 
@@ -1401,6 +1431,11 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
         vidpred = vid       
     ifile.close()
 
+
+    #print unpl_spis
+    #print unpl_num
+    #a = raw_input()    
+    
     ifile  = open('projectname_tdd_3.csv', "rb")
     readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
     vid = ''
@@ -1448,7 +1483,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     ofile.write('&&&&\hspace{2 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'L':
-                    ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                    #ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                    ofile.write('&&&&\hspace{2 cm}\underline{Дроссели}&&'+'\\'+'\\''\n')
                     num += 5
                 if vid == 'S':
                     ofile.write('&&&&\hspace{0,1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
@@ -1664,6 +1700,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 else:
                     col5_list.append('')
                 if row['Value'] != ' ':
+                    if vid == 'L':
+                        col5_list.append(row['Value']+gn)
                     if vid == 'C':
                         if mk in row['Value']:
                             col5_list.append(row['Value']+f)
@@ -1673,8 +1711,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         if k in row['Value'] or m in row['Value']:
                             col5_list.append(row['Value']+om)
                         else:
-                            col5_list.append(row['Value'])#+' '+om)
-                    if vid != 'C' and vid != 'R':
+                            col5_list.append(row['Value']+' '+om)
+                    if vid == 'Z':
+                        col5_list.append(row['Value']+' '+om)               
+                    if vid != 'C' and vid != 'R'and vid != 'L'and vid != 'Z':
                         col5_list.append(row['Value'])
                 else:
                     col5_list.append('')
@@ -1915,6 +1955,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                         sys.exit()
 
 ################################################ 2-я строка
+            lens5 = 32
             col5 = ''
             count  = len(col5_list)
             while count > 0:

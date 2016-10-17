@@ -20,7 +20,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     and ('Korp' in cfg_headerd)
                     and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
                     and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
-                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)and ('Gn' in cfg_headerd)
                     and ('Mk' in cfg_headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
@@ -43,6 +43,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 k = row['K']
                 m = row['M']
                 mk = row['Mk']
+                gn = row['Gn']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
      
@@ -106,7 +107,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                 ofile.write('&&&&\hspace{2 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'L':
-                ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                #ofile.write('&&&&\hspace{0,1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                ofile.write('&&&&\hspace{2 cm}\underline{Дроссели}&&'+'\\'+'\\''\n')
                 num += 5
             if vid == 'S':
                 ofile.write('&&&&\hspace{0,1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
@@ -300,6 +302,8 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
             else:
                 col5_list.append('')
             if row['Value'] != ' ':
+                if vid == 'L':
+                    col5_list.append(row['Value']+gn)
                 if vid == 'C':
                     if mk in row['Value']:
                         col5_list.append(row['Value']+f)
@@ -309,8 +313,10 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     if k in row['Value'] or m in row['Value']:
                         col5_list.append(row['Value']+om)
                     else:
-                        col5_list.append(row['Value'])#+' '+om)
-                if vid != 'C' and vid != 'R':
+                        col5_list.append(row['Value']+' '+om)
+                if vid == 'Z':
+                    col5_list.append(row['Value']+' '+om)               
+                if vid != 'C' and vid != 'R'and vid != 'L'and vid != 'Z':
                     col5_list.append(row['Value'])
             else:
                 col5_list.append('')
@@ -550,6 +556,7 @@ def prizgen(num,perecod,num_sbed,num_det,num_stiz,unpl_spis):
                     sys.exit()
 
 ################################################ 2-я строка
+        lens5 = 32
         col5 = ''
         count  = len(col5_list)
         while count > 0:

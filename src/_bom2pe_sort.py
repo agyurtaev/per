@@ -83,7 +83,7 @@ def main():
                     and ('Dop' in cfg_headerd) and ('Korp' in cfg_headerd)
                     and ('Volt' in cfg_headerd) and ('Om' in cfg_headerd)
                     and ('pF' in cfg_headerd) and ('F' in cfg_headerd)
-                    and ('K' in cfg_headerd) and ('M' in cfg_headerd)
+                    and ('K' in cfg_headerd) and ('M' in cfg_headerd) and ('Gn' in cfg_headerd)
                     and ('Mk' in cfg_headerd)):
                 print 'FATAL ERROR!!! \n' 
                 ofile =open('reports.tex', 'w')
@@ -106,6 +106,7 @@ def main():
                 k = row['K']
                 m = row['M']
                 mk = row['Mk']
+                gn = row['Gn']
                 output_log_file.write("[INFO] Config file is loaded. UnplacedStr={%s}, TestPointStr={%s}\n" %(dni_str, tp_str))
     cfg_file.close()
     
@@ -346,7 +347,8 @@ def main():
                 ofile.write('&\hspace{3 cm}\underline{Реле}&&'+'\\'+'\\''\n')
                 st += 1
             if vid == 'L':
-                ofile.write('&\hspace{1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                #ofile.write('&\hspace{1 cm}\underline{Катушки индуктивности / Дроссели}&&'+'\\'+'\\''\n')
+                ofile.write('&\hspace{3 cm}\underline{Дроссели}&&'+'\\'+'\\''\n')
                 st += 1
             if vid == 'S':
                 ofile.write('&\hspace{1 cm}\underline{Механичесие устройства коммутации}&&'+'\\'+'\\''\n')
@@ -414,6 +416,8 @@ def main():
             else:
                 col2_list.append('')
             if row['Value'] != ' ':
+                if vid == 'L':
+                    col2_list.append(row['Value']+gn)
                 if vid == 'C':
                     if mk in row['Value']:
                         col2_list.append(row['Value']+f)
@@ -423,8 +427,10 @@ def main():
                     if k in row['Value'] or m in row['Value']:
                         col2_list.append(row['Value']+om)
                     else:
-                        col2_list.append(row['Value'])#+' '+om)
-                if vid != 'C' and vid != 'R':
+                        col2_list.append(row['Value']+' '+om)
+                if vid == 'Z':
+                    col2_list.append(row['Value']+' '+om)               
+                if vid != 'C' and vid != 'R'and vid != 'L'and vid != 'Z':
                     col2_list.append(row['Value'])
             else:
                 col2_list.append('')

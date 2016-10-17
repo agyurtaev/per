@@ -419,50 +419,38 @@ def presort():
     ifile.close()
     ifilea.close()
     ofile.close()
-#########################################  
-    ifile  = open('projectname_tdd_1.csv', "rb")
+#########################################
+    ifile  = open('projectname_tdd_2.csv', "rb")
+    ofile =open('projectname_tdd_2_b.csv', 'wb')
+    for row in ifile:
+        ofile.write(row)
+    ifile.close()
+    ofile.close()
+#########################################    
+    ifile  = open('projectname_tdd_2.csv', "rb")
     readerd.__init__(ifile, delimiter=";", quoting=csv.QUOTE_NONE)
-    ifilea  = open('projectname_tdd_3.csv', "rb")    
-    readerda = csv.DictReader(ifilea, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )      
+    ifilea  = open('projectname_tdd_2_b.csv', "rb")    
+    readerda = csv.DictReader(ifilea, delimiter=';', doublequote=False, quoting=csv.QUOTE_NONE )
     unpl_spis = []
     row_num=0
-    row1 = {}
-    row2 = {}
-    refbuf = ''
-    pr = 1
-    priz = 0
+    row_num_a=0
     for row in readerd:
         row_num_a = 0
-        if row_num==0:
-            row1 = row
-        else:
-            for rowa in readerda:
-                if row_num_a==0:
-                    row2 = rowa
-                else:
-                    row2 = rowa
-                    if row_num_a < row_num:
-                        if (row1['Name']==row2['Name'] and row1['PartNumber']==row2['PartNumber'] and row1['PartNumberRU']==row2['PartNumberRU']
-                            and row1['PartDocument']==row2['PartDocument']):
-                            pr = 0    
-                    if row_num_a > row_num:
-                        if (row1['Name']==row2['Name'] and row1['PartNumber']==row2['PartNumber'] and row1['PartNumberRU']==row2['PartNumberRU']
-                            and row1['PartDocument']==row2['PartDocument']):
-                            if row1['Unplaced']!=row2['Unplaced']:
-                                priz = 1
-                row_num_a+=1
-            if pr == 1:
-                if priz == 1:
-                    unpl_spis.append(row1['PartNumber']+row1['PartNumberRU'])           
-        priz = 0
-        row1 = row
-        row_num+=1 
-        pr = 1
+        for rowa in readerda:
+            if (row['Name']==rowa['Name'] and row['PartNumber']==rowa['PartNumber'] and row['PartNumberRU']==rowa['PartNumberRU']
+                    and row['PartDocument']==rowa['PartDocument']):
+                if row['Unplaced'] !=rowa['Unplaced']:
+                    if not row['PartNumber']+row['PartNumberRU'] in unpl_spis:
+                        unpl_spis.append(row['PartNumber']+row['PartNumberRU'])
+            row_num_a+=1
+        row_num += 1 
         ifilea.seek(0)
     ifile.close()
     ifilea.close()
-    ofile.close()
-
+    
+    #print unpl_spis
+    #c = raw_input()
+    
 #########################################
     
 ## Десятый проход: Неустанавлеваемые вниз
@@ -521,7 +509,7 @@ def presort():
     vidpred = ''
     row_num = 0
     ln_up_sp = 0
-    for row in readerd:   
+    for row in readerd:
         vid = row['RefDes'][0]
         if vid == 'D' or vid == 'd':
             vid = row['RefDes'][0] + row['RefDes'][1]
@@ -529,6 +517,8 @@ def presort():
             vid = row['RefDes'][0] + row['RefDes'][1]
         if row_num == 0:
             vidpred = vid
+            writerd.writeheader()
+            writerd.writerow(row)
         if vid != vidpred:
             ofile.close()
             ifile_b  = open('projectname_tdd_1_b.csv', "rb")
@@ -558,7 +548,8 @@ def presort():
             writerd.writeheader()
             writerd.writerow(row)
         else:
-            writerd.writerow(row)
+            if row_num != 0:
+                writerd.writerow(row)
         row_num+=1
         vidpred = vid
         
@@ -602,7 +593,7 @@ def presort():
     vidpred = ''
     row_num = 0
     ln_up_sp = 0
-    for row in readerd:   
+    for row in readerd:
         vid = row['RefDes'][0]
         if vid == 'D' or vid == 'd':
             vid = row['RefDes'][0] + row['RefDes'][1]
@@ -610,6 +601,8 @@ def presort():
             vid = row['RefDes'][0] + row['RefDes'][1]
         if row_num == 0:
             vidpred = vid
+            writerd.writeheader()
+            writerd.writerow(row)
         if vid != vidpred:
             ofile.close()
             ifile_b  = open('projectname_tdd_3_b.csv', "rb")
@@ -639,13 +632,16 @@ def presort():
             writerd.writeheader()
             writerd.writerow(row)
         else:
-            writerd.writerow(row)
+            if row_num != 0:
+                writerd.writerow(row)
         row_num+=1
         vidpred = vid
         
-
+    
+    
     ifile.close()
     ofile.close()
+    
     
     ifile_b  = open('projectname_tdd_3_b.csv', "rb")
     readerda.__init__(ifile_b, delimiter=";", quoting=csv.QUOTE_NONE)
@@ -667,8 +663,6 @@ def presort():
         ln_up_sp -= 1
 
     ofile_u.close()
-
-
 
 #########################################
     ifile  = open('projectname_tdd_1_u.csv', "rb")
@@ -701,6 +695,9 @@ def presort():
         path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_1_b.csv')
         os.remove(path)
         
+    if os.path.exists(os.path.abspath('projectname_tdd_2_b.csv')):        
+        path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'projectname_tdd_2_b.csv')
+        os.remove(path)       
 
     output_log_file.close()
 
